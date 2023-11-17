@@ -3,10 +3,11 @@ import { useAuth } from './context/authContext';
 import Loading from '../components/Loading';
 import Signin from '../components/Signin';
 import NavBar from '../components/NavBar';
-import RegisterForm from '../components/RegisterForm';
+// import RegisterForm from '../components/RegisterForm';
+import { checkUser, postUser } from './auth';
 
 const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) => {
-  const { user, userLoading, updateUser } = useAuth();
+  const { user, userLoading } = useAuth();
 
   // if user state is null, then show loader
   if (userLoading) {
@@ -15,10 +16,22 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
 
   // what the user should see if they are logged in
   if (user) {
+      checkUser(user.uid).then((userResp) => {
+        if (!userResp) {
+          const newUser = {
+            name: user.displayName,
+            uid: user.uid,
+          };
+          postUser(newUser).then(() => {});
+        }
+    });
+  
     return (
       <>
         <NavBar /> {/* NavBar only visible if user is logged in and is in every view */}
-        <div className="container">{'valid' in user ? <RegisterForm user={user} updateUser={updateUser} /> : <Component {...pageProps} />}</div>
+        <div className="container">
+          <Component {...pageProps} />
+        </div>
       </>
     );
   }
