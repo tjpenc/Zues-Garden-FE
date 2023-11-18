@@ -16,16 +16,15 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
 
   // what the user should see if they are logged in
   if (user) {
-      checkUser(user.uid).then((userResp) => {
-        if (!userResp) {
-          const newUser = {
-            name: user.displayName,
-            uid: user.uid,
-          };
-          postUser(newUser).then(() => {});
-        }
+    checkUser(user.uid).then((userResp) => {
+      if (!userResp) {
+        const newUser = {
+          name: user.displayName,
+          uid: user.uid,
+        };
+        postUser(newUser).then(() => {});
+      }
     });
-  
     return (
       <>
         <NavBar /> {/* NavBar only visible if user is logged in and is in every view */}
