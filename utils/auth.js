@@ -1,9 +1,9 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { clientCredentials } from './client';
+// import { clientCredentials } from './client';
 
-// const endpoint = "https://localhost:7188";
-const endpoint = clientCredentials.databaseURL;
+const endpoint = 'http://localhost:7188';
+// const endpoint = clientCredentials.databaseURL;
 
 const checkUser = (uid) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/users/${uid}`, {
