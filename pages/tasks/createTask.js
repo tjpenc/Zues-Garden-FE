@@ -1,7 +1,12 @@
+import TaskForm from '../../components/forms/TaskForm';
+
 export default function CreateTask() {
   return (
     <>
-      Create Task
+      <div>
+        Create a Task
+      </div>
+      <TaskForm />
     </>
   );
 }

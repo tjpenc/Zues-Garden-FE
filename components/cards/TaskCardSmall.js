@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import { deleteTask } from '../../api/taskData';
 
 export default function SmallTaskCard({ taskObj, onUpdate }) {
-  const deleteThisTask = deleteTask(taskObj.id).then(onUpdate);
+  const deleteThisTask = () => deleteTask(taskObj.id).then(onUpdate);
 
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Title>{taskObj.title}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{taskObj.deadline}</Card.Subtitle>
+        <Card.Subtitle className="mb-2 text-muted">{taskObj.deadline.slice(0, 10)}</Card.Subtitle>
         <Card.Subtitle className="mb-2 text-muted">{taskObj.priority}</Card.Subtitle>
         <Card.Text>
           {taskObj.description}
@@ -34,7 +34,7 @@ SmallTaskCard.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     deadline: PropTypes.string,
-    priority: PropTypes.string,
+    priority: PropTypes.number,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

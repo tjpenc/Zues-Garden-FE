@@ -81,7 +81,7 @@ const deleteTask = (id) => new Promise((resolve, reject) => {
       if (resp.status === 404) {
         resolve('Task not found');
       } else {
-        resolve(resp.json());
+        resolve(resp);
       }
     })
     .catch(reject);
