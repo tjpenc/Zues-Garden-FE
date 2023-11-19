@@ -1,10 +1,13 @@
 import { Button, Card } from 'react-bootstrap';
+import { useState } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { deleteTask } from '../../api/taskData';
+import { completeTask, deleteTask } from '../../api/taskData';
 
 export default function BigTaskCard({ taskObj, onUpdate }) {
+  const [isComplete, setIsComplete] = useState(taskObj.isComplete);
   const deleteThisTask = () => deleteTask(taskObj.id).then(onUpdate);
+  const completeThisTask = () => completeTask(taskObj.id).then(setIsComplete(true));
 
   const calculateDaysUntilDue = () => {
     const today = new Date().toJSON().slice(0, 10);
@@ -18,16 +21,26 @@ export default function BigTaskCard({ taskObj, onUpdate }) {
 
   return (
     <Card style={{ width: '18rem' }}>
+      {console.warn(taskObj)}
       <Card.Body>
         <Card.Title>{taskObj.title}</Card.Title>
+        {isComplete
+          ? <Card.Subtitle className="mb-2 text-muted">Completed: {taskObj.dateCompleted?.slice(0, 10)}</Card.Subtitle>
+          : (
+            <>
+              <Card.Subtitle className="mb-2 text-muted">Incomplete</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">Priority: {taskObj.priority}</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">Days Until Due: {daysUntilDue}</Card.Subtitle>
+            </>
+          )}
         <Card.Subtitle className="mb-2 text-muted">Deadline: {taskObj.deadline?.slice(0, 10)}</Card.Subtitle>
         <Card.Subtitle className="mb-2 text-muted">Created: {taskObj.dateCreated?.slice(0, 10)}</Card.Subtitle>
-        <Card.Subtitle className="mb-2 text-muted">Days Until Due: {daysUntilDue}</Card.Subtitle>
-        <Card.Subtitle className="mb-2 text-muted">Priority: {taskObj.priority}</Card.Subtitle>
         <Card.Text>
           {taskObj.description}
         </Card.Text>
-        <Button variant="success">Completed</Button>
+        {isComplete
+          ? ''
+          : <Button variant="success" onClick={completeThisTask}>Complete Task</Button>}
         <Button variant="danger" onClick={deleteThisTask}>Delete</Button>
         <Link passHref href={`/tasks/edit/${taskObj.id}`}>
           <Button variant="dark">Edit</Button>
@@ -45,6 +58,8 @@ BigTaskCard.propTypes = {
     deadline: PropTypes.string,
     priority: PropTypes.number,
     dateCreated: PropTypes.string,
+    isComplete: PropTypes.bool,
+    dateCompleted: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
