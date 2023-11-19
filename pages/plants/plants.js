@@ -26,7 +26,7 @@ export default function ViewPlants() {
       <div>
         {plants?.length === 0
           ? 'You have no plants!'
-          : plants?.map((plant) => <SmallPlantCard key={plant.id} taskObj={plant} onUpdate={getAllPlants} />)}
+          : plants?.map((plant) => <SmallPlantCard key={plant.id} plantObj={plant} onUpdate={getAllPlants} />)}
       </div>
     </>
   );

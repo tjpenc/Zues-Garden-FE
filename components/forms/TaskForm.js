@@ -13,7 +13,7 @@ const initialState = {
   priority: 3,
 };
 
-export default function ItemForm({ taskObj }) {
+export default function TaskForm({ taskObj }) {
   const [formInput, setFormInput] = useState(initialState);
   const router = useRouter();
   const { user } = useAuth();
@@ -47,7 +47,6 @@ export default function ItemForm({ taskObj }) {
 
   return (
     <>
-      {console.warn(taskObj)}
       <Form style={{ width: '50%' }} onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>Title</Form.Label>
@@ -81,7 +80,6 @@ export default function ItemForm({ taskObj }) {
             min={new Date().toJSON().slice(0, 10)}
             onChange={handleChange}
           />
-
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>Priority</Form.Label>
@@ -103,7 +101,7 @@ export default function ItemForm({ taskObj }) {
   );
 }
 
-ItemForm.propTypes = {
+TaskForm.propTypes = {
   taskObj: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
@@ -113,7 +111,7 @@ ItemForm.propTypes = {
   }),
 };
 
-ItemForm.defaultProps = {
+TaskForm.defaultProps = {
   taskObj: {
     uid: '',
     title: '',
