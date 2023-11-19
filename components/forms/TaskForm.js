@@ -38,7 +38,7 @@ export default function ItemForm({ taskObj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (taskObj.id) {
-      updateTask(formInput).then(router.push('/tasks/tasks'));
+      updateTask(formInput).then(router.push(`/tasks/${taskObj.id}`));
     } else {
       formInput.uid = user.uid;
       createTask(formInput).then(router.push('/tasks/tasks'));
