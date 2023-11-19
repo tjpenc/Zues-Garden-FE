@@ -21,7 +21,9 @@ export default function ItemForm({ taskObj }) {
 
   useEffect(() => {
     if (taskObj.id) {
-      setFormInput(taskObj);
+      const updateState = taskObj;
+      updateState.deadline = taskObj.deadline.slice(0, 10);
+      setFormInput(updateState);
     }
   }, [taskObj.id]);
 
@@ -45,6 +47,7 @@ export default function ItemForm({ taskObj }) {
 
   return (
     <>
+      {console.warn(taskObj)}
       <Form style={{ width: '50%' }} onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>Title</Form.Label>
