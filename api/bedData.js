@@ -87,10 +87,29 @@ const deleteBed = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const createBedGroup = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/beds/bedgroups`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((resp) => {
+      if (resp.status === 204) {
+        resolve({});
+      } else {
+        resolve(resp.json());
+      }
+    })
+    .catch(reject);
+});
+
 export {
   getBeds,
   getSingleBed,
   createBed,
   updateBed,
   deleteBed,
+  createBedGroup,
 };

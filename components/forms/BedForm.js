@@ -49,6 +49,8 @@ export default function BedForm({ bedObj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (bedObj.id) {
+      const stringYear = formInput.year.toString();
+      formInput.year = stringYear;
       updateBed(formInput).then(router.push('/beds/beds'));
     } else {
       formInput.uid = user.uid;
@@ -117,42 +119,48 @@ export default function BedForm({ bedObj }) {
             required
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Soil Type</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Soil Type"
-            name="soilType"
-            value={formInput.soilType}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Bed Width</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Width"
-            min="1"
-            name="width"
-            value={formInput.width}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Bed Length</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Length"
-            min="1"
-            name="length"
-            value={formInput.length}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        {bedObj.id
+          ? ''
+          : (
+            <>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Soil Type</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Soil Type"
+                  name="soilType"
+                  value={formInput.soilType}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Bed Width</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Width"
+                  min="1"
+                  name="width"
+                  value={formInput.width}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Bed Length</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Length"
+                  min="1"
+                  name="length"
+                  value={formInput.length}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+            </>
+          )}
+        {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>BedGroup</Form.Label>
           <Form.Control
             type="number"
@@ -163,7 +171,7 @@ export default function BedForm({ bedObj }) {
             onChange={handleChange}
             required
           />
-        </Form.Group>
+        </Form.Group> */}
         <Form.Check
           className="mb-3"
           inline
@@ -198,7 +206,7 @@ BedForm.propTypes = {
 BedForm.defaultProps = {
   bedObj: {
     uid: '',
-    bedGroupId: 1,
+    bedGroupId: 0,
     name: '',
     season: '',
     year: '',
@@ -209,3 +217,5 @@ BedForm.defaultProps = {
     length: 1,
   },
 };
+
+// Issue is that bedGroupId is being passed as 0 which is registering as null which is passing null into the backend, instead of a value of 0. Need to pass a value, and not null, into the backend
