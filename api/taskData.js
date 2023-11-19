@@ -1,7 +1,7 @@
 const endpoint = 'http://localhost:7188';
 
 const getTasks = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/tasks/${uid}`, {
+  fetch(`${endpoint}/api/tasks/user/${uid}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
