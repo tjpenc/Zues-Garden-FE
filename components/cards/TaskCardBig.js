@@ -6,8 +6,12 @@ import { completeTask, deleteTask } from '../../api/taskData';
 
 export default function BigTaskCard({ taskObj, onUpdate }) {
   const [isComplete, setIsComplete] = useState(taskObj.isComplete);
+  const [taskCompletionDate, setTaskCompletionDate] = useState(taskObj.dateCompleted);
   const deleteThisTask = () => deleteTask(taskObj.id).then(onUpdate);
-  const completeThisTask = () => completeTask(taskObj.id).then(setIsComplete(true));
+  const completeThisTask = () => completeTask(taskObj.id).then((task) => {
+    setIsComplete(true);
+    setTaskCompletionDate(task.dateCompleted);
+  });
 
   const calculateDaysUntilDue = () => {
     const today = new Date().toJSON().slice(0, 10);
@@ -25,7 +29,7 @@ export default function BigTaskCard({ taskObj, onUpdate }) {
       <Card.Body>
         <Card.Title>{taskObj.title}</Card.Title>
         {isComplete
-          ? <Card.Subtitle className="mb-2 text-muted">Completed: {taskObj.dateCompleted?.slice(0, 10)}</Card.Subtitle>
+          ? <Card.Subtitle className="mb-2 text-muted">Completed: {taskCompletionDate?.slice(0, 10)}</Card.Subtitle>
           : (
             <>
               <Card.Subtitle className="mb-2 text-muted">Incomplete</Card.Subtitle>
