@@ -1,7 +1,7 @@
 const endpoint = 'http://localhost:7188';
 
 const getBeds = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/beds/${uid}`, {
+  fetch(`${endpoint}/api/beds/user/${uid}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
