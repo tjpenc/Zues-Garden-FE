@@ -1,10 +1,17 @@
 import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { deleteTask } from '../../api/taskData';
+import { useEffect, useState } from 'react';
+import { completeTask, deleteTask } from '../../api/taskData';
 
 export default function SmallTaskCard({ taskObj, onUpdate }) {
+  const [isComplete, setIsComplete] = useState(taskObj.isComplete);
   const deleteThisTask = () => deleteTask(taskObj.id).then(onUpdate);
+  const completeThisTask = () => completeTask(taskObj.id).then(setIsComplete(true));
+
+  useEffect(() => {
+    onUpdate();
+  }, [isComplete]);
 
   const calculateDaysUntilDue = () => {
     const today = new Date().toJSON().slice(0, 10);
@@ -13,19 +20,26 @@ export default function SmallTaskCard({ taskObj, onUpdate }) {
     const days = Math.ceil(daysDifference / (1000 * 60 * 60 * 24));
     return days;
   };
-
   const daysUntilDue = calculateDaysUntilDue();
 
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Title>{taskObj.title}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">Days Until Due: {daysUntilDue}</Card.Subtitle>
-        <Card.Subtitle className="mb-2 text-muted">Priority: {taskObj.priority}</Card.Subtitle>
+        {isComplete
+          ? <Card.Subtitle className="mb-2 text-muted">Completed: {taskObj.dateCompleted?.slice(0, 10)}</Card.Subtitle>
+          : (
+            <>
+              <Card.Subtitle className="mb-2 text-muted">Priority: {taskObj.priority}</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">Days Until Due: {daysUntilDue}</Card.Subtitle>
+            </>
+          )}
         <Card.Text>
           {taskObj.description}
         </Card.Text>
-        <Button variant="success">Completed</Button>
+        {isComplete
+          ? ''
+          : <Button variant="success" onClick={completeThisTask}>Complete Task</Button>}
         <Button variant="danger" onClick={deleteThisTask}>Delete</Button>
         <Link passHref href={`/tasks/${taskObj.id}`}>
           <Button variant="primary">View</Button>
@@ -45,6 +59,8 @@ SmallTaskCard.propTypes = {
     description: PropTypes.string,
     deadline: PropTypes.string,
     priority: PropTypes.number,
+    isComplete: PropTypes.bool,
+    dateCompleted: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

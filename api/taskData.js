@@ -87,10 +87,28 @@ const deleteTask = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const completeTask = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/tasks/complete/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((resp) => {
+      if (resp.status === 404) {
+        resolve({});
+      } else {
+        resolve(resp.json());
+      }
+    })
+    .catch(reject);
+});
+
 export {
   getTasks,
   getSingleTask,
   createTask,
   updateTask,
   deleteTask,
+  completeTask,
 };
