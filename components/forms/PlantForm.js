@@ -37,7 +37,6 @@ export default function PlantForm({ plantObj }) {
   };
 
   const handleCheckChange = (e) => {
-    console.warn(e.target.checked);
     const { name, checked } = e.target;
     setFormInput((prevState) => ({
       ...prevState,
@@ -48,7 +47,7 @@ export default function PlantForm({ plantObj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (plantObj.id) {
-      updatePlant(formInput).then(router.push(`/plants/${plantObj.id}`));
+      updatePlant(formInput).then(router.push('/plants/plants'));
     } else {
       formInput.uid = user.uid;
       createPlant(formInput).then(router.push('/plants/plants'));
@@ -120,6 +119,7 @@ export default function PlantForm({ plantObj }) {
           label="Owned?"
           name="isOwned"
           type="checkbox"
+          checked={formInput.isOwned}
           onChange={handleCheckChange}
           id="inline-checkbox-1"
         />
