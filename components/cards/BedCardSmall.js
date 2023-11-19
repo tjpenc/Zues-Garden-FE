@@ -10,7 +10,7 @@ export default function SmallBedCard({ bedObj, onUpdate }) {
     <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Title>{bedObj.name}</Card.Title>
-        <Card.Subtitle>{bedObj.year}</Card.Subtitle>
+        <Card.Subtitle>{bedObj.season} {bedObj.year}</Card.Subtitle>
         <Card.Text>{`${bedObj.width} x ${bedObj.length}`}</Card.Text>
         <Button variant="danger" onClick={deleteThisBed}>Delete</Button>
         <Link passHref href={`/beds/edit/${bedObj.id}`}>
@@ -29,6 +29,7 @@ SmallBedCard.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     description: PropTypes.string,
+    season: PropTypes.string,
     year: PropTypes.string,
     width: PropTypes.number,
     length: PropTypes.number,

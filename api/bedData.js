@@ -81,7 +81,7 @@ const deleteBed = (id) => new Promise((resolve, reject) => {
       if (resp.status === 404) {
         resolve('Bed not found');
       } else {
-        resolve(resp.json());
+        resolve(resp);
       }
     })
     .catch(reject);
