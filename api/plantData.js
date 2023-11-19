@@ -1,7 +1,7 @@
 const endpoint = 'http://localhost:7188';
 
 const getPlants = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/plants/${uid}`, {
+  fetch(`${endpoint}/api/plants/users/${uid}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ const createPlant = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updatePlants = (payload) => new Promise((resolve, reject) => {
+const updatePlant = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/plants/${payload.id}`, {
     method: 'PUT',
     headers: {
@@ -91,6 +91,6 @@ export {
   getPlants,
   getSinglePlant,
   createPlant,
-  updatePlants,
+  updatePlant,
   deletePlant,
 };
