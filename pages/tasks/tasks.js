@@ -12,7 +12,7 @@ export default function ViewTasks() {
   const getAllTasks = () => getTasks(user.uid).then(setTasks);
   useEffect(() => {
     getAllTasks();
-  }, []);
+  }, [user.uid]);
 
   return (
     <>
@@ -30,7 +30,7 @@ export default function ViewTasks() {
       <div>
         {tasks.length === 0
           ? 'No tasks for this user'
-          : tasks?.map((task) => <SmallTaskCard taskObj={task} onUpdate={getAllTasks} />)}
+          : tasks?.map((task) => <SmallTaskCard key={task.id} taskObj={task} onUpdate={getAllTasks} />)}
       </div>
     </>
   );
