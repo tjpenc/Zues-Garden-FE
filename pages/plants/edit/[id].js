@@ -1,4 +1,6 @@
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { getSinglePlant } from '../../../api/plantData';
 import PlantForm from '../../../components/forms/PlantForm';
@@ -15,6 +17,9 @@ export default function EditPlant() {
   return (
     <>
       <div>
+        <Link passHref href="/plants/plants">
+          <Button>Back to Plants</Button>
+        </Link>
         Edit {plant.name}
       </div>
       <div>

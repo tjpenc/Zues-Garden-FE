@@ -5,16 +5,12 @@ import { deletePlant } from '../../api/plantData';
 
 export default function SmallPlantCard({ plantObj, onUpdate }) {
   const deleteThisPlant = () => deletePlant(plantObj.id).then(onUpdate);
-  console.warn(plantObj);
   return (
     <Card style={{ width: '18rem' }}>
-      {console.warn(plantObj)}
       <Card.Img variant="top" src={plantObj.image} />
       <Card.Body>
         <Card.Title>{plantObj.name}</Card.Title>
         <Card.Subtitle>{plantObj.type}</Card.Subtitle>
-        <Card.Text>{plantObj.description}</Card.Text>
-        <Card.Text># per Square Foot: {plantObj.numberPerSquare}</Card.Text>
         {plantObj.isOwned
           ? <Card.Text>Owned</Card.Text>
           : ''}
