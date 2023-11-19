@@ -81,7 +81,7 @@ const deletePlant = (id) => new Promise((resolve, reject) => {
       if (resp.status === 404) {
         resolve('Plant not found');
       } else {
-        resolve(resp.json());
+        resolve(resp);
       }
     })
     .catch(reject);
