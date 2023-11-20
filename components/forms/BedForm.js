@@ -56,7 +56,9 @@ export default function BedForm({ bedObj }) {
       formInput.uid = user.uid;
       const stringYear = formInput.year.toString();
       formInput.year = stringYear;
-      createBed(formInput).then(router.push('/beds/beds'));
+      createBed(formInput).then((newBed) => {
+        router.push(`/beds/addPlants/${newBed.id}`);
+      });
     }
   };
 

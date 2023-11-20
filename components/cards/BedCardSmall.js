@@ -19,6 +19,9 @@ export default function SmallBedCard({ bedObj, onUpdate }) {
         <Link passHref href={`/beds/${bedObj.id}`}>
           <Button variant="dark">View Bed</Button>
         </Link>
+        <Link passHref href={`/beds/addPlants/${bedObj.id}`}>
+          <Button variant="success">Add Plants</Button>
+        </Link>
       </Card.Body>
     </Card>
   );
