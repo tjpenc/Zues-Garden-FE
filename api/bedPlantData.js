@@ -17,7 +17,7 @@ const getBedPlants = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const createBedPlants = (payload) => new Promise((resolve, reject) => {
+const createBedPlant = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/beds/plants`, {
     method: 'POST',
     headers: {
@@ -35,7 +35,7 @@ const createBedPlants = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const deleteBedPlants = (id) => new Promise((resolve, reject) => {
+const deleteBedPlant = (id) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/beds/plants/${id}`, {
     method: 'DELETE',
     headers: {
@@ -46,7 +46,7 @@ const deleteBedPlants = (id) => new Promise((resolve, reject) => {
       if (resp.status === 404) {
         resolve('BedPlant not found');
       } else {
-        resolve(resp.json());
+        resolve(resp);
       }
     })
     .catch(reject);
@@ -54,6 +54,6 @@ const deleteBedPlants = (id) => new Promise((resolve, reject) => {
 
 export {
   getBedPlants,
-  createBedPlants,
-  deleteBedPlants,
+  createBedPlant,
+  deleteBedPlant,
 };
