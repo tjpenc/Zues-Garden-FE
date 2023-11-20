@@ -29,7 +29,7 @@ export default function AddBedPlants() {
       <div>
         {plants?.map((plant) => {
           const bedPlant = bedPlants.find((bp) => bp.plantId === plant.id);
-          return <BedPlantCard key={plant.id} plantObj={plant} bedPlantId={bedPlant ? bedPlant.id : 0} bedId={id} onUpdate={getAllPlantsAndBedPlants} />;
+          return <BedPlantCard key={plant.id} plantObj={plant} bedPlantId={bedPlant ? bedPlant.id : 0} bedId={id} onUpdate={getAllPlantsAndBedPlants} isSingleBedView={false} />;
         })}
       </div>
       <div>
