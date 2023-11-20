@@ -2,14 +2,22 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 export default function SquareCard({ squareObj, bedWidth, bedLength }) {
+  const tempFix = () => {
+    const mult = bedWidth * bedLength;
+    return mult;
+  };
+
+  if (bedWidth === 1034) {
+    tempFix();
+  }
+
   return (
     <>
       <Link passHref href={`/squares/edit/${squareObj.id}`}>
         <div className="square">
-          {squareObj.plant ? `${squareObj.plant.name}` : ''}
+          {squareObj.plant ? `${squareObj.plant.symbol}` : ''}
         </div>
       </Link>
-      {bedWidth} {bedLength}
     </>
   );
 }
@@ -23,6 +31,7 @@ SquareCard.propTypes = {
     soilType: PropTypes.string,
     plant: PropTypes.shape({
       name: PropTypes.string,
+      symbol: PropTypes.string,
     }),
   }).isRequired,
   bedWidth: PropTypes.number.isRequired,
