@@ -6,8 +6,12 @@ import { completeTask, deleteTask } from '../../api/taskData';
 
 export default function SmallTaskCard({ taskObj, onUpdate }) {
   const [isComplete, setIsComplete] = useState(taskObj.isComplete);
+  const [taskCompletionDate, setTaskCompletionDate] = useState(taskObj.dateCompleted);
   const deleteThisTask = () => deleteTask(taskObj.id).then(onUpdate);
-  const completeThisTask = () => completeTask(taskObj.id).then(setIsComplete(true));
+  const completeThisTask = () => completeTask(taskObj.id).then((task) => {
+    setIsComplete(true);
+    setTaskCompletionDate(task.dateCompleted);
+  });
 
   useEffect(() => {
     onUpdate();
@@ -27,7 +31,7 @@ export default function SmallTaskCard({ taskObj, onUpdate }) {
       <Card.Body className="d-flex flex-column">
         <Card.Title>{taskObj.title}</Card.Title>
         {isComplete
-          ? <Card.Subtitle className="mb-2 text-muted mt-3">Completed: {taskObj.dateCompleted?.slice(0, 10)}</Card.Subtitle>
+          ? <Card.Subtitle className="mb-2 text-muted mt-3">Completed: {taskCompletionDate?.slice(0, 10)}</Card.Subtitle>
           : (
             <>
               <Card.Subtitle className="mb-2 text-muted">Priority: {taskObj.priority}</Card.Subtitle>
