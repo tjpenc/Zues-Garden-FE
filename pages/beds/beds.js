@@ -22,9 +22,17 @@ export default function ViewBeds() {
           <Button>Create Bed</Button>
         </Link>
       </div>
-      <h1 className="center mb-5">Beds</h1>
+      <h1 className="center mb-5">My Beds</h1>
       <div className="space-around">
-        {beds?.map((bed) => <SmallBedCard key={bed.id} bedObj={bed} onUpdate={getAllBeds} />)}
+        {beds?.length === 0
+          ? (
+            <>
+              <div>
+                <h2>You have no beds! Use the top left button to create a new bed</h2>
+              </div>
+            </>
+          )
+          : beds?.map((bed) => <SmallBedCard key={bed.id} bedObj={bed} onUpdate={getAllBeds} />)}
       </div>
     </>
   );

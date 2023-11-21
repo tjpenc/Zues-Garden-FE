@@ -22,10 +22,16 @@ export default function ViewTasks() {
           <Button>Create Task</Button>
         </Link>
       </div>
-      <h1 className="center mb-5">View Tasks</h1>
+      <h1 className="center mb-5">My Tasks</h1>
       <div className="space-around mt-3 wrap">
         {tasks?.length === 0
-          ? 'No tasks for this user'
+          ? (
+            <>
+              <div>
+                <h2>You have no current tasks! Use the top left button to create a new task</h2>
+              </div>
+            </>
+          )
           : tasks?.map((task) => <SmallTaskCard key={task.id} taskObj={task} onUpdate={getAllTasks} />)}
       </div>
     </>
