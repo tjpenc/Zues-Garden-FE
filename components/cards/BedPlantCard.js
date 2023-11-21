@@ -7,7 +7,6 @@ export default function BedPlantCard({
   bedPlantId,
   bedId,
   onUpdate,
-  isSingleBedView,
 }) {
   const addBedPlant = () => {
     const payload = {
@@ -26,20 +25,13 @@ export default function BedPlantCard({
       <Card.Body>
         <Card.Title>{plantObj.name}</Card.Title>
         <Card.Subtitle>{plantObj.type}</Card.Subtitle>
-        {isSingleBedView
-          ? ''
-          : (
+        {bedPlantId
+          ? (
             <>
-              {bedPlantId
-                ? (
-                  <>
-                    <Card.Text>Already in Bed</Card.Text>
-                    <Button variant="danger" onClick={deleteThisBedPlant}>Remove Plant from Bed</Button>
-                  </>
-                )
-                : <Button variant="success" onClick={addBedPlant}>Add Plant to Bed</Button>}
+              <Button variant="danger" onClick={deleteThisBedPlant}>Remove Plant from Bed</Button>
             </>
-          )}
+          )
+          : <Button variant="success" onClick={addBedPlant}>Add Plant to Bed</Button>}
       </Card.Body>
     </Card>
   );
@@ -59,10 +51,8 @@ BedPlantCard.propTypes = {
   bedPlantId: PropTypes.number,
   bedId: PropTypes.number.isRequired,
   onUpdate: PropTypes.func.isRequired,
-  isSingleBedView: PropTypes.bool,
 };
 
 BedPlantCard.defaultProps = {
   bedPlantId: 0,
-  isSingleBedView: false,
 };
