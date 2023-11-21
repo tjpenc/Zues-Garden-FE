@@ -25,19 +25,24 @@ export default function AddBedPlants() {
 
   return (
     <>
-      <div>Add Plants to Your Bed</div>
-      <div>
+      <div className="mt-3">
+        <Link passHref href="/beds/beds">
+          <Button>Back to Beds</Button>
+        </Link>
+      </div>
+      <h1 className="center mb-5">Select plants to put in this bed</h1>
+      <div className="space-around">
         {plants?.map((plant) => {
           const bedPlant = bedPlants.find((bp) => bp.plantId === plant.id);
           return <BedPlantCard key={plant.id} plantObj={plant} bedPlantId={bedPlant ? bedPlant.id : 0} bedId={id} onUpdate={getAllPlantsAndBedPlants} />;
         })}
       </div>
-      <div>
+      <div className="center mt-3">
         {!bedPlants.length
           ? ''
           : (
             <Link passHref href={`/beds/${id}`}>
-              <Button>Done Adding Plants</Button>
+              <Button>Continue to Bed</Button>
             </Link>
           )}
       </div>

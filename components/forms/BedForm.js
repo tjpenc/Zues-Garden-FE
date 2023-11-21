@@ -194,7 +194,9 @@ export default function BedForm({ bedObj }) {
           onChange={handleCheckChange}
           id="inline-checkbox-1"
         />
-        <Button type="Submit">Submit</Button>
+        <div className="center mt-3">
+          <Button type="Submit">Submit</Button>
+        </div>
       </Form>
     </>
   );

@@ -23,23 +23,17 @@ export default function ViewPlant() {
 
   return (
     <>
-      <div>
-        <h1 className="space-around">
-          View {bed.name}
-          <span>
-            <Link passHref href="/beds/beds">
-              <Button>Back to Beds</Button>
-            </Link>
-          </span>
-          <span>
-            <Link passHref href={`/beds/addPlants/${id}`}>
-              <Button>Add Plants to Bed</Button>
-            </Link>
-          </span>
-        </h1>
+      <div className="space-between mt-3">
+        <Link passHref href="/beds/beds">
+          <Button>Back to Beds</Button>
+        </Link>
+        <Link passHref href={`/beds/addPlants/${id}`}>
+          <Button variant="success">Add Plants to Bed</Button>
+        </Link>
       </div>
+      <h1 className="center">{bed.name}</h1>
       <div className="center">
-        <div className="square-container" style={{ width: `${bed.length * 10 + 1}vh` }}>
+        <div className="square-container" style={{ width: `${bed.length * 10 + 2}vh` }}>
           {/* As long as viewport height is not too small, the raised bed should create correctly, replace with % later on */}
           {bed?.squares?.map((square) => <SquareCard key={square.id} squareObj={square} bedWidth={bed.width} bedLength={bed.length} />)}
         </div>
@@ -48,7 +42,7 @@ export default function ViewPlant() {
         {bed?.plants?.length
           ? (
             <>
-              <div className="center margin-5"><h3>Plants Available</h3></div>
+              <div className="center m-5"><h3>Available Plants</h3></div>
               <div className="space-around">
                 {bed?.plants?.map((plant) => {
                   const bedPlant = bed.bedPlants.find((bp) => bp.plantId === plant.id);
@@ -60,17 +54,17 @@ export default function ViewPlant() {
           : (
             <>
               <div className="center">
-                <h1>Looks like there are no plants for this bed!</h1>
+                <h1>Looks like you have no plants for this bed!</h1>
               </div>
               <div className="center">
                 <h2>Why not add some?</h2>
               </div>
-              <div className="space-around margin-5">
+              <div className="space-evenly">
                 <Link passHref href={`/beds/addPlants/${id}`}>
-                  <Button>Add Plants to Bed</Button>
+                  <Button variant="success">Add Plants to {bed.name}</Button>
                 </Link>
                 <Link passHref href="/plants/createPlant">
-                  <Button>Create a New Plant</Button>
+                  <Button variant="success">Create a New Plant</Button>
                 </Link>
               </div>
             </>

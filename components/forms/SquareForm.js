@@ -6,7 +6,7 @@ import { updateSquare } from '../../api/squareData';
 import { getBedPlants } from '../../api/bedPlantData';
 
 const initialState = {
-  plantId: undefined,
+  plantId: '',
   plantQuantity: 1,
   soilType: '',
 };
@@ -37,7 +37,6 @@ export default function SquareForm({ squareObj }) {
 
   return (
     <>
-      {console.warn(squareObj)}
       <Form style={{ width: '50%' }} onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label>Plant</Form.Label>
@@ -81,7 +80,9 @@ export default function SquareForm({ squareObj }) {
             ))}
           </Form.Select>
         </Form.Group>
-        <Button type="Submit">Submit</Button>
+        <div className="center mt-3">
+          <Button type="Submit">Submit</Button>
+        </div>
       </Form>
     </>
   );

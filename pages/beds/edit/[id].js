@@ -16,13 +16,13 @@ export default function EditPlant() {
 
   return (
     <>
-      <div>
+      <div className="mt-2">
         <Link passHref href="/beds/beds">
           <Button>Back to Beds</Button>
         </Link>
-        Edit {bed.name}
       </div>
-      <div>
+      <h1 className="center">Edit {bed.name}</h1>
+      <div className="center">
         <BedForm bedObj={bed} />
       </div>
     </>
