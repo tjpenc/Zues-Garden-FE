@@ -24,29 +24,36 @@ export default function SmallTaskCard({ taskObj, onUpdate }) {
 
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Body>
+      <Card.Body className="d-flex flex-column">
         <Card.Title>{taskObj.title}</Card.Title>
         {isComplete
-          ? <Card.Subtitle className="mb-2 text-muted">Completed: {taskObj.dateCompleted?.slice(0, 10)}</Card.Subtitle>
+          ? <Card.Subtitle className="mb-2 text-muted mt-auto">Completed: {taskObj.dateCompleted?.slice(0, 10)}</Card.Subtitle>
           : (
             <>
               <Card.Subtitle className="mb-2 text-muted">Priority: {taskObj.priority}</Card.Subtitle>
               <Card.Subtitle className="mb-2 text-muted">Days Until Due: {daysUntilDue}</Card.Subtitle>
             </>
           )}
-        <Card.Text>
-          {taskObj.description}
-        </Card.Text>
-        {isComplete
-          ? ''
-          : <Button variant="success" onClick={completeThisTask}>Complete Task</Button>}
-        <Button variant="danger" onClick={deleteThisTask}>Delete</Button>
-        <Link passHref href={`/tasks/${taskObj.id}`}>
-          <Button variant="primary">View</Button>
-        </Link>
-        <Link passHref href={`/tasks/edit/${taskObj.id}`}>
-          <Button variant="dark">Edit</Button>
-        </Link>
+        <div className="mt-4 mb-3">
+          {isComplete
+            ? ''
+            : <Button variant="success" onClick={completeThisTask}>Complete Task</Button>}
+        </div>
+        <div className="mt-auto">
+          <Button variant="light" onClick={deleteThisTask}>
+            <Card.Img variant="top" src="/delete.png" alt="delete" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+          </Button>
+          <Link passHref href={`/tasks/edit/${taskObj.id}`}>
+            <Button variant="light">
+              <Card.Img variant="top" src="/feather-pen.png" alt="edit" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+            </Button>
+          </Link>
+          <Link passHref href={`/tasks/${taskObj.id}`}>
+            <Button variant="light">
+              <Card.Img variant="top" src="/fast-forward.png" alt="view" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+            </Button>
+          </Link>
+        </div>
       </Card.Body>
     </Card>
   );
