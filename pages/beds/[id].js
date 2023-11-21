@@ -34,7 +34,30 @@ export default function ViewPlant() {
         </div>
       </div>
       <div>
-        {bed?.plants?.map((plant) => <BedPlantCard key={plant.id} plantObj={plant} bedId={id} bedPlantId={1} onUpdate={getThisBed} isSingleBedView />)}
+        {bed?.plants?.length
+          ? (
+            <div>
+              {bed?.plants?.map((plant) => <BedPlantCard key={plant.id} plantObj={plant} bedId={id} bedPlantId={1} onUpdate={getThisBed} isSingleBedView />)}
+            </div>
+          )
+          : (
+            <>
+              <div className="center">
+                <h1>Looks like there are no plants for this bed!</h1>
+              </div>
+              <div className="center">
+                <h2>Why not add some?</h2>
+              </div>
+              <div className="center">
+                <Link passHref href={`/beds/addPlants/${id}`}>
+                  <Button>Add Plants to Bed</Button>
+                </Link>
+                <Link passHref href="plants/createPlant">
+                  <Button>Create a New Plant</Button>
+                </Link>
+              </div>
+            </>
+          )}
       </div>
     </>
   );

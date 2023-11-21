@@ -75,6 +75,7 @@ export default function SquareForm({ squareObj }) {
             value={formInput.soilType}
             required
           >
+            <option value="">Select a Soil Type</option>
             {soilTypes?.map((soilType) => (
               <option key={soilType} value={soilType}>{soilType}</option>
             ))}
