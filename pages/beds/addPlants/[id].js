@@ -29,13 +29,17 @@ export default function AddBedPlants() {
       <div>
         {plants?.map((plant) => {
           const bedPlant = bedPlants.find((bp) => bp.plantId === plant.id);
-          return <BedPlantCard key={plant.id} plantObj={plant} bedPlantId={bedPlant ? bedPlant.id : 0} bedId={id} onUpdate={getAllPlantsAndBedPlants} isSingleBedView={false} />;
+          return <BedPlantCard key={plant.id} plantObj={plant} bedPlantId={bedPlant ? bedPlant.id : 0} bedId={id} onUpdate={getAllPlantsAndBedPlants} />;
         })}
       </div>
       <div>
-        <Link passHref href={`/beds/${id}`}>
-          <Button>Done Adding Plants</Button>
-        </Link>
+        {!bedPlants.length
+          ? ''
+          : (
+            <Link passHref href={`/beds/${id}`}>
+              <Button>Done Adding Plants</Button>
+            </Link>
+          )}
       </div>
     </>
   );

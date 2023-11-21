@@ -99,6 +99,7 @@ export default function BedForm({ bedObj }) {
             value={formInput.season}
             required
           >
+            <option value="">Season</option>
             {seasons?.map((season) => (
               <option key={season} value={season}>{season}</option>
             ))}
@@ -139,6 +140,7 @@ export default function BedForm({ bedObj }) {
                   value={formInput.soilType}
                   required
                 >
+                  <option value="">Select a Soil Type</option>
                   {soilTypes?.map((soilType) => (
                     <option key={soilType} value={soilType}>{soilType}</option>
                   ))}

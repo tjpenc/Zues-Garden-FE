@@ -5,6 +5,7 @@ import { deleteBed } from '../../api/bedData';
 
 export default function SmallBedCard({ bedObj, onUpdate }) {
   const deleteThisBed = () => deleteBed(bedObj.id).then(onUpdate);
+  console.warn(bedObj);
 
   return (
     <Card style={{ width: '18rem' }}>
