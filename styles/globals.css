@@ -27,6 +27,15 @@ body {
   justify-content: center;
 }
 
+.space-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.margin-5 {
+  margin: 5px;
+}
+
 .square-container {
   display: flex;
   flex-wrap: wrap;

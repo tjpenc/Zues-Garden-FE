@@ -11,7 +11,9 @@ export default function ViewPlant() {
   const router = useRouter();
   const id = parseInt(router.query.id, 10);
 
-  const getThisBed = () => getSingleBed(id).then(setBed);
+  const getThisBed = () => getSingleBed(id).then((bedObj) => {
+    setBed(bedObj);
+  });
 
   useEffect(() => {
     getThisBed();
@@ -22,10 +24,19 @@ export default function ViewPlant() {
   return (
     <>
       <div>
-        <Link passHref href="/beds/beds">
-          <Button>Back to Beds</Button>
-        </Link>
-        View {bed.name}
+        <h1 className="space-around">
+          View {bed.name}
+          <span>
+            <Link passHref href="/beds/beds">
+              <Button>Back to Beds</Button>
+            </Link>
+          </span>
+          <span>
+            <Link passHref href={`/beds/addPlants/${id}`}>
+              <Button>Add Plants to Bed</Button>
+            </Link>
+          </span>
+        </h1>
       </div>
       <div className="center">
         <div className="square-container" style={{ width: `${bed.length * 10 + 1}vh` }}>
@@ -36,8 +47,11 @@ export default function ViewPlant() {
       <div>
         {bed?.plants?.length
           ? (
-            <div>
-              {bed?.plants?.map((plant) => <BedPlantCard key={plant.id} plantObj={plant} bedId={id} bedPlantId={1} onUpdate={getThisBed} isSingleBedView />)}
+            <div className="space-around">
+              {bed?.plants?.map((plant) => {
+                const bedPlant = bed.bedPlants.find((bp) => bp.plantId === plant.id);
+                return <BedPlantCard key={plant.id} plantObj={plant} bedPlantId={bedPlant.id} bedId={id} onUpdate={getThisBed} isSingleBedView />;
+              })}
             </div>
           )
           : (
@@ -48,11 +62,11 @@ export default function ViewPlant() {
               <div className="center">
                 <h2>Why not add some?</h2>
               </div>
-              <div className="center">
+              <div className="space-around margin-5">
                 <Link passHref href={`/beds/addPlants/${id}`}>
                   <Button>Add Plants to Bed</Button>
                 </Link>
-                <Link passHref href="plants/createPlant">
+                <Link passHref href="/plants/createPlant">
                   <Button>Create a New Plant</Button>
                 </Link>
               </div>
