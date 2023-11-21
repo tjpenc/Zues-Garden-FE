@@ -23,7 +23,13 @@ export default function ViewPlants() {
       <h1 className="center mb-5">My Plants</h1>
       <div className="space-around wrap">
         {plants?.length === 0
-          ? 'You have no plants!'
+          ? (
+            <>
+              <div>
+                <h2>You have no Plants! Use the top left button to create a new plant</h2>
+              </div>
+            </>
+          )
           : plants?.map((plant) => <SmallPlantCard key={plant.id} plantObj={plant} onUpdate={getAllPlants} />)}
       </div>
     </>
