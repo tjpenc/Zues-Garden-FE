@@ -17,13 +17,13 @@ function Home() {
       <h1>Hello {user.displayName}! </h1>
       <br />
       <Link passHref href="/plants/plants">
-        <Button className="m-3">View Plants</Button>
+        <Button variant="primary" className="m-3">View Plants</Button>
       </Link>
       <Link passHref href="/beds/beds">
-        <Button className="m-3">View Beds</Button>
+        <Button variant="primary" className="m-3">View Beds</Button>
       </Link>
       <Link passHref href="/tasks/tasks">
-        <Button className="m-3">View Tasks</Button>
+        <Button variant="primary" className="m-3">View Tasks</Button>
       </Link>
     </div>
   );

@@ -124,7 +124,6 @@ export default function PlantForm({ plantObj }) {
             required
           />
         </Form.Group>
-        <Button type="Submit">Submit</Button>
         <Form.Check
           className="mb-3"
           inline

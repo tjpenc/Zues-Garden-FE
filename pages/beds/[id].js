@@ -11,12 +11,10 @@ export default function ViewPlant() {
   const router = useRouter();
   const id = parseInt(router.query.id, 10);
 
-  const getThisBed = async () => getSingleBed(id).then((bedObj) => {
-    setBed(bedObj);
-  });
+  const getThisBed = async () => getSingleBed(id).then(setBed);
 
   useEffect(() => {
-    getThisBed();
+    getSingleBed(id).then(setBed);
   }, [id]);
 
   // const pushToBeds = () => router.push('/beds/beds');
@@ -54,7 +52,7 @@ export default function ViewPlant() {
           : (
             <>
               <div className="center">
-                <h1>Looks like you have no plants for this bed!</h1>
+                <h1>Looks like you dont have any plants for this bed!</h1>
               </div>
               <div className="center">
                 <h2>Why not add some?</h2>

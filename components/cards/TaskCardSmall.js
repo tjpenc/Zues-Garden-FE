@@ -27,7 +27,7 @@ export default function SmallTaskCard({ taskObj, onUpdate }) {
       <Card.Body className="d-flex flex-column">
         <Card.Title>{taskObj.title}</Card.Title>
         {isComplete
-          ? <Card.Subtitle className="mb-2 text-muted mt-auto">Completed: {taskObj.dateCompleted?.slice(0, 10)}</Card.Subtitle>
+          ? <Card.Subtitle className="mb-2 text-muted mt-3">Completed: {taskObj.dateCompleted?.slice(0, 10)}</Card.Subtitle>
           : (
             <>
               <Card.Subtitle className="mb-2 text-muted">Priority: {taskObj.priority}</Card.Subtitle>
@@ -39,18 +39,18 @@ export default function SmallTaskCard({ taskObj, onUpdate }) {
             ? ''
             : <Button variant="success" onClick={completeThisTask}>Complete Task</Button>}
         </div>
-        <div className="mt-auto">
-          <Button variant="light" onClick={deleteThisTask}>
+        <div className="mt-auto border-top">
+          <Button className="float-left" variant="light" onClick={deleteThisTask}>
             <Card.Img variant="top" src="/delete.png" alt="delete" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
           </Button>
-          <Link passHref href={`/tasks/edit/${taskObj.id}`}>
-            <Button variant="light">
-              <Card.Img variant="top" src="/feather-pen.png" alt="edit" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+          <Link passHref href={`/tasks/${taskObj.id}`}>
+            <Button className="float-right" variant="light">
+              <Card.Img variant="top" src="/fast-forward.png" alt="view" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
             </Button>
           </Link>
-          <Link passHref href={`/tasks/${taskObj.id}`}>
-            <Button variant="light">
-              <Card.Img variant="top" src="/fast-forward.png" alt="view" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+          <Link passHref href={`/tasks/edit/${taskObj.id}`}>
+            <Button className="float-right" variant="light">
+              <Card.Img variant="top" src="/feather-pen.png" alt="edit" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
             </Button>
           </Link>
         </div>

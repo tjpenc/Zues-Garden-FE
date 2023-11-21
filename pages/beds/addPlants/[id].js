@@ -31,7 +31,7 @@ export default function AddBedPlants() {
         </Link>
       </div>
       <h1 className="center mb-5">Select plants to put in this bed</h1>
-      <div className="space-around">
+      <div className="space-around wrap">
         {plants?.map((plant) => {
           const bedPlant = bedPlants.find((bp) => bp.plantId === plant.id);
           return <BedPlantCard key={plant.id} plantObj={plant} bedPlantId={bedPlant ? bedPlant.id : 0} bedId={id} onUpdate={getAllPlantsAndBedPlants} />;

@@ -20,7 +20,6 @@ export default function SquareCard({ squareObj, bedWidth, bedLength }) {
             flex: `0 1 ${(1 / bedLength) * 100}%`,
           }}
         >
-          {console.warn(bedLength)}
           {squareObj.plant ? `${squareObj.plant.symbol}` : ''}
         </div>
       </Link>

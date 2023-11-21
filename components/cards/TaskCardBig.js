@@ -24,8 +24,7 @@ export default function BigTaskCard({ taskObj, onUpdate }) {
 
   return (
     <Card style={{ width: '18rem' }}>
-      {console.warn(taskObj)}
-      <Card.Body>
+      <Card.Body className="d-flex flex-column">
         <Card.Title>Created {taskObj.dateCreated?.slice(0, 10)}</Card.Title>
         {isComplete
           ? <Card.Subtitle className="mb-2 text-muted">Completed: {taskCompletionDate?.slice(0, 10)}</Card.Subtitle>
@@ -34,17 +33,17 @@ export default function BigTaskCard({ taskObj, onUpdate }) {
               <Card.Subtitle className="mb-2 text-muted">Priority: {taskObj.priority}</Card.Subtitle>
               <Card.Subtitle className="mb-2 text-muted">Deadline: {taskObj.deadline?.slice(0, 10)}</Card.Subtitle>
               <Card.Subtitle className="mb-2 text-muted">{daysUntilDue} Days Until Due</Card.Subtitle>
+              <div className="mt-4 mb-3">
+                <Button variant="success" onClick={completeThisTask}>Complete Task</Button>
+              </div>
             </>
           )}
         <Card.Text className="border-top mt-3">
           {taskObj.description}
         </Card.Text>
-        <div>
-          {isComplete
-            ? ''
-            : <Button variant="success" onClick={completeThisTask}>Complete Task</Button>}
+        <div className="mt-auto border-top">
           <Button variant="light" onClick={deleteThisTask}>
-            <Card.Img variant="top" src="/delete.png" alt="edit" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+            <Card.Img variant="top" src="/delete.png" alt="delete" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
           </Button>
           <Link passHref href={`/tasks/edit/${taskObj.id}`}>
             <Button variant="light">

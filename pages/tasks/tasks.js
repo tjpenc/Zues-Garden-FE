@@ -12,7 +12,7 @@ export default function ViewTasks() {
   const getAllTasks = async () => getTasks(user.uid).then(setTasks);
 
   useEffect(() => {
-    getAllTasks();
+    getTasks(user.uid).then(setTasks);
   }, []);
 
   return (
@@ -23,7 +23,7 @@ export default function ViewTasks() {
         </Link>
       </div>
       <h1 className="center mb-5">View Tasks</h1>
-      <div className="space-around mt-3">
+      <div className="space-around mt-3 wrap">
         {tasks?.length === 0
           ? 'No tasks for this user'
           : tasks?.map((task) => <SmallTaskCard key={task.id} taskObj={task} onUpdate={getAllTasks} />)}
