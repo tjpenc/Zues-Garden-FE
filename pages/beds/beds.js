@@ -9,7 +9,7 @@ export default function ViewBeds() {
   const [beds, setBeds] = useState([]);
   const { user } = useAuth();
 
-  const getAllBeds = () => getBeds(user.uid).then(setBeds);
+  const getAllBeds = async () => getBeds(user.uid).then(setBeds);
 
   useEffect(() => {
     getAllBeds();

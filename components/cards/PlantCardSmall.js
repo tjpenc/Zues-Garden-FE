@@ -5,6 +5,7 @@ import { deletePlant } from '../../api/plantData';
 
 export default function SmallPlantCard({ plantObj, onUpdate }) {
   const deleteThisPlant = () => deletePlant(plantObj.id).then(onUpdate);
+
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src={plantObj.image} />
