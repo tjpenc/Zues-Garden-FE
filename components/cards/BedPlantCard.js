@@ -28,10 +28,10 @@ export default function BedPlantCard({
         {bedPlantId
           ? (
             <>
-              <Button variant="danger" onClick={deleteThisBedPlant}>Remove Plant from Bed</Button>
+              <Button className="mt-3" variant="danger" onClick={deleteThisBedPlant}>Remove from Bed</Button>
             </>
           )
-          : <Button variant="success" onClick={addBedPlant}>Add Plant to Bed</Button>}
+          : <Button className="mt-3" variant="success" onClick={addBedPlant}>Add Plant to Bed</Button>}
       </Card.Body>
     </Card>
   );

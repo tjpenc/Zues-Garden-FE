@@ -36,6 +36,12 @@ body {
   margin: 5px;
 }
 
+.image-container {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 .square-container {
   display: flex;
   flex-wrap: wrap;
@@ -60,4 +66,5 @@ body {
   border: solid green 2px;
   transform: scale(1.05);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
 }

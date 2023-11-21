@@ -47,12 +47,15 @@ export default function ViewPlant() {
       <div>
         {bed?.plants?.length
           ? (
-            <div className="space-around">
-              {bed?.plants?.map((plant) => {
-                const bedPlant = bed.bedPlants.find((bp) => bp.plantId === plant.id);
-                return <BedPlantCard key={plant.id} plantObj={plant} bedPlantId={bedPlant.id} bedId={id} onUpdate={getThisBed} isSingleBedView />;
-              })}
-            </div>
+            <>
+              <div className="center margin-5"><h3>Plants Available</h3></div>
+              <div className="space-around">
+                {bed?.plants?.map((plant) => {
+                  const bedPlant = bed.bedPlants.find((bp) => bp.plantId === plant.id);
+                  return <BedPlantCard key={plant.id} plantObj={plant} bedPlantId={bedPlant.id} bedId={id} onUpdate={getThisBed} isSingleBedView />;
+                })}
+              </div>
+            </>
           )
           : (
             <>
