@@ -18,13 +18,13 @@ export default function ViewSingleTask() {
 
   return (
     <>
-      <div>
+      <div className="mt-3">
         <Link passHref href="/tasks/tasks">
           <Button>Back to Tasks</Button>
         </Link>
-        View {task.title}
       </div>
-      <div>
+      <h1 className="center mb-5">{task.title}</h1>
+      <div className="space-around">
         <BigTaskCard key={task.id} taskObj={task} onUpdate={pushToTasks} />
       </div>
     </>

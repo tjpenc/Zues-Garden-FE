@@ -17,15 +17,13 @@ export default function ViewBeds() {
 
   return (
     <>
-      <div>
-        View All Beds
-      </div>
-      <div>
+      <div className="mt-3">
         <Link passHref href="/beds/createBed">
           <Button>Create Bed</Button>
         </Link>
       </div>
-      <div>
+      <h1 className="center mb-5">Beds</h1>
+      <div className="space-around">
         {beds?.map((bed) => <SmallBedCard key={bed.id} bedObj={bed} onUpdate={getAllBeds} />)}
       </div>
     </>

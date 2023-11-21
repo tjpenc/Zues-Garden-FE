@@ -5,24 +5,28 @@ import { deleteBed } from '../../api/bedData';
 
 export default function SmallBedCard({ bedObj, onUpdate }) {
   const deleteThisBed = () => deleteBed(bedObj.id).then(onUpdate);
-  console.warn(bedObj);
 
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Body>
+      <Card.Body className="d-flex flex-column">
         <Card.Title>{bedObj.name}</Card.Title>
         <Card.Subtitle>{bedObj.season} {bedObj.year}</Card.Subtitle>
-        <Card.Text>{`${bedObj.width} x ${bedObj.length}`}</Card.Text>
-        <Button variant="danger" onClick={deleteThisBed}>Delete</Button>
-        <Link passHref href={`/beds/edit/${bedObj.id}`}>
-          <Button variant="primary">Edit Bed</Button>
-        </Link>
-        <Link passHref href={`/beds/${bedObj.id}`}>
-          <Button variant="dark">View Bed</Button>
-        </Link>
-        <Link passHref href={`/beds/addPlants/${bedObj.id}`}>
-          <Button variant="success">Add Plants</Button>
-        </Link>
+        <Card.Text>{`${bedObj.width} ft. x ${bedObj.length} ft.`}</Card.Text>
+        <div className="mt-auto border-top">
+          <Button className="float-left" variant="light" onClick={deleteThisBed}>
+            <Card.Img variant="top" src="/delete.png" alt="delete" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+          </Button>
+          <Link passHref href={`/beds/${bedObj.id}`}>
+            <Button className="float-right" variant="light">
+              <Card.Img variant="top" src="/fast-forward.png" alt="view" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+            </Button>
+          </Link>
+          <Link passHref href={`/beds/edit/${bedObj.id}`}>
+            <Button className="float-right" variant="light">
+              <Card.Img variant="top" src="/feather-pen.png" alt="edit" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+            </Button>
+          </Link>
+        </div>
       </Card.Body>
     </Card>
   );

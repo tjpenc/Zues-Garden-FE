@@ -6,20 +6,22 @@ import { updateSquare } from '../../api/squareData';
 import { getBedPlants } from '../../api/bedPlantData';
 
 const initialState = {
-  plantId: undefined,
+  plantId: '',
   plantQuantity: 1,
   soilType: '',
 };
 
 export default function SquareForm({ squareObj }) {
   const [formInput, setFormInput] = useState(initialState);
-  const [bedPlants, setBedPlants] = useState(null);
+  const [bedPlants, setBedPlants] = useState([]);
   const router = useRouter();
   const soilTypes = ['Loam', 'Sand', 'Clay'];
 
   useEffect(() => {
-    getBedPlants(squareObj?.bedId).then(setBedPlants);
-    setFormInput(squareObj);
+    if (squareObj.bedId) {
+      getBedPlants(squareObj?.bedId).then(setBedPlants);
+      setFormInput(squareObj);
+    }
   }, [squareObj.id]);
 
   const handleChange = (e) => {
@@ -37,7 +39,6 @@ export default function SquareForm({ squareObj }) {
 
   return (
     <>
-      {console.warn(squareObj)}
       <Form style={{ width: '50%' }} onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label>Plant</Form.Label>
@@ -48,7 +49,7 @@ export default function SquareForm({ squareObj }) {
             value={formInput.plantId}
             required
           >
-            <option value="">Select a Plant</option>
+            <option value={undefined}>Select a Plant</option>
             {bedPlants?.map((bedPlant) => (
               <option key={bedPlant.id} value={bedPlant.plant.id}>{bedPlant.plant.name}</option>
             ))}
@@ -75,13 +76,15 @@ export default function SquareForm({ squareObj }) {
             value={formInput.soilType}
             required
           >
-            <option value="">Select a Soil Type</option>
+            <option value={undefined}>Select a Soil Type</option>
             {soilTypes?.map((soilType) => (
               <option key={soilType} value={soilType}>{soilType}</option>
             ))}
           </Form.Select>
         </Form.Group>
-        <Button type="Submit">Submit</Button>
+        <div className="center mt-3">
+          <Button type="Submit">Submit</Button>
+        </div>
       </Form>
     </>
   );

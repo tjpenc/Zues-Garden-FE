@@ -95,7 +95,9 @@ export default function TaskForm({ taskObj }) {
             required
           />
         </Form.Group>
-        <Button type="Submit">Submit</Button>
+        <div className="center mt-3">
+          <Button type="Submit">Submit</Button>
+        </div>
       </Form>
     </>
   );

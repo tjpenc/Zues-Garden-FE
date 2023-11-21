@@ -10,24 +10,20 @@ export default function ViewTasks() {
   const { user } = useAuth();
 
   const getAllTasks = async () => getTasks(user.uid).then(setTasks);
+
   useEffect(() => {
-    getAllTasks();
+    getTasks(user.uid).then(setTasks);
   }, []);
 
   return (
     <>
-      <div>
-        View All Tasks
-      </div>
-      <div>
+      <div className="mt-3">
         <Link passHref href="/tasks/createTask">
           <Button>Create Task</Button>
         </Link>
-        <Link passHref href="/">
-          <Button>Completed Tasks</Button>
-        </Link>
       </div>
-      <div>
+      <h1 className="center mb-5">View Tasks</h1>
+      <div className="space-around mt-3 wrap">
         {tasks?.length === 0
           ? 'No tasks for this user'
           : tasks?.map((task) => <SmallTaskCard key={task.id} taskObj={task} onUpdate={getAllTasks} />)}

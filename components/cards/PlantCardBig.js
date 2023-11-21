@@ -5,21 +5,28 @@ import { deletePlant } from '../../api/plantData';
 
 export default function BigPlantCard({ plantObj, onUpdate }) {
   const deleteThisPlant = () => deletePlant(plantObj.id).then(onUpdate);
+
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src={plantObj.image} />
-      <Card.Body>
+      <Card.Body className="d-flex flex-column">
         <Card.Title>{plantObj.name}</Card.Title>
         <Card.Subtitle>{plantObj.type}</Card.Subtitle>
-        <Card.Text>{plantObj.description}</Card.Text>
+        <Card.Text>Description: {plantObj.description}</Card.Text>
         <Card.Text># per Square Foot: {plantObj.numberPerSquare}</Card.Text>
         {plantObj.isOwned
           ? <Card.Text>Owned</Card.Text>
           : ''}
-        <Button variant="danger" onClick={deleteThisPlant}>Delete</Button>
-        <Link passHref href={`/plants/edit/${plantObj.id}`}>
-          <Button variant="primary">Edit Plant</Button>
-        </Link>
+        <div className="mt-auto border-top">
+          <Button variant="light" onClick={deleteThisPlant}>
+            <Card.Img variant="top" src="/delete.png" alt="delete" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+          </Button>
+          <Link passHref href={`/plants/edit/${plantObj.id}`}>
+            <Button variant="light">
+              <Card.Img variant="top" src="/feather-pen.png" alt="edit" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+            </Button>
+          </Link>
+        </div>
       </Card.Body>
     </Card>
   );

@@ -7,21 +7,26 @@ export default function SmallPlantCard({ plantObj, onUpdate }) {
   const deleteThisPlant = () => deletePlant(plantObj.id).then(onUpdate);
 
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={plantObj.image} />
-      <Card.Body>
+    <Card style={{ width: '12rem' }}>
+      <Card.Img className="image" variant="top" src={plantObj.image} />
+      <Card.Body className="d-flex flex-column">
         <Card.Title>{plantObj.name}</Card.Title>
-        <Card.Subtitle>{plantObj.type}</Card.Subtitle>
-        {plantObj.isOwned
-          ? <Card.Text>Owned</Card.Text>
-          : ''}
-        <Button variant="danger" onClick={deleteThisPlant}>Delete</Button>
-        <Link passHref href={`/plants/edit/${plantObj.id}`}>
-          <Button variant="primary">Edit Plant</Button>
-        </Link>
-        <Link passHref href={`/plants/${plantObj.id}`}>
-          <Button variant="dark">View Plant</Button>
-        </Link>
+        <Card.Subtitle className="mb-3">{plantObj.type}</Card.Subtitle>
+        <div className="mt-auto border-top">
+          <Button className="float-left" variant="light" onClick={deleteThisPlant}>
+            <Card.Img variant="top" src="/delete.png" alt="delete" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+          </Button>
+          <Link passHref href={`/plants/${plantObj.id}`}>
+            <Button className="float-right" variant="light">
+              <Card.Img variant="top" src="/fast-forward.png" alt="view" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+            </Button>
+          </Link>
+          <Link passHref href={`/plants/edit/${plantObj.id}`}>
+            <Button className="float-right" variant="light">
+              <Card.Img variant="top" src="/feather-pen.png" alt="edit" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+            </Button>
+          </Link>
+        </div>
       </Card.Body>
     </Card>
   );

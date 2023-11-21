@@ -1,6 +1,5 @@
 import { Button } from 'react-bootstrap';
 import Link from 'next/link';
-import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 
 function Home() {
@@ -16,19 +15,16 @@ function Home() {
       }}
     >
       <h1>Hello {user.displayName}! </h1>
+      <br />
       <Link passHref href="/plants/plants">
-        <Button>View Plants</Button>
+        <Button variant="primary" className="m-3">View Plants</Button>
       </Link>
       <Link passHref href="/beds/beds">
-        <Button>View Beds</Button>
+        <Button variant="primary" className="m-3">View Beds</Button>
       </Link>
       <Link passHref href="/tasks/tasks">
-        <Button>View Tasks</Button>
+        <Button variant="primary" className="m-3">View Tasks</Button>
       </Link>
-      <p>Click the button below to logout!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-        Sign Out
-      </Button>
     </div>
   );
 }

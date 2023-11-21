@@ -124,7 +124,6 @@ export default function PlantForm({ plantObj }) {
             required
           />
         </Form.Group>
-        <Button type="Submit">Submit</Button>
         <Form.Check
           className="mb-3"
           inline
@@ -135,6 +134,9 @@ export default function PlantForm({ plantObj }) {
           onChange={handleCheckChange}
           id="inline-checkbox-1"
         />
+        <div className="center mt-3">
+          <Button type="Submit">Submit</Button>
+        </div>
       </Form>
     </>
   );
