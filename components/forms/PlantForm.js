@@ -47,7 +47,7 @@ export default function PlantForm({ plantObj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (plantObj.id) {
-      updatePlant(formInput).then(router.push('/plants/plants'));
+      updatePlant(formInput).then(router.push(`/plants/${plantObj.id}`));
     } else {
       formInput.uid = user.uid;
       createPlant(formInput).then(router.push('/plants/plants'));
@@ -113,16 +113,6 @@ export default function PlantForm({ plantObj }) {
             required
           />
         </Form.Group>
-        <Form.Check
-          className="mb-3"
-          inline
-          label="Owned?"
-          name="isOwned"
-          type="checkbox"
-          checked={formInput.isOwned}
-          onChange={handleCheckChange}
-          id="inline-checkbox-1"
-        />
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>Plant Symbol</Form.Label>
           <Form.Control
@@ -135,6 +125,16 @@ export default function PlantForm({ plantObj }) {
           />
         </Form.Group>
         <Button type="Submit">Submit</Button>
+        <Form.Check
+          className="mb-3"
+          inline
+          label="Owned?"
+          name="isOwned"
+          type="checkbox"
+          checked={formInput.isOwned}
+          onChange={handleCheckChange}
+          id="inline-checkbox-1"
+        />
       </Form>
     </>
   );

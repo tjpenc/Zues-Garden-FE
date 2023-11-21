@@ -11,7 +11,7 @@ export default function ViewPlant() {
   const router = useRouter();
   const id = parseInt(router.query.id, 10);
 
-  const getThisBed = () => getSingleBed(id).then((bedObj) => {
+  const getThisBed = async () => getSingleBed(id).then((bedObj) => {
     setBed(bedObj);
   });
 
