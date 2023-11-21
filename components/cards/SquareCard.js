@@ -14,7 +14,13 @@ export default function SquareCard({ squareObj, bedWidth, bedLength }) {
   return (
     <>
       <Link passHref href={`/squares/edit/${squareObj.id}`}>
-        <div className="square">
+        <div
+          className="square"
+          style={{
+            flex: `0 1 ${(1 / bedLength) * 100}%`,
+          }}
+        >
+          {console.warn(bedLength)}
           {squareObj.plant ? `${squareObj.plant.symbol}` : ''}
         </div>
       </Link>

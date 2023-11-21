@@ -21,14 +21,19 @@ body {
   background-color: #88effd;
 }
 
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .square-container {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
   height: auto;
   background-color: white;
   margin: 5%;
-  border: solid black 2px
+  border: solid black 2px;
 }
 
 .square {
