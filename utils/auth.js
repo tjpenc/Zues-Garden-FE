@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import Router, { useRouter } from 'next/router';
 // import { clientCredentials } from './client';
 
 const endpoint = 'http://localhost:7188';
@@ -46,6 +47,8 @@ const signIn = () => {
 };
 
 const signOut = () => {
+  const router = useRouter();
+  router.push("/");
   firebase.auth().signOut();
 };
 

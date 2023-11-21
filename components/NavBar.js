@@ -32,9 +32,11 @@ export default function NavBar() {
             <Link passHref href="/tasks/tasks">
               <Nav.Link>Tasks</Nav.Link>
             </Link>
-            <Button variant="danger" onClick={signOut}>
-              Sign Out
-            </Button>
+            <Link passHref href="/">
+              <Button variant="danger" onClick={signOut}>
+                Sign Out
+              </Button>
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
