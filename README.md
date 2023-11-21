@@ -1,44 +1,33 @@
-# React/Next.js Django Auth Template
+# Plants
+## Overview
+    This app is for the hobby gardener who needs to keep track of the many tasks, plants, and beds that they have. A user is able to create tasks and set deadlines for themselves, and mark when the tasks have been completed. A user can also create plants to keep track of what plants they have in their inventory or even any plants they may want to own in the future. Further, this app acts as a raised bed planner. A user can use the plants they have created, and plan out a raised bed with those plants. All data is user specific, so you will never encounter another users data. 
 
-## Topics
-- [Get Started](#getting-started)
-- [Starting the Project](#starting-the-project)
-___
-## Getting Started
-### Use Template
-#### 1. To get started, click the GREEN "Use this Template" button at the top of the repo
-<img width="915" alt="Screen Shot 2022-07-06 at 12 54 01 PM" src="https://user-images.githubusercontent.com/29741570/177612998-4aac9237-5a1e-4f13-8ae0-468587521564.png">
+## Deploy
+[Netlify Link](https://littleadventures.netlify.app)
 
-#### 2. Make sure YOUR github account is selected in the dropdown and name your project
-<img width="763" alt="Screen Shot 2022-07-06 at 12 54 48 PM" src="https://user-images.githubusercontent.com/29741570/177613126-dd38f678-7553-4f27-8a4a-75680f14d71e.png">
+## Features
+- Sign in/out via Google Authentication
+- Create a plant and give it a name, description, and symbol to appear as in your raised beds
+- Delete and edit plants that you do not have anymore
+- Create tasks and reminders for your garden so you can see what you need to do, and the upcoming deadlines of when they are due
+- Mark tasks as complete, and see a log of all you have accomplished in your garden
+- Create and keep track of multiple raised beds
+- Raised beds are based on square foot gardening, with each square representing one foot
+- Add and remove plants from your raised beds to help you plot your next season
 
-#### 3. Clone your new repo to your local machine
-#### 4. Go to the **NEXT** section
+## Screenshots
 
-## Starting the Project
-1. Create a Firebase project and set up authentication. Use [these videos](https://vimeo.com/showcase/codetracker-firebase) as a refresher if needed.
-1. Create a `.env` file at the root of the project
-1. Copy/Paste the contents of the `.env.sample` file to your newly created `.env` file.
-1. Copy over all of your Firebase values into the `.env` file.
-1. Open the `package.json` file and change the `name` property to the name of your application, and `author` to  your name.
-1. From your command line, be in the root directory and run `npm install` OR `npm i` for short.
-1. Next, run `npm run prepare`. This command sets up husky to track eslint errors on commit that will make your deploy fail on Netlify.
-1. To start your application, run `npm run dev`. THIS IS THE COMMAND YOU WILL USE TO RUN YOUR DEVELOPMENT SERVER FROM NOW ON.
-1. Open [http://localhost:3000](http://localhost:3000) with your browser.
+## Wireframe
+[Figma Wireframe](https://www.figma.com/file/AbOlFV3K1tQg0UalAyhkkm/Plants?type=design&node-id=0-1&mode=design&t=hVdyxheIQOWGHnzM-0)
 
-### If you see this, you are set to go!
-<img width="450" alt="Screen Shot 2022-07-06 at 1 07 27 PM" src="https://user-images.githubusercontent.com/29741570/177615077-9b6a75bc-0260-4d29-bb88-bd95a3140687.png">
-
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-**NOTES:** 
-- If you see the following error, you did not follow all the setup steps correctly and failed to add your Firebase creds. Go back and do that NOW.
-
-<img width="1043" alt="Screen Shot 2022-07-06 at 11 18 45 AM" src="https://user-images.githubusercontent.com/29741570/177612501-c2628f18-4bbd-4de9-aae6-27ffba1172d6.png">
-        
-## Learn More about Next.js
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ERD
+[ERD Link](https://lucid.app/lucidchart/2d39394c-ec0e-4575-80b0-030d814fde2e/edit?page=0_0&invitationId=inv_a8ca4164-5452-47db-bce8-b33e6388c491#)
+## Start App
+    Use npm run dev to start the app from the terminal
+## Technologies
+    - Next.js
+    - React
+    - Bootstrap
+    - Styled Components
+    - Google Maps API
+    - Firebase
