@@ -15,6 +15,7 @@ export default function SquareForm({ squareObj }) {
   const [formInput, setFormInput] = useState(initialState);
   const [bedPlants, setBedPlants] = useState(null);
   const router = useRouter();
+  const soilTypes = ['Loam', 'Sand', 'Clay'];
 
   useEffect(() => {
     getBedPlants(squareObj?.bedId).then(setBedPlants);
@@ -65,16 +66,19 @@ export default function SquareForm({ squareObj }) {
             required
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        <Form.Group>
           <Form.Label>Soil Type</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Soil Type"
+          <Form.Select
+            aria-label="Default select example"
             name="soilType"
-            value={formInput.soilType}
             onChange={handleChange}
+            value={formInput.soilType}
             required
-          />
+          >
+            {soilTypes?.map((soilType) => (
+              <option key={soilType} value={soilType}>{soilType}</option>
+            ))}
+          </Form.Select>
         </Form.Group>
         <Button type="Submit">Submit</Button>
       </Form>

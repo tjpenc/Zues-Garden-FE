@@ -22,6 +22,8 @@ export default function BedForm({ bedObj }) {
   const [formInput, setFormInput] = useState(initialState);
   const router = useRouter();
   const { user } = useAuth();
+  const seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
+  const soilTypes = ['Loam', 'Sand', 'Clay'];
   // when a field is filled, need to update state
 
   useEffect(() => {
@@ -88,16 +90,19 @@ export default function BedForm({ bedObj }) {
             required
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        <Form.Group>
           <Form.Label>Season</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Season"
+          <Form.Select
+            aria-label="Default select example"
             name="season"
-            value={formInput.season}
             onChange={handleChange}
+            value={formInput.season}
             required
-          />
+          >
+            {seasons?.map((season) => (
+              <option key={season} value={season}>{season}</option>
+            ))}
+          </Form.Select>
         </Form.Group>
         {/* <Form.Group className="mb-3">
           <Form.Label for="start">Year: </Form.Label>
@@ -125,16 +130,19 @@ export default function BedForm({ bedObj }) {
           ? ''
           : (
             <>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Group>
                 <Form.Label>Soil Type</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Soil Type"
+                <Form.Select
+                  aria-label="Default select example"
                   name="soilType"
-                  value={formInput.soilType}
                   onChange={handleChange}
+                  value={formInput.soilType}
                   required
-                />
+                >
+                  {soilTypes?.map((soilType) => (
+                    <option key={soilType} value={soilType}>{soilType}</option>
+                  ))}
+                </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Bed Width</Form.Label>
