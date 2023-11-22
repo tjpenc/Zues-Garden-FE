@@ -12,7 +12,9 @@ export default function ViewBeds() {
   const getAllBeds = () => getBeds(user.uid).then(setBeds);
 
   useEffect(() => {
-    getAllBeds();
+    setTimeout(() => {
+      getAllBeds();
+    }, 500);
   }, []);
 
   return (

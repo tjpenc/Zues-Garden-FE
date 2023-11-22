@@ -17,6 +17,23 @@ const getSingleSquare = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getAllBedSquares = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/beds/squares/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((resp) => {
+      if (resp.status === 404) {
+        resolve([]);
+      } else {
+        resolve(resp.json());
+      }
+    })
+    .catch(reject);
+});
+
 const updateSquare = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/squares/${payload.id}`, {
     method: 'PUT',
@@ -37,5 +54,6 @@ const updateSquare = (payload) => new Promise((resolve, reject) => {
 
 export {
   getSingleSquare,
+  getAllBedSquares,
   updateSquare,
 };

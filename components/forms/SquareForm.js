@@ -49,7 +49,7 @@ export default function SquareForm({ squareObj }) {
             value={formInput.plantId}
             required
           >
-            <option value={undefined}>Select a Plant</option>
+            <option value="0">Select a Plant</option>
             {bedPlants?.map((bedPlant) => (
               <option key={bedPlant.id} value={bedPlant.plant.id}>{bedPlant.plant.name}</option>
             ))}

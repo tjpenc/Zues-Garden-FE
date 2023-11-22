@@ -13,9 +13,13 @@ export default function SmallPlantCard({ plantObj, onUpdate }) {
         <Card.Title>{plantObj.name}</Card.Title>
         <Card.Subtitle className="mb-3">{plantObj.type}</Card.Subtitle>
         <div className="mt-auto border-top">
-          <Button className="float-left" variant="light" onClick={deleteThisPlant}>
-            <Card.Img variant="top" src="/delete.png" alt="delete" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
-          </Button>
+          {!plantObj.beds.length
+            ? (
+              <Button className="float-left" variant="light" onClick={deleteThisPlant}>
+                <Card.Img variant="top" src="/delete.png" alt="delete" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+              </Button>
+            )
+            : ''}
           <Link passHref href={`/plants/${plantObj.id}`}>
             <Button className="float-right" variant="light">
               <Card.Img variant="top" src="/fast-forward.png" alt="view" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
@@ -42,6 +46,7 @@ SmallPlantCard.propTypes = {
     numberPerSquare: PropTypes.number,
     image: PropTypes.string,
     symbol: PropTypes.string,
+    beds: PropTypes.instanceOf(Array),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

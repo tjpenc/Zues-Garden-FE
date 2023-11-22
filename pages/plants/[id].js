@@ -7,11 +7,17 @@ import BigPlantCard from '../../components/cards/PlantCardBig';
 
 export default function ViewPlant() {
   const [plant, setPlant] = useState({});
+  const [hasBedPlants, setHasBedPlants] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
-    getSinglePlant(id).then(setPlant);
+    getSinglePlant(id).then((plantObj) => {
+      setPlant(plantObj);
+      if (plantObj.beds.length) {
+        setHasBedPlants(true);
+      }
+    });
   }, [id]);
 
   const pushToPlants = () => router.push('/plants/plants');
@@ -25,7 +31,7 @@ export default function ViewPlant() {
       </div>
       <h1 className="center mb-5">{plant.name}</h1>
       <div className="center">
-        <BigPlantCard key={plant.id} plantObj={plant} onUpdate={pushToPlants} />
+        <BigPlantCard key={plant.id} plantObj={plant} onUpdate={pushToPlants} hasBedPlants={hasBedPlants} />
       </div>
     </>
   );

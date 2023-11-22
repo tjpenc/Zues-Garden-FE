@@ -3,7 +3,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { deletePlant } from '../../api/plantData';
 
-export default function BigPlantCard({ plantObj, onUpdate }) {
+export default function BigPlantCard({ plantObj, onUpdate, hasBedPlants }) {
   const deleteThisPlant = () => deletePlant(plantObj.id).then(onUpdate);
 
   return (
@@ -18,9 +18,13 @@ export default function BigPlantCard({ plantObj, onUpdate }) {
           ? <Card.Text>Owned</Card.Text>
           : ''}
         <div className="mt-auto border-top">
-          <Button variant="light" onClick={deleteThisPlant}>
-            <Card.Img variant="top" src="/delete.png" alt="delete" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
-          </Button>
+          {!hasBedPlants
+            ? (
+              <Button className="float-left" variant="light" onClick={deleteThisPlant}>
+                <Card.Img variant="top" src="/delete.png" alt="delete" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+              </Button>
+            )
+            : ''}
           <Link passHref href={`/plants/edit/${plantObj.id}`}>
             <Button variant="light">
               <Card.Img variant="top" src="/feather-pen.png" alt="edit" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
@@ -42,6 +46,12 @@ BigPlantCard.propTypes = {
     numberPerSquare: PropTypes.number,
     image: PropTypes.string,
     symbol: PropTypes.string,
+    beds: PropTypes.instanceOf(Array),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
+  hasBedPlants: PropTypes.bool,
+};
+
+BigPlantCard.defaultProps = {
+  hasBedPlants: false,
 };
