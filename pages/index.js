@@ -1,9 +1,20 @@
 import { Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { useAuth } from '../utils/context/authContext';
+import { checkUser, postUser } from '../utils/auth';
 
 function Home() {
   const { user } = useAuth();
+  checkUser(user.uid).then((userResp) => {
+    if (!userResp) {
+      const newUser = {
+        name: user.displayName,
+        uid: user.uid,
+      };
+      postUser(newUser).then(() => {});
+    }
+  });
+
   return (
     <div
       className="text-center d-flex flex-column justify-content-center align-content-center"
@@ -15,6 +26,7 @@ function Home() {
       }}
     >
       <h1>Hello {user.displayName}! </h1>
+      <h6>UID: {user.uid}</h6>
       <br />
       <Link passHref href="/plants/plants">
         <Button variant="primary" className="m-3">View Plants</Button>

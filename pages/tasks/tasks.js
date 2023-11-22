@@ -9,10 +9,10 @@ export default function ViewTasks() {
   const [tasks, setTasks] = useState([]);
   const { user } = useAuth();
 
-  const getAllTasks = async () => getTasks(user.uid).then(setTasks);
+  const getAllTasks = () => getTasks(user.uid).then(setTasks);
 
   useEffect(() => {
-    getTasks(user.uid).then(setTasks);
+    getAllTasks();
   }, []);
 
   return (
