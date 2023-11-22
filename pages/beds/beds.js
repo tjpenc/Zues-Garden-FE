@@ -9,7 +9,7 @@ export default function ViewBeds() {
   const [beds, setBeds] = useState([]);
   const { user } = useAuth();
 
-  const getAllBeds = async () => getBeds(user.uid).then(setBeds);
+  const getAllBeds = () => getBeds(user.uid).then(setBeds);
 
   useEffect(() => {
     getAllBeds();
@@ -23,7 +23,7 @@ export default function ViewBeds() {
         </Link>
       </div>
       <h1 className="center mb-5">My Beds</h1>
-      <div className="space-around">
+      <div className="space-around wrap">
         {beds?.length === 0
           ? (
             <>

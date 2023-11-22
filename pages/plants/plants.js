@@ -8,10 +8,10 @@ import SmallPlantCard from '../../components/cards/PlantCardSmall';
 export default function ViewPlants() {
   const [plants, setPlants] = useState([]);
   const { user } = useAuth();
-  const getAllPlants = async () => getPlants(user.uid).then(setPlants);
+  const getAllPlants = () => getPlants(user.uid).then(setPlants);
 
   useEffect(() => {
-    getPlants(user.uid).then(setPlants);
+    getAllPlants();
   }, []);
   return (
     <>

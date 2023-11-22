@@ -11,10 +11,10 @@ export default function ViewPlant() {
   const router = useRouter();
   const id = parseInt(router.query.id, 10);
 
-  const getThisBed = async () => getSingleBed(id).then(setBed);
+  const getThisBed = () => getSingleBed(id).then(setBed);
 
   useEffect(() => {
-    getSingleBed(id).then(setBed);
+    getThisBed();
   }, [id]);
 
   // const pushToBeds = () => router.push('/beds/beds');
