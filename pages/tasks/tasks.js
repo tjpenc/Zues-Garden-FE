@@ -12,7 +12,9 @@ export default function ViewTasks() {
   const getAllTasks = () => getTasks(user.uid).then(setTasks);
 
   useEffect(() => {
-    getAllTasks();
+    setTimeout(() => {
+      getAllTasks();
+    }, 500);
   }, []);
 
   return (

@@ -11,7 +11,9 @@ export default function ViewPlants() {
   const getAllPlants = () => getPlants(user.uid).then(setPlants);
 
   useEffect(() => {
-    getAllPlants();
+    setTimeout(() => {
+      getAllPlants();
+    }, 300);
   }, []);
   return (
     <>
