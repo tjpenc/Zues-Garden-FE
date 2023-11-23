@@ -47,56 +47,71 @@ export default function TaskForm({ taskObj }) {
 
   return (
     <>
-      <Form style={{ width: '50%' }} onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Title"
-            name="title"
-            value={formInput.title}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Description"
-            name="description"
-            value={formInput.description}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label for="start">Deadline: </Form.Label>
-          <Form.Control
-            type="date"
-            id="start"
-            name="deadline"
-            value={formInput.deadline}
-            min={new Date().toJSON().slice(0, 10)}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Priority</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Priority"
-            name="priority"
-            min="1"
-            max="3"
-            // customize this range as a stretch?
-            value={formInput.priority}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <div className="center mt-3">
-          <Button type="Submit">Submit</Button>
+      <Form className="form-container" onSubmit={handleSubmit}>
+        <div className="form-column-container">
+          <div className="form-column">
+            <h1 className="center">Required</h1>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Title"
+                name="title"
+                value={formInput.title}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Description"
+                name="description"
+                value={formInput.description}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label for="start">Deadline: </Form.Label>
+              <Form.Control
+                type="date"
+                id="start"
+                name="deadline"
+                value={formInput.deadline}
+                min={new Date().toJSON().slice(0, 10)}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Priority</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Priority"
+                name="priority"
+                min="1"
+                max="3"
+                // customize this range as a stretch?
+                value={formInput.priority}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+          </div>
+          <div className="form-column">
+            <h1 className="center">Optional</h1>
+
+          </div>
+        </div>
+        <div className="form-submit-button">
+          <div className="center mt-3">
+            <Button type="Submit">Submit</Button>
+          </div>
         </div>
       </Form>
     </>

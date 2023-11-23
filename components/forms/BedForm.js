@@ -66,136 +66,129 @@ export default function BedForm({ bedObj }) {
 
   return (
     <>
-      <Form style={{ width: '50%' }} onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Bed Name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Bed Name"
-            name="name"
-            value={formInput.name}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Year</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Year"
-            min={parseInt(new Date().toJSON().slice(0, 4), 10)}
-            name="year"
-            value={formInput.year}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Season</Form.Label>
-          <Form.Select
-            aria-label="Default select example"
-            name="season"
-            onChange={handleChange}
-            value={formInput.season}
-            required
-          >
-            <option value="">Season</option>
-            {seasons?.map((season) => (
-              <option key={season} value={season}>{season}</option>
-            ))}
-          </Form.Select>
-        </Form.Group>
-        {/* <Form.Group className="mb-3">
-          <Form.Label for="start">Year: </Form.Label>
-          <Form.Control
-            type="month"
-            id="start"
-            name="year"
-            value={formInput.year}
-            min={new Date().toJSON().slice(0, 10)}
-            onChange={handleChange}
-          />
-        </Form.Group> */}
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Description"
-            name="description"
-            value={formInput.description}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        {bedObj.id
-          ? ''
-          : (
-            <>
-              <Form.Group>
-                <Form.Label>Soil Type</Form.Label>
-                <Form.Select
-                  aria-label="Default select example"
-                  name="soilType"
-                  onChange={handleChange}
-                  value={formInput.soilType}
-                  required
-                >
-                  <option value="">Select a Soil Type</option>
-                  {soilTypes?.map((soilType) => (
-                    <option key={soilType} value={soilType}>{soilType}</option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Bed Width</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Width"
-                  min="1"
-                  name="width"
-                  value={formInput.width}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Bed Length</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Length"
-                  min="1"
-                  name="length"
-                  value={formInput.length}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-            </>
-          )}
-        {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>BedGroup</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Bedgroup?"
-            min="0"
-            name="bedGroupId"
-            value={formInput.bedGroupId}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group> */}
-        <Form.Check
-          className="mb-3"
-          inline
-          label="Current Bed?"
-          name="isCurrent"
-          type="checkbox"
-          checked={formInput.isCurrent}
-          onChange={handleCheckChange}
-          id="inline-checkbox-1"
-        />
-        <div className="center mt-3">
-          <Button type="Submit">Submit</Button>
+      <Form className="form-container" onSubmit={handleSubmit}>
+        <div className="form-column-container">
+          <div className="form-column">
+            <h1 className="center">Required</h1>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Bed Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Bed Name"
+                name="name"
+                value={formInput.name}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Year</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Year"
+                min={parseInt(new Date().toJSON().slice(0, 4), 10)}
+                name="year"
+                value={formInput.year}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Season</Form.Label>
+              <Form.Select
+                aria-label="Default select example"
+                name="season"
+                onChange={handleChange}
+                value={formInput.season}
+                required
+              >
+                <option value="">Season</option>
+                {seasons?.map((season) => (
+                  <option key={season} value={season}>{season}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Description"
+                name="description"
+                value={formInput.description}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            {bedObj.id
+              ? ''
+              : (
+                <>
+                  <Form.Group>
+                    <Form.Label>Soil Type</Form.Label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      name="soilType"
+                      onChange={handleChange}
+                      value={formInput.soilType}
+                      required
+                    >
+                      <option value="">Select a Soil Type</option>
+                      {soilTypes?.map((soilType) => (
+                        <option key={soilType} value={soilType}>{soilType}</option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>Bed Width</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Width"
+                      min="1"
+                      name="width"
+                      value={formInput.width}
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>Bed Length</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Length"
+                      min="1"
+                      name="length"
+                      value={formInput.length}
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                </>
+              )}
+
+            <Form.Check
+              className="mb-3"
+              inline
+              label="Current Bed?"
+              name="isCurrent"
+              type="checkbox"
+              checked={formInput.isCurrent}
+              onChange={handleCheckChange}
+              id="inline-checkbox-1"
+            />
+          </div>
+          <div className="form-column">
+            <h1 className="center">Optional</h1>
+
+          </div>
+        </div>
+        <div className="form-submit-button">
+          <div className="center mt-3">
+            <Button type="Submit">Submit</Button>
+          </div>
         </div>
       </Form>
     </>
