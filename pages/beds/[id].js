@@ -6,9 +6,11 @@ import { getSingleBed } from '../../api/bedData';
 import SquareCard from '../../components/cards/SquareCard';
 import BedPlantCard from '../../components/cards/BedPlantCard';
 import Loading from '../../components/Loading';
+import { updateSquare } from '../../api/squareData';
 
 export default function ViewPlant() {
   const [bed, setBed] = useState({});
+  const [selectedPlant, setSelectedPlant] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const id = parseInt(router.query.id, 10);
@@ -22,7 +24,19 @@ export default function ViewPlant() {
     setTimeout(() => {
       getThisBed();
     }, 300);
-  }, [id]);
+  }, []);
+
+  const handleSquareClick = (squareObj) => {
+    if (selectedPlant) {
+      const plant = {
+        id: squareObj.id,
+        plantId: selectedPlant.id,
+        plantQuantity: selectedPlant.plantQuantity,
+        soilType: squareObj.soilType,
+      };
+      updateSquare(plant).then(getThisBed);
+    }
+  };
 
   return (
     <>
@@ -42,7 +56,12 @@ export default function ViewPlant() {
             <div className="center">
               <div className="square-container" style={{ width: `${bed.length * 10 + 2}vh` }}>
                 {/* As long as viewport height is not too small, the raised bed should create correctly, replace with % later on */}
-                {bed?.squares?.map((square) => <SquareCard key={square.id} squareObj={square} bedWidth={bed.width} bedLength={bed.length} />)}
+                {bed?.squares?.map((square) => (
+                  // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+                  <div key={square.id} onClick={() => handleSquareClick(square)} onKeyDown={() => handleSquareClick(square)}>
+                    <SquareCard squareObj={square} bedWidth={bed.width} bedLength={bed.length} />
+                  </div>
+                ))}
               </div>
             </div>
             <div>
@@ -53,7 +72,12 @@ export default function ViewPlant() {
                     <div className="space-around">
                       {bed?.plants?.map((plant) => {
                         const bedPlant = bed.bedPlants.find((bp) => bp.plantId === plant.id);
-                        return <BedPlantCard key={plant.id} plantObj={plant} bedPlantId={bedPlant.id} bedId={id} onUpdate={getThisBed} isSingleBedView />;
+                        return (
+                          // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+                          <div onClick={() => setSelectedPlant(plant)} onKeyDown={() => setSelectedPlant(plant)}>
+                            <BedPlantCard key={plant.id} plantObj={plant} bedPlantId={bedPlant.id} bedId={id} onUpdate={getThisBed} isSingleBedView isSelected={plant.id === selectedPlant.id} />
+                          </div>
+                        );
                       })}
                     </div>
                   </>

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 export default function SquareCard({ squareObj, bedWidth, bedLength }) {
@@ -13,16 +12,14 @@ export default function SquareCard({ squareObj, bedWidth, bedLength }) {
 
   return (
     <>
-      <Link passHref href={`/squares/edit/${squareObj.id}`}>
-        <div
-          className="square"
-          style={{
-            flex: `0 1 ${(1 / bedLength) * 100}%`,
-          }}
-        >
-          {squareObj.plant ? `${squareObj.plant.symbol}` : ''}
-        </div>
-      </Link>
+      <div
+        className="square"
+        style={{
+          flex: `0 1 ${(1 / bedLength) * 100}%`,
+        }}
+      >
+        {squareObj.plant ? `${squareObj.plant.symbol}` : ''}
+      </div>
     </>
   );
 }

@@ -90,6 +90,24 @@ body {
   font-weight: bold;
 }
 
+.bedPlantContainer:hover {
+  background-color: rgba(144, 238, 144, 0.5);
+  cursor: pointer;
+  border: solid black 2px;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+}
+
+.selectedBedPlant {
+  background-color: rgba(144, 238, 144, 0.5);
+  cursor: pointer;
+  border: solid black 2px;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+}
+
 .form-container {
   display: flex;
   flex-direction: column;
