@@ -7,6 +7,7 @@ export default function BedPlantCard({
   bedPlantId,
   bedId,
   onUpdate,
+  isSelected,
 }) {
   const addBedPlant = () => {
     const payload = {
@@ -21,7 +22,10 @@ export default function BedPlantCard({
   };
 
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card
+      className={`${isSelected ? 'selectedBedPlant' : 'bedPlantContainer'}`}
+      style={{ width: '18rem' }}
+    >
       <Card.Body>
         <Card.Title>{plantObj.name}</Card.Title>
         <Card.Subtitle>{plantObj.type}</Card.Subtitle>
@@ -51,8 +55,10 @@ BedPlantCard.propTypes = {
   bedPlantId: PropTypes.number,
   bedId: PropTypes.number.isRequired,
   onUpdate: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool,
 };
 
 BedPlantCard.defaultProps = {
   bedPlantId: 0,
+  isSelected: false,
 };
