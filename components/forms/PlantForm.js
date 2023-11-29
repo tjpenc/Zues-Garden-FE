@@ -56,85 +56,97 @@ export default function PlantForm({ plantObj }) {
 
   return (
     <>
-      <Form style={{ width: '50%' }} onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Plant Name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Plant Name"
-            name="name"
-            value={formInput.name}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Description"
-            name="description"
-            value={formInput.description}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Type</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Type"
-            name="type"
-            value={formInput.type}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Image</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Image"
-            name="image"
-            value={formInput.image}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Number Per Square Foot</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="# / sq.ft"
-            min="1"
-            name="numberPerSquare"
-            value={formInput.numberPerSquare}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Plant Symbol</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Put a symbol for your plant to appear as in your raised beds"
-            name="symbol"
-            value={formInput.symbol}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Check
-          className="mb-3"
-          inline
-          label="Owned?"
-          name="isOwned"
-          type="checkbox"
-          checked={formInput.isOwned}
-          onChange={handleCheckChange}
-          id="inline-checkbox-1"
-        />
-        <div className="center mt-3">
+      <Form className="form-container" onSubmit={handleSubmit}>
+        <div className="form-column-container">
+          <div className="form-column">
+            <h1 className="center">Required</h1>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Plant Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Plant Name"
+                name="name"
+                value={formInput.name}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Description"
+                name="description"
+                value={formInput.description}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Type</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Type"
+                name="type"
+                value={formInput.type}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Number Per Square Foot</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="# / sq.ft"
+                min="1"
+                name="numberPerSquare"
+                value={formInput.numberPerSquare}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Plant Symbol</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Put a symbol for your plant to appear as in your raised beds"
+                name="symbol"
+                value={formInput.symbol}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Check
+              className="mb-3"
+              inline
+              label="Owned?"
+              name="isOwned"
+              type="checkbox"
+              checked={formInput.isOwned}
+              onChange={handleCheckChange}
+              id="inline-checkbox-1"
+            />
+          </div>
+          <div className="form-column">
+            <h1 className="center">Optional</h1>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Image</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Image"
+                name="image"
+                value={formInput.image}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </div>
+        </div>
+        <div className="center mt-3 form-submit-button">
           <Button type="Submit">Submit</Button>
         </div>
       </Form>

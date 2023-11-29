@@ -107,3 +107,23 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   font-weight: bold;
 }
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-column-container {
+  display: flex;
+  flex: 1;
+}
+
+.form-column {
+  flex: 1;
+  margin: 0 5%;
+}
+
+.form-submit-button {
+  flex: 1;
+}
