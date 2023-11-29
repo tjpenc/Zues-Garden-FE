@@ -52,8 +52,44 @@ const updateSquare = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const removeSquareInfo = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/squares/remove_info/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((resp) => {
+      if (resp.status === 204) {
+        resolve({});
+      } else {
+        resolve(resp.json());
+      }
+    })
+    .catch(reject);
+});
+
+const removeAllSquareInfo = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/squares/remove_info_all/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((resp) => {
+      if (resp.status === 204) {
+        resolve({});
+      } else {
+        resolve(resp.json());
+      }
+    })
+    .catch(reject);
+});
+
 export {
   getSingleSquare,
   getAllBedSquares,
   updateSquare,
+  removeSquareInfo,
+  removeAllSquareInfo,
 };

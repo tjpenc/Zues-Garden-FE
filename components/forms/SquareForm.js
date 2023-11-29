@@ -39,7 +39,7 @@ export default function SquareForm({ squareObj }) {
 
   return (
     <>
-      <Form style={{ width: '50%' }} onSubmit={handleSubmit}>
+      <Form className="form-container" onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label>Plant</Form.Label>
           <Form.Select
