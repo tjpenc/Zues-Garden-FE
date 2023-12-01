@@ -70,6 +70,23 @@ const updatePlant = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const updatePlantSymbol = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/plants/symbol/${payload.symbol}/${payload.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((resp) => {
+      if (resp.status === 204) {
+        resolve({});
+      } else {
+        resolve(resp.json());
+      }
+    })
+    .catch(reject);
+});
+
 const deletePlant = (id) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/plants/${id}`, {
     method: 'DELETE',
@@ -92,5 +109,6 @@ export {
   getSinglePlant,
   createPlant,
   updatePlant,
+  updatePlantSymbol,
   deletePlant,
 };
