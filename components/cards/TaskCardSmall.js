@@ -22,13 +22,14 @@ export default function SmallTaskCard({ taskObj, onUpdate }) {
     const deadline = taskObj.deadline?.slice(0, 10);
     const daysDifference = (Date.parse(deadline) - Date.parse(today));
     const days = Math.ceil(daysDifference / (1000 * 60 * 60 * 24));
-    return days;
+    return days + 1;
   };
   const daysUntilDue = calculateDaysUntilDue();
 
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body className="d-flex flex-column">
+        {!isComplete && daysUntilDue <= 3 && daysUntilDue >= 0 ? <p>Urgent!!!</p> : ''}
         <Card.Title>{taskObj.title}</Card.Title>
         {isComplete
           ? <Card.Subtitle className="mb-2 text-muted mt-3">Completed: {taskCompletionDate?.slice(0, 10)}</Card.Subtitle>

@@ -18,7 +18,7 @@ export default function BigTaskCard({ taskObj, onUpdate }) {
     const deadline = taskObj.deadline?.slice(0, 10);
     const daysDifference = (Date.parse(deadline) - Date.parse(today));
     const days = Math.ceil(daysDifference / (1000 * 60 * 60 * 24));
-    return days;
+    return days + 1;
   };
   const daysUntilDue = calculateDaysUntilDue();
 
@@ -32,7 +32,7 @@ export default function BigTaskCard({ taskObj, onUpdate }) {
             <>
               <Card.Subtitle className="mb-2 text-muted">Priority: {taskObj.priority}</Card.Subtitle>
               <Card.Subtitle className="mb-2 text-muted">Deadline: {taskObj.deadline?.slice(0, 10)}</Card.Subtitle>
-              <Card.Subtitle className="mb-2 text-muted">{daysUntilDue} Days Until Due</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">Days Until Due: {daysUntilDue}</Card.Subtitle>
               <div className="mt-4 mb-3">
                 <Button variant="success" onClick={completeThisTask}>Complete Task</Button>
               </div>
