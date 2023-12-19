@@ -79,6 +79,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .square:hover {
@@ -88,6 +89,15 @@ body {
   transform: scale(1.05);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   font-weight: bold;
+}
+
+.hidden {
+  display: none;
+  position: absolute;
+}
+
+.unhide {
+  display: block;
 }
 
 .bedPlantContainer:hover {
