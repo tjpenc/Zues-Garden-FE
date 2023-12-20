@@ -70,16 +70,18 @@ body {
   background-color: white;
   margin: 5%;
   border: solid black 5px;
+  align-items: stretch;
+  justify-content: center;
 }
 
 .square {
   aspect-ratio: 1;
+  flex-basis: 1;
   height: 10vh;
   border: solid black 2px;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
 .square:hover {
@@ -136,4 +138,69 @@ body {
 
 .form-submit-button {
   flex: 1;
+}
+
+.task-alert-plant {
+  border-radius: 3px;
+  position: absolute;
+  top: 3%;
+  right: 5%;
+  width: 9%;
+  height: 5%;
+}
+
+.task-alert-bed {
+  border-radius: 3px;
+  position: absolute;
+  top: 3%;
+  right: 5%;
+  width: 5%;
+  height: 9%;
+}
+
+.task-alert-title {
+  border-radius: 3px;
+  position: absolute;
+  top: 3%;
+  right: 41%;
+  width: 2%;
+  height: 50%;
+}
+
+.task-alert-plant:hover, .task-alert-bed:hover, .task-alert-title:hover {
+  transform: scale(1.25);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.task-alert-hidden-container-plant {
+  position: absolute;
+  top: -21vh;
+  right: 20%;
+  background-color: white;
+  border: solid black 1px;
+  padding: 1px 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.task-alert-hidden-container-bed {
+  position: absolute;
+  top: -3vh;
+  right: 9%;
+  background-color: white;
+  border: solid black 1px;
+  padding: 1px 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.task-alert-hidden-container-title {
+  position: absolute;
+  top: -3vh;
+  right: 9%;
+  background-color: white;
+  border: solid black 1px;
+  padding: 1px 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }

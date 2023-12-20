@@ -7,6 +7,7 @@ import SquareCard from '../../components/cards/SquareCard';
 import BedPlantCard from '../../components/cards/BedPlantCard';
 import Loading from '../../components/Loading';
 import { removeAllSquareInfo, removeSquareInfo, updateSquare } from '../../api/squareData';
+import TaskAlert from '../../components/TaskAlert';
 
 export default function ViewPlant() {
   const [bed, setBed] = useState({});
@@ -72,9 +73,11 @@ export default function ViewPlant() {
                 <Button variant="success">Add Plants to Bed</Button>
               </Link>
             </div>
-            <h1 className="center">{bed.name}</h1>
+            <h1 className="center" style={{ position: 'relative' }}>{bed.name}
+              {bed?.tasks?.some((task) => task.isComplete === false) ? <TaskAlert isOnTitle /> : ''}
+            </h1>
             <div className="center">
-              <div className="square-container" style={{ width: `${bed.length * 10 + 2}vh` }}>
+              <div className="square-container" style={{ width: `${bed.length * 10 + 1.5}vh` }}>
                 {/* As long as viewport height is not too small, the raised bed should create correctly, replace with % later on */}
                 {bed?.squares?.map((square) => (
                   // eslint-disable-next-line jsx-a11y/no-static-element-interactions

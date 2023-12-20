@@ -1,14 +1,27 @@
 import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { deleteBed } from '../../api/bedData';
+import TaskAlert from '../TaskAlert';
 
 export default function SmallBedCard({ bedObj, onUpdate }) {
+  const [hasTasks, setHasTasks] = useState();
   const deleteThisBed = () => deleteBed(bedObj.id).then(onUpdate);
+
+  const checkForOpenTasks = () => {
+    const hasOpenTasks = bedObj?.tasks?.some((task) => task.isComplete === false);
+    setHasTasks(hasOpenTasks);
+  };
+
+  useEffect(() => {
+    checkForOpenTasks();
+  }, [bedObj.id]);
 
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Body className="d-flex flex-column">
+      <Card.Body className="d-flex flex-column" style={{ position: 'relative' }}>
+        {hasTasks ? <TaskAlert isOnBed numOfTasks={bedObj.tasks.length} /> : ''}
         <Card.Title>{bedObj.name}</Card.Title>
         <Card.Subtitle>{bedObj.season} {bedObj.year}</Card.Subtitle>
         <Card.Text>{`${bedObj.width} ft. x ${bedObj.length} ft.`}</Card.Text>
@@ -41,6 +54,7 @@ SmallBedCard.propTypes = {
     year: PropTypes.string,
     width: PropTypes.number,
     length: PropTypes.number,
+    tasks: PropTypes.instanceOf(Array),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
