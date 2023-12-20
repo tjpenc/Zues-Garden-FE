@@ -7,11 +7,14 @@ import SquareCard from '../../components/cards/SquareCard';
 import BedPlantCard from '../../components/cards/BedPlantCard';
 import Loading from '../../components/Loading';
 import { removeAllSquareInfo, removeSquareInfo, updateSquare } from '../../api/squareData';
+import TaskAlert from '../../components/TaskAlert';
+import SmallTaskCard from '../../components/cards/TaskCardSmall';
 
 export default function ViewPlant() {
   const [bed, setBed] = useState({});
   const [selectedPlant, setSelectedPlant] = useState({});
   const [isRemovingPlants, setIsRemovingPlants] = useState(false);
+  const [isViewingTasks, setIsViewingTasks] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const id = parseInt(router.query.id, 10);
@@ -57,6 +60,10 @@ export default function ViewPlant() {
     removeAllSquareInfo(bed.id).then(getThisBed);
   };
 
+  const toggleTaskView = () => {
+    setIsViewingTasks((prevState) => !prevState);
+  };
+
   return (
     <>
       {isLoading
@@ -72,9 +79,10 @@ export default function ViewPlant() {
                 <Button variant="success">Add Plants to Bed</Button>
               </Link>
             </div>
-            <h1 className="center">{bed.name}</h1>
+            <h1 className="center" style={{ position: 'relative' }}>{bed.name}
+            </h1>
             <div className="center">
-              <div className="square-container" style={{ width: `${bed.length * 10 + 2}vh` }}>
+              <div className="square-container" style={{ width: `${bed.length * 10 + 1.5}vh` }}>
                 {/* As long as viewport height is not too small, the raised bed should create correctly, replace with % later on */}
                 {bed?.squares?.map((square) => (
                   // eslint-disable-next-line jsx-a11y/no-static-element-interactions
@@ -82,6 +90,15 @@ export default function ViewPlant() {
                     <SquareCard squareObj={square} bedWidth={bed.width} bedLength={bed.length} />
                   </div>
                 ))}
+              </div>
+              <div>
+                <Button variant="success" onClick={toggleTaskView}>View Bed Tasks<TaskAlert isOnTitle /></Button>
+                {isViewingTasks && bed?.tasks?.some((task) => task.isComplete === false)
+                  ? (
+                    <>
+                      {bed?.tasks?.map((task) => <SmallTaskCard key={task.id} taskObj={task} onUpdate={() => {}} />)}
+                    </>
+                  ) : ''}
               </div>
             </div>
             <div>
@@ -115,7 +132,7 @@ export default function ViewPlant() {
                 : (
                   <>
                     <div className="center">
-                      <h1>Looks like you dont have any plants for this bed!</h1>
+                      <h1>You dont have any plants for this bed!</h1>
                     </div>
                     <div className="center">
                       <h2>Why not add some?</h2>

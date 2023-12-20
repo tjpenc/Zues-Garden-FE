@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { createTask, updateTask } from '../../api/taskData';
 import { useAuth } from '../../utils/context/authContext';
+import { getBeds } from '../../api/bedData';
+import { getPlants } from '../../api/plantData';
 
 const initialState = {
   uid: '',
@@ -11,15 +13,25 @@ const initialState = {
   description: '',
   deadline: '',
   priority: 3,
+  bedId: null,
+  plantId: null,
+  squareId: null,
 };
 
 export default function TaskForm({ taskObj }) {
   const [formInput, setFormInput] = useState(initialState);
+  const [beds, setBeds] = useState([]);
+  const [plants, setPlants] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
   // when a field is filled, need to update state
 
   useEffect(() => {
+    getBeds(user.uid).then((bedsArray) => {
+      const currentBeds = bedsArray.filter((bed) => bed.isCurrent === true);
+      setBeds(currentBeds);
+    });
+    getPlants(user.uid).then(setPlants);
     if (taskObj.id) {
       const updateState = taskObj;
       updateState.deadline = taskObj.deadline.slice(0, 10);
@@ -87,25 +99,56 @@ export default function TaskForm({ taskObj }) {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group>
               <Form.Label>Priority</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Priority"
+              <Form.Select
+                aria-label="Default select example"
                 name="priority"
-                min="1"
-                max="3"
-                // customize this range as a stretch?
-                value={formInput.priority}
                 onChange={handleChange}
+                value={formInput.priority}
                 required
-              />
+              >
+                <option value={undefined}>Select a Priority</option>
+                <option key="high" value={1}>High</option>
+                <option key="medium" value={2}>Medium</option>
+                <option key="low" value={3}>Low</option>
+              </Form.Select>
             </Form.Group>
 
           </div>
           <div className="form-column">
             <h1 className="center">Optional</h1>
+            <Form.Group>
+              <Form.Label>Associated Raised Bed</Form.Label>
+              <Form.Select
+                aria-label="Default select example"
+                name="bedId"
+                onChange={handleChange}
+                value={formInput.bedId}
+                required
+              >
+                <option value={undefined}>Select the Raised Bed this Task is for</option>
+                {beds?.map((bed) => (
+                  <option key={bed.name} value={bed.id}>{bed.name}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
 
+            <Form.Group>
+              <Form.Label>Associated Plant</Form.Label>
+              <Form.Select
+                aria-label="Default select example"
+                name="plantId"
+                onChange={handleChange}
+                value={formInput.plantId}
+                required
+              >
+                <option value={undefined}>Select the Plant this Task is for</option>
+                {plants?.map((plant) => (
+                  <option key={plant.name} value={plant.id}>{plant.name}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
           </div>
         </div>
         <div className="form-submit-button">
