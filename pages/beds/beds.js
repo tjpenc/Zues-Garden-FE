@@ -8,19 +8,30 @@ import Loading from '../../components/Loading';
 
 export default function ViewBeds() {
   const [beds, setBeds] = useState([]);
+  const [showCurrentBeds, setShowCurrentBeds] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useAuth();
 
   const getAllBeds = () => getBeds(user.uid).then((bedsArray) => {
-    setBeds(bedsArray);
-    setIsLoading(false);
+    if (showCurrentBeds) {
+      const currentBeds = bedsArray.filter((bed) => bed.isCurrent === true);
+      setBeds(currentBeds);
+    } else if (!showCurrentBeds) {
+      const oldBeds = bedsArray.filter((bed) => bed.isCurrent === false);
+      setBeds(oldBeds);
+    }
   });
 
   useEffect(() => {
+    getAllBeds();
     setTimeout(() => {
-      getAllBeds();
+      setIsLoading(false);
     }, 300);
-  }, []);
+  }, [showCurrentBeds]);
+
+  const toggleBeds = () => {
+    setShowCurrentBeds((prevState) => !prevState);
+  };
 
   return (
     <>
@@ -32,6 +43,7 @@ export default function ViewBeds() {
               <Link passHref href="/beds/createBed">
                 <Button>Create Bed</Button>
               </Link>
+              {showCurrentBeds ? <Button onClick={toggleBeds}>Older Beds</Button> : <Button onClick={toggleBeds}>Current Beds</Button>}
             </div>
             <h1 className="center mb-5">My Beds</h1>
             <div className="space-around wrap">

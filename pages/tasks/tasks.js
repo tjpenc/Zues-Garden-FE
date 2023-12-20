@@ -20,12 +20,11 @@ export default function ViewTasks() {
     } else if (showCompleteTasks) {
       setTasks(completedTasks);
     }
-    console.warn('getting all tasks');
   });
 
   useEffect(() => {
+    getAllTasks();
     setTimeout(() => {
-      getAllTasks();
       setIsLoading(false);
     }, 300);
   }, [showCompleteTasks]);
