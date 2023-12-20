@@ -12,6 +12,7 @@ export default function BigPlantCard({ plantObj, onUpdate, hasBedPlants }) {
       <Card.Body className="d-flex flex-column">
         <Card.Title>{plantObj.name}</Card.Title>
         <Card.Subtitle>{plantObj.type}</Card.Subtitle>
+        <Card.Text>{plantObj.isOwned === true ? '(Owned)' : '(Not owned)' }</Card.Text>
         <Card.Text>Description: {plantObj.description}</Card.Text>
         <Card.Text># per Square Foot: {plantObj.numberPerSquare}</Card.Text>
         {plantObj.isOwned
