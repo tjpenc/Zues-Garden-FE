@@ -6,12 +6,27 @@ import { completeTask, deleteTask } from '../../api/taskData';
 
 export default function SmallTaskCard({ taskObj, onUpdate }) {
   const [isComplete, setIsComplete] = useState(taskObj.isComplete);
+  const [taskColor, setTaskColor] = useState();
   const [taskCompletionDate, setTaskCompletionDate] = useState(taskObj.dateCompleted);
   const deleteThisTask = () => deleteTask(taskObj.id).then(onUpdate);
   const completeThisTask = () => completeTask(taskObj.id).then((task) => {
     setIsComplete(true);
     setTaskCompletionDate(task.dateCompleted);
   });
+
+  const pickTaskColor = () => {
+    if (taskObj.priority === 1) {
+      setTaskColor('red');
+    } else if (taskObj.priority === 2) {
+      setTaskColor('orange');
+    } else if (taskObj.priority === 3) {
+      setTaskColor('green');
+    }
+  };
+
+  useEffect(() => {
+    pickTaskColor();
+  }, [taskObj.id]);
 
   useEffect(() => {
     onUpdate();
@@ -29,13 +44,13 @@ export default function SmallTaskCard({ taskObj, onUpdate }) {
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body className="d-flex flex-column">
-        {!isComplete && daysUntilDue <= 3 && daysUntilDue >= 0 ? <p>Urgent!!!</p> : ''}
+        {!isComplete && daysUntilDue <= 3 && daysUntilDue >= 0 ? <p>Due Soon!</p> : ''}
         <Card.Title>{taskObj.title}</Card.Title>
         {isComplete
           ? <Card.Subtitle className="mb-2 text-muted mt-3">Completed: {taskCompletionDate?.slice(0, 10)}</Card.Subtitle>
           : (
             <>
-              <Card.Subtitle className="mb-2 text-muted">Priority: {taskObj.priority}</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted"><div style={{ color: `${taskColor}` }}>Priority: {taskObj.priority}</div></Card.Subtitle>
               <Card.Subtitle className="mb-2 text-muted">Days Until Due: {daysUntilDue}</Card.Subtitle>
             </>
           )}
