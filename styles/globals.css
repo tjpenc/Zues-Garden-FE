@@ -159,12 +159,10 @@ body {
 }
 
 .task-alert-title {
-  border-radius: 3px;
   position: absolute;
-  top: 3%;
-  right: 41%;
-  width: 2%;
-  height: 50%;
+  border-radius: 3px;
+  width: 1%;
+  top: 7%
 }
 
 .task-alert-plant:hover, .task-alert-bed:hover, .task-alert-title:hover {
