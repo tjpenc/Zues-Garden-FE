@@ -43,7 +43,7 @@ export default function ViewBeds() {
               <Link passHref href="/beds/createBed">
                 <Button>Create Bed</Button>
               </Link>
-              {showCurrentBeds ? <Button onClick={toggleBeds}>Older Beds</Button> : <Button onClick={toggleBeds}>Current Beds</Button>}
+              {showCurrentBeds ? <Button onClick={toggleBeds}>Old Beds</Button> : <Button onClick={toggleBeds}>Current Beds</Button>}
             </div>
             <h1 className="center mb-5">My Beds</h1>
             <div className="space-around wrap">

@@ -14,6 +14,7 @@ export default function BedPlantCard({
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState();
+
   const addBedPlant = () => {
     const payload = {
       bedId,
@@ -46,7 +47,7 @@ export default function BedPlantCard({
       <Card.Body>
         <Card.Title>{plantObj.name}
           <span onClick={() => setIsEditing(true)} onKeyDown={() => setIsEditing(true)}>
-            {isEditing ? <form onSubmit={handleSymbolSubmit}><input type="text" value={editText} onChange={handleSymbolChange} /></form> : `(${plantObj.symbol})`}
+            {isEditing ? <form onSubmit={handleSymbolSubmit}><input type="text" value={editText} onChange={handleSymbolChange} /></form> : ` (${plantObj.symbol})`}
           </span>
         </Card.Title>
         <Card.Subtitle>{plantObj.type}</Card.Subtitle>

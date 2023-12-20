@@ -1,5 +1,5 @@
 import { Button, Card } from 'react-bootstrap';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { completeTask, deleteTask } from '../../api/taskData';
@@ -7,6 +7,8 @@ import { completeTask, deleteTask } from '../../api/taskData';
 export default function BigTaskCard({ taskObj, onUpdate }) {
   const [isComplete, setIsComplete] = useState(taskObj.isComplete);
   const [taskCompletionDate, setTaskCompletionDate] = useState(taskObj.dateCompleted);
+  const [taskColor, setTaskColor] = useState();
+  const [priorityString, setPriorityString] = useState();
   const deleteThisTask = () => deleteTask(taskObj.id).then(onUpdate);
   const completeThisTask = () => completeTask(taskObj.id).then((task) => {
     setIsComplete(true);
@@ -22,6 +24,23 @@ export default function BigTaskCard({ taskObj, onUpdate }) {
   };
   const daysUntilDue = calculateDaysUntilDue();
 
+  const setTaskInfo = () => {
+    if (taskObj.priority === 1) {
+      setTaskColor('red');
+      setPriorityString('High');
+    } else if (taskObj.priority === 2) {
+      setTaskColor('orange');
+      setPriorityString('Medium');
+    } else if (taskObj.priority === 3) {
+      setTaskColor('green');
+      setPriorityString('Low');
+    }
+  };
+
+  useEffect(() => {
+    setTaskInfo();
+  }, [taskObj.id]);
+
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body className="d-flex flex-column">
@@ -30,7 +49,7 @@ export default function BigTaskCard({ taskObj, onUpdate }) {
           ? <Card.Subtitle className="mb-2 text-muted">Completed: {taskCompletionDate?.slice(0, 10)}</Card.Subtitle>
           : (
             <>
-              <Card.Subtitle className="mb-2 text-muted">Priority: {taskObj.priority}</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted"><div style={{ color: `${taskColor}` }}>Priority: {priorityString}</div></Card.Subtitle>
               <Card.Subtitle className="mb-2 text-muted">Deadline: {taskObj.deadline?.slice(0, 10)}</Card.Subtitle>
               <Card.Subtitle className="mb-2 text-muted">Days Until Due: {daysUntilDue}</Card.Subtitle>
               <div className="mt-4 mb-3">

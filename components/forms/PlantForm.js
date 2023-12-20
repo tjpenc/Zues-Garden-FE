@@ -11,7 +11,7 @@ const initialState = {
   description: '',
   type: '',
   numberPerSquare: 1,
-  isOwned: false,
+  isOwned: true,
   image: '',
   symbol: '',
 };
@@ -50,6 +50,9 @@ export default function PlantForm({ plantObj }) {
       updatePlant(formInput).then(router.push(`/plants/${plantObj.id}`));
     } else {
       formInput.uid = user.uid;
+      if (formInput.description === '') {
+        formInput.description = 'No description';
+      }
       createPlant(formInput).then(router.push('/plants/plants'));
     }
   };
@@ -67,18 +70,6 @@ export default function PlantForm({ plantObj }) {
                 placeholder="Plant Name"
                 name="name"
                 value={formInput.name}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Description"
-                name="description"
-                value={formInput.description}
                 onChange={handleChange}
                 required
               />
@@ -142,6 +133,18 @@ export default function PlantForm({ plantObj }) {
                 name="image"
                 value={formInput.image}
                 onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Description"
+                name="description"
+                value={formInput.description}
+                onChange={handleChange}
+                required
               />
             </Form.Group>
           </div>

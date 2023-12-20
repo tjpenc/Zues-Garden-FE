@@ -1,14 +1,29 @@
 import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { deletePlant } from '../../api/plantData';
+import TaskAlert from '../TaskAlert';
 
 export default function BigPlantCard({ plantObj, onUpdate, hasBedPlants }) {
+  const [hasTasks, setHasTasks] = useState();
+
   const deleteThisPlant = () => deletePlant(plantObj.id).then(onUpdate);
+
+  const checkForOpenTasks = () => {
+    const hasOpenTasks = plantObj?.tasks?.some((task) => task.isComplete === false);
+    setHasTasks(hasOpenTasks);
+    console.warn(plantObj);
+  };
+
+  useEffect(() => {
+    checkForOpenTasks();
+  }, [plantObj.id]);
 
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src={plantObj.image} />
+      {hasTasks ? <TaskAlert isOnPlant /> : ''}
       <Card.Body className="d-flex flex-column">
         <Card.Title>{plantObj.name}</Card.Title>
         <Card.Subtitle>{plantObj.type}</Card.Subtitle>
@@ -48,6 +63,7 @@ BigPlantCard.propTypes = {
     image: PropTypes.string,
     symbol: PropTypes.string,
     beds: PropTypes.instanceOf(Array),
+    tasks: PropTypes.instanceOf(Array),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
   hasBedPlants: PropTypes.bool,
