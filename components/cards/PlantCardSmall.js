@@ -12,6 +12,7 @@ export default function SmallPlantCard({ plantObj, onUpdate }) {
       <Card.Body className="d-flex flex-column">
         <Card.Title>{plantObj.name}</Card.Title>
         <Card.Subtitle className="mb-3">{plantObj.type}</Card.Subtitle>
+        {plantObj.isOwned === true ? 'Owned' : 'Not owned' }
         <div className="mt-auto border-top">
           {!plantObj.beds.length
             ? (
