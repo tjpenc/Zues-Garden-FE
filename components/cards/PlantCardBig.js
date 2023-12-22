@@ -13,7 +13,6 @@ export default function BigPlantCard({ plantObj, onUpdate, hasBedPlants }) {
   const checkForOpenTasks = () => {
     const hasOpenTasks = plantObj?.tasks?.some((task) => task.isComplete === false);
     setHasTasks(hasOpenTasks);
-    console.warn(plantObj);
   };
 
   useEffect(() => {
