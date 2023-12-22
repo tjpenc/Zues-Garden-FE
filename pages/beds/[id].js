@@ -9,12 +9,15 @@ import Loading from '../../components/Loading';
 import { removeAllSquareInfo, removeSquareInfo, updateSquare } from '../../api/squareData';
 import TaskAlert from '../../components/TaskAlert';
 import SmallTaskCard from '../../components/cards/TaskCardSmall';
+import NoteForm from '../../components/forms/NoteForm';
 
 export default function ViewPlant() {
   const [bed, setBed] = useState({});
   const [selectedPlant, setSelectedPlant] = useState({});
   const [isRemovingPlants, setIsRemovingPlants] = useState(false);
   const [isViewingTasks, setIsViewingTasks] = useState(false);
+  const [isViewingNotes, setIsViewingNotes] = useState(false);
+  const [isViewingNoteForm, setIsViewingNoteForm] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const id = parseInt(router.query.id, 10);
@@ -64,6 +67,14 @@ export default function ViewPlant() {
     setIsViewingTasks((prevState) => !prevState);
   };
 
+  const toggleNotesView = () => {
+    setIsViewingNotes((prevState) => !prevState);
+  };
+
+  const toggleNoteFormView = () => {
+    setIsViewingNoteForm((prevState) => !prevState);
+  };
+
   return (
     <>
       {isLoading
@@ -78,8 +89,29 @@ export default function ViewPlant() {
               <Link passHref href={`/beds/addPlants/${id}`}>
                 <Button variant="success">Add Plants to Bed</Button>
               </Link>
+              <Button variant="success" onClick={toggleTaskView}>{isViewingTasks ? 'Close' : 'View'} Tasks</Button>
+              <Button variant="success" onClick={toggleNotesView}>{isViewingNotes ? 'Close' : 'View'} Notes</Button>
+              <Button variant="success" onClick={toggleNoteFormView}>{isViewingNoteForm ? 'Close Form' : 'Add Note'}</Button>
+              {isViewingTasks && bed?.tasks?.some((task) => task.isComplete === false)
+                ? (
+                  <>
+                    {bed?.tasks?.map((task) => <SmallTaskCard key={task.id} taskObj={task} onUpdate={() => {}} />)}
+                  </>
+                ) : ''}
+              {isViewingNotes
+                ? (
+                  <>
+                    {bed?.notes?.map((task) => <SmallTaskCard key={task.id} taskObj={task} onUpdate={() => {}} />)}
+                  </>
+                ) : ''}
+              {isViewingNoteForm
+                ? (
+                  <>
+                    <NoteForm bedId={id} onUpdate={getThisBed} />
+                  </>
+                ) : ''}
             </div>
-            <h1 className="center" style={{ position: 'relative' }}>{bed.name}
+            <h1 className="center" style={{ position: 'relative' }}>{bed.name} <TaskAlert isOnTitle />
             </h1>
             <div className="center">
               <div className="square-container" style={{ width: `${bed.length * 10 + 1.5}vh` }}>
@@ -90,15 +122,6 @@ export default function ViewPlant() {
                     <SquareCard squareObj={square} bedWidth={bed.width} bedLength={bed.length} />
                   </div>
                 ))}
-              </div>
-              <div>
-                <Button variant="success" onClick={toggleTaskView}>View Bed Tasks<TaskAlert isOnTitle /></Button>
-                {isViewingTasks && bed?.tasks?.some((task) => task.isComplete === false)
-                  ? (
-                    <>
-                      {bed?.tasks?.map((task) => <SmallTaskCard key={task.id} taskObj={task} onUpdate={() => {}} />)}
-                    </>
-                  ) : ''}
               </div>
             </div>
             <div>
