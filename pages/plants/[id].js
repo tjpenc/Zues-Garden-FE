@@ -5,27 +5,40 @@ import { useState, useEffect } from 'react';
 import { getSinglePlant } from '../../api/plantData';
 import BigPlantCard from '../../components/cards/PlantCardBig';
 import SmallTaskCard from '../../components/cards/TaskCardSmall';
+import NoteForm from '../../components/forms/NoteForm';
 
 export default function ViewPlant() {
   const [plant, setPlant] = useState({});
   const [hasBedPlants, setHasBedPlants] = useState(false);
   const [isViewingTasks, setIsViewingTasks] = useState(false);
+  const [isViewingNotes, setIsViewingNotes] = useState(false);
+  const [isViewingNoteForm, setIsViewingNoteForm] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
+  const getThisPlant = () => getSinglePlant(id).then((plantObj) => {
+    setPlant(plantObj);
+    if (plantObj.beds.length) {
+      setHasBedPlants(true);
+    }
+  });
+
   useEffect(() => {
-    getSinglePlant(id).then((plantObj) => {
-      setPlant(plantObj);
-      if (plantObj.beds.length) {
-        setHasBedPlants(true);
-      }
-    });
+    getThisPlant();
   }, [id]);
 
   const returnToPrevPage = () => router.back();
 
   const toggleTaskView = () => {
     setIsViewingTasks((prevState) => !prevState);
+  };
+
+  const toggleNotesView = () => {
+    setIsViewingNotes((prevState) => !prevState);
+  };
+
+  const toggleNoteFormView = () => {
+    setIsViewingNoteForm((prevState) => !prevState);
   };
 
   return (
@@ -40,11 +53,25 @@ export default function ViewPlant() {
         <BigPlantCard key={plant.id} plantObj={plant} onUpdate={returnToPrevPage} hasBedPlants={hasBedPlants} />
       </div>
       <div>
-        <Button variant="success" onClick={toggleTaskView}>View Plant Tasks</Button>
+        <Button variant="success" onClick={toggleTaskView}>{isViewingTasks ? 'Close' : 'View'} Tasks</Button>
+        <Button variant="success" onClick={toggleNotesView}>{isViewingNotes ? 'Close' : 'View'} Notes</Button>
+        <Button variant="success" onClick={toggleNoteFormView}>{isViewingNoteForm ? 'Close Form' : 'Add Note'}</Button>
         {isViewingTasks && plant?.tasks?.some((task) => task.isComplete === false)
           ? (
             <>
               {plant?.tasks?.map((task) => <SmallTaskCard key={task.id} taskObj={task} onUpdate={() => {}} />)}
+            </>
+          ) : ''}
+        {isViewingNotes
+          ? (
+            <>
+              {plant?.notes?.map((task) => <SmallTaskCard key={task.id} taskObj={task} onUpdate={() => {}} />)}
+            </>
+          ) : ''}
+        {isViewingNoteForm
+          ? (
+            <>
+              <NoteForm plantId={id} onUpdate={getThisPlant} />
             </>
           ) : ''}
       </div>

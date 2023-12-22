@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
@@ -13,10 +12,10 @@ const initialState = {
   plantId: null,
 };
 
-export default function SquareForm({ plantId, bedId }) {
+export default function NoteForm({ plantId, bedId, onUpdate }) {
   const [formInput, setFormInput] = useState(initialState);
-  const user = useAuth();
-  const router = useRouter();
+  const { user } = useAuth();
+  console.warn(user.uid);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,13 +27,13 @@ export default function SquareForm({ plantId, bedId }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    formInput.uid = user.uid;
     if (bedId) {
       formInput.bedId = bedId;
     } else if (plantId) {
       formInput.plantId = plantId;
     }
-    createNote(formInput).then(router.back());
+    formInput.uid = user.uid;
+    createNote(formInput).then(onUpdate);
   };
 
   return (
@@ -70,12 +69,13 @@ export default function SquareForm({ plantId, bedId }) {
   );
 }
 
-SquareForm.propTypes = {
+NoteForm.propTypes = {
   plantId: PropTypes.number,
   bedId: PropTypes.number,
+  onUpdate: PropTypes.func.isRequired,
 };
 
-SquareForm.defaultProps = {
+NoteForm.defaultProps = {
   plantId: 0,
   bedId: 0,
 };

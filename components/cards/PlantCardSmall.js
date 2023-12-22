@@ -1,28 +1,16 @@
 import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
 import { deletePlant } from '../../api/plantData';
 import TaskAlert from '../TaskAlert';
 
 export default function SmallPlantCard({ plantObj, onUpdate }) {
-  const [hasTasks, setHasTasks] = useState();
   const deleteThisPlant = () => deletePlant(plantObj.id).then(onUpdate);
-
-  const checkForOpenTasks = () => {
-    const hasOpenTasks = plantObj?.tasks?.some((task) => task.isComplete === false);
-    setHasTasks(hasOpenTasks);
-    console.warn(plantObj);
-  };
-
-  useEffect(() => {
-    checkForOpenTasks();
-  }, [plantObj.id]);
 
   return (
     <Card style={{ width: '12rem', position: 'relative' }}>
       <Card.Img className="image" variant="top" src={plantObj.image} />
-      {hasTasks ? <TaskAlert isOnPlant /> : ''}
+      {plantObj.hasOpenTasks ? <TaskAlert isOnPlant /> : ''}
       <Card.Body className="d-flex flex-column">
         <Card.Title>{plantObj.name}</Card.Title>
         <Card.Subtitle className="mb-3">{plantObj.type}</Card.Subtitle>
@@ -62,7 +50,7 @@ SmallPlantCard.propTypes = {
     image: PropTypes.string,
     symbol: PropTypes.string,
     beds: PropTypes.instanceOf(Array),
-    tasks: PropTypes.instanceOf(Array),
+    hasOpenTasks: PropTypes.bool,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
