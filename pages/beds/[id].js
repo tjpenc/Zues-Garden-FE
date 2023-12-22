@@ -10,6 +10,7 @@ import { removeAllSquareInfo, removeSquareInfo, updateSquare } from '../../api/s
 import TaskAlert from '../../components/TaskAlert';
 import SmallTaskCard from '../../components/cards/TaskCardSmall';
 import NoteForm from '../../components/forms/NoteForm';
+import SmallNoteCard from '../../components/cards/NoteCardSmall';
 
 export default function ViewPlant() {
   const [bed, setBed] = useState({});
@@ -22,9 +23,24 @@ export default function ViewPlant() {
   const router = useRouter();
   const id = parseInt(router.query.id, 10);
 
+  const toggleTaskView = () => {
+    setIsViewingTasks((prevState) => !prevState);
+  };
+
+  const toggleNotesView = () => {
+    setIsViewingNotes((prevState) => !prevState);
+  };
+
+  const toggleNoteFormView = () => {
+    setIsViewingNoteForm((prevState) => !prevState);
+  };
+
   const getThisBed = () => getSingleBed(id).then((bedObj) => {
     setBed(bedObj);
     setIsLoading(false);
+    if (isViewingNoteForm === true) {
+      toggleNoteFormView();
+    }
   });
 
   useEffect(() => {
@@ -63,18 +79,6 @@ export default function ViewPlant() {
     removeAllSquareInfo(bed.id).then(getThisBed);
   };
 
-  const toggleTaskView = () => {
-    setIsViewingTasks((prevState) => !prevState);
-  };
-
-  const toggleNotesView = () => {
-    setIsViewingNotes((prevState) => !prevState);
-  };
-
-  const toggleNoteFormView = () => {
-    setIsViewingNoteForm((prevState) => !prevState);
-  };
-
   return (
     <>
       {isLoading
@@ -101,7 +105,7 @@ export default function ViewPlant() {
               {isViewingNotes
                 ? (
                   <>
-                    {bed?.notes?.map((task) => <SmallTaskCard key={task.id} taskObj={task} onUpdate={() => {}} />)}
+                    {bed?.notes?.map((note) => <SmallNoteCard key={note.id} noteObj={note} onUpdate={getThisBed} />)}
                   </>
                 ) : ''}
               {isViewingNoteForm

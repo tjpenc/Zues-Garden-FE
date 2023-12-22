@@ -6,6 +6,7 @@ import { getSinglePlant } from '../../api/plantData';
 import BigPlantCard from '../../components/cards/PlantCardBig';
 import SmallTaskCard from '../../components/cards/TaskCardSmall';
 import NoteForm from '../../components/forms/NoteForm';
+import SmallNoteCard from '../../components/cards/NoteCardSmall';
 
 export default function ViewPlant() {
   const [plant, setPlant] = useState({});
@@ -15,19 +16,6 @@ export default function ViewPlant() {
   const [isViewingNoteForm, setIsViewingNoteForm] = useState(false);
   const router = useRouter();
   const { id } = router.query;
-
-  const getThisPlant = () => getSinglePlant(id).then((plantObj) => {
-    setPlant(plantObj);
-    if (plantObj.beds.length) {
-      setHasBedPlants(true);
-    }
-  });
-
-  useEffect(() => {
-    getThisPlant();
-  }, [id]);
-
-  const returnToPrevPage = () => router.back();
 
   const toggleTaskView = () => {
     setIsViewingTasks((prevState) => !prevState);
@@ -40,6 +28,22 @@ export default function ViewPlant() {
   const toggleNoteFormView = () => {
     setIsViewingNoteForm((prevState) => !prevState);
   };
+
+  const getThisPlant = () => getSinglePlant(id).then((plantObj) => {
+    setPlant(plantObj);
+    if (plantObj.beds.length) {
+      setHasBedPlants(true);
+    }
+    if (isViewingNoteForm === true) {
+      toggleNoteFormView();
+    }
+  });
+
+  useEffect(() => {
+    getThisPlant();
+  }, [id]);
+
+  const returnToPrevPage = () => router.back();
 
   return (
     <>
@@ -65,7 +69,7 @@ export default function ViewPlant() {
         {isViewingNotes
           ? (
             <>
-              {plant?.notes?.map((task) => <SmallTaskCard key={task.id} taskObj={task} onUpdate={() => {}} />)}
+              {plant?.notes?.map((note) => <SmallNoteCard key={note.id} noteObj={note} onUpdate={getThisPlant} />)}
             </>
           ) : ''}
         {isViewingNoteForm
