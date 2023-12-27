@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { getSinglePlant } from '../../../api/plantData';
@@ -17,9 +16,7 @@ export default function EditPlant() {
   return (
     <>
       <div className="mt-3">
-        <Link passHref href="/plants/plants">
-          <Button>Back to Plants</Button>
-        </Link>
+        <Button onClick={() => { router.back(); }}>Back to {plant.name}</Button>
       </div>
       <h1 className="center mb-5">Edit {plant.name}</h1>
       <div className="center">

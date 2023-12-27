@@ -22,31 +22,36 @@ export default function ViewPlants() {
   }, []);
 
   return (
-    <>
+    <div className="plants-page">
       {isLoading
         ? <Loading />
         : (
           <>
-            <div className="mt-3">
-              <Link passHref href="/plants/createPlant">
-                <Button>Create Plant</Button>
-              </Link>
+            <div className="sidebar">
+              Options
+              <div className="mt-3">
+                <Link passHref href="/plants/createPlant">
+                  <Button>Create Plant</Button>
+                </Link>
+              </div>
             </div>
-            <h1 className="center mb-5">My Plants</h1>
-            <div className="space-around wrap">
-              {plants?.length === 0
-                ? (
-                  <>
-                    <div>
-                      <h2>You have no Plants! Use the top left button to create a new plant</h2>
-                    </div>
-                  </>
-                )
-                : plants?.map((plant) => <SmallPlantCard key={plant.id} plantObj={plant} onUpdate={getAllPlants} />)}
+            <div className="content-container">
+              <h1 className="center mb-5">My Plants</h1>
+              <div className="space-around wrap card-container">
+                {plants?.length === 0
+                  ? (
+                    <>
+                      <div>
+                        <h2>You have no Plants! Use the top left button to create a new plant</h2>
+                      </div>
+                    </>
+                  )
+                  : plants?.map((plant) => <SmallPlantCard key={plant.id} plantObj={plant} onUpdate={getAllPlants} />)}
+              </div>
             </div>
           </>
         )}
 
-    </>
+    </div>
   );
 }
