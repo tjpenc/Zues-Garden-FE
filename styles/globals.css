@@ -18,13 +18,21 @@ a {
 }
 
 body {
-  background-color: grey;
+  background-color: #FFF5EA;
+  overflow-y: hidden;
 }
 
 .center {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.center-flex-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .wrap {
@@ -79,7 +87,7 @@ body {
 
 .sidebar {
   flex: 1;
-  background-color: black;
+  background-color: #292b2c;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -90,11 +98,12 @@ body {
 .content-container {
   flex: 8;
   height: 90vh;
-  overflow-y: hidden;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: top;
+  padding: 0 5% 5% 5%;
 }
 
 .card-container {
@@ -102,7 +111,7 @@ body {
   height: 70vh;
   border: solid white 2px;
   margin: 0 2% 5% 2%;
-  padding: 2% 0;
+  padding: 2% 10%;
   border-radius: 5px;
   background-color: antiquewhite;
 }
@@ -117,10 +126,29 @@ body {
   justify-content: center;
 }
 
-.plant-notes {
-  border: solid black 2px;
+.single-task-content-container {
+  flex: 8;
+  height: 90vh;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  padding: 0 5%;
+}
+
+.information-cards {
   flex: 1;
   height: 100%;
+}
+
+.information-cards-container {
+  flex: 1;
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .square-container {
@@ -260,4 +288,28 @@ body {
   padding: 1px 5px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.note-form-container {
+  width: 80%;
+}
+
+.note-form-details-box {
+  height: 20vh;
+}
+
+.bed-bedplant-container {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100%;
+  border: solid black 2px;
+  padding: 1%;
+}
+
+.bed-squares-container {
+  flex: 9;
+  height: 100%;
+  border: solid black 2px;
 }

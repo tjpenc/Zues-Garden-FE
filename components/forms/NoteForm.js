@@ -37,9 +37,9 @@ export default function NoteForm({ plantId, bedId, onUpdate }) {
   };
 
   return (
-    <>
+    <div className="note-form-container">
       <Form className="form-container" onSubmit={handleSubmit}>
-        <Form.Group>
+        <Form.Group className="mb-4">
           <Form.Label>Title</Form.Label>
           <Form.Control
             type="text"
@@ -50,11 +50,11 @@ export default function NoteForm({ plantId, bedId, onUpdate }) {
             required
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        <Form.Group className="mb-5 note-form-details-box" controlId="exampleForm.ControlInput1">
           <Form.Label>Note Details</Form.Label>
           <Form.Control
-            type="text"
-            placeholder="details"
+            as="textarea"
+            rows={5}
             name="details"
             value={formInput.details}
             onChange={handleChange}
@@ -65,7 +65,7 @@ export default function NoteForm({ plantId, bedId, onUpdate }) {
           <Button type="Submit">Submit</Button>
         </div>
       </Form>
-    </>
+    </div>
   );
 }
 

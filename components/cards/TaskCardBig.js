@@ -1,15 +1,13 @@
-import { Button, Card } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { completeTask, deleteTask } from '../../api/taskData';
+import { completeTask } from '../../api/taskData';
 
-export default function BigTaskCard({ taskObj, onUpdate }) {
+export default function BigTaskCard({ taskObj }) {
   const [isComplete, setIsComplete] = useState(taskObj.isComplete);
   const [taskCompletionDate, setTaskCompletionDate] = useState(taskObj.dateCompleted);
   const [taskColor, setTaskColor] = useState();
   const [priorityString, setPriorityString] = useState();
-  const deleteThisTask = () => deleteTask(taskObj.id).then(onUpdate);
   const completeThisTask = () => completeTask(taskObj.id).then((task) => {
     setIsComplete(true);
     setTaskCompletionDate(task.dateCompleted);
@@ -42,36 +40,26 @@ export default function BigTaskCard({ taskObj, onUpdate }) {
   }, [taskObj.id]);
 
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Body className="d-flex flex-column">
-        <Card.Title>Created {taskObj.dateCreated?.slice(0, 10)}</Card.Title>
-        {isComplete
-          ? <Card.Subtitle className="mb-2 text-muted">Completed: {taskCompletionDate?.slice(0, 10)}</Card.Subtitle>
-          : (
-            <>
-              <Card.Subtitle className="mb-2 text-muted"><div style={{ color: `${taskColor}` }}>Priority: {priorityString}</div></Card.Subtitle>
-              <Card.Subtitle className="mb-2 text-muted">Deadline: {taskObj.deadline?.slice(0, 10)}</Card.Subtitle>
-              <Card.Subtitle className="mb-2 text-muted">Days Until Due: {daysUntilDue}</Card.Subtitle>
-              <div className="mt-4 mb-3">
-                <Button variant="success" onClick={completeThisTask}>Complete Task</Button>
-              </div>
-            </>
-          )}
-        <Card.Text className="border-top mt-3">
-          {taskObj.description}
-        </Card.Text>
-        <div className="mt-auto border-top">
-          <Button variant="light" onClick={deleteThisTask}>
-            <Card.Img variant="top" src="/delete.png" alt="delete" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
-          </Button>
-          <Link passHref href={`/tasks/edit/${taskObj.id}`}>
-            <Button variant="light">
-              <Card.Img variant="top" src="/feather-pen.png" alt="edit" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
-            </Button>
-          </Link>
-        </div>
-      </Card.Body>
-    </Card>
+    <>
+      <h1 className="mb-3">{taskObj.title}</h1>
+      {isComplete
+        ? (
+          <>
+            <h2>Completed: {taskCompletionDate?.slice(0, 10)}</h2>
+            <h5 className="mt-5">{taskObj.description}</h5>
+          </>
+        )
+        : (
+          <>
+            <h3>Deadline: {taskObj.deadline?.slice(0, 10)} {`(${daysUntilDue} days)`}</h3>
+            <h3><div style={{ color: `${taskColor}` }}>Priority: {priorityString}</div></h3>
+            <h5 className="mt-5">{taskObj.description}</h5>
+            <div className="mt-4 mb-3">
+              <Button variant="success" onClick={completeThisTask}>Complete Task</Button>
+            </div>
+          </>
+        )}
+    </>
   );
 }
 
@@ -86,5 +74,4 @@ BigTaskCard.propTypes = {
     isComplete: PropTypes.bool,
     dateCompleted: PropTypes.string,
   }).isRequired,
-  onUpdate: PropTypes.func.isRequired,
 };

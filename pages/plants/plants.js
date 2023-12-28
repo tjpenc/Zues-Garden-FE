@@ -28,7 +28,6 @@ export default function ViewPlants() {
         : (
           <>
             <div className="sidebar">
-              Options
               <div className="mt-3">
                 <Link passHref href="/plants/createPlant">
                   <Button>Create Plant</Button>
@@ -37,7 +36,7 @@ export default function ViewPlants() {
             </div>
             <div className="content-container">
               <h1 className="center mb-5">My Plants</h1>
-              <div className="space-around wrap card-container">
+              <div className="space-around wrap">
                 {plants?.length === 0
                   ? (
                     <>

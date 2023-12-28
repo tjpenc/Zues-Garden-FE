@@ -29,7 +29,7 @@ export default function SmallPlantCard({ plantObj, onUpdate }) {
             </Button>
           </Link>
           <Link passHref href={`/plants/edit/${plantObj.id}`}>
-            <Button className="float-right" variant="light">
+            <Button className="float-right" variant="light" style={{ maxHeight: '100%' }}>
               <Card.Img variant="top" src="/feather-pen.png" alt="edit" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
             </Button>
           </Link>

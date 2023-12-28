@@ -11,6 +11,7 @@ export default function BedPlantCard({
   bedId,
   onUpdate,
   isSelected,
+  isOnBedPage,
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState();
@@ -40,26 +41,49 @@ export default function BedPlantCard({
   };
 
   return (
-    <Card
-      className={`${isSelected ? 'selectedBedPlant' : 'bedPlantContainer'}`}
-      style={{ width: '18rem' }}
-    >
-      <Card.Body>
-        <Card.Title>{plantObj.name}
-          <span onClick={() => setIsEditing(true)} onKeyDown={() => setIsEditing(true)}>
-            {isEditing ? <form onSubmit={handleSymbolSubmit}><input type="text" value={editText} onChange={handleSymbolChange} /></form> : ` (${plantObj.symbol})`}
-          </span>
-        </Card.Title>
-        <Card.Subtitle>{plantObj.type}</Card.Subtitle>
-        {bedPlantId
-          ? (
-            <>
-              <Button className="mt-3" variant="danger" onClick={deleteThisBedPlant}>Remove from Bed</Button>
-            </>
-          )
-          : <Button className="mt-3" variant="success" onClick={addBedPlant}>Add Plant to Bed</Button>}
-      </Card.Body>
-    </Card>
+    <>
+      {isOnBedPage
+        ? (
+          <Card
+            className={`${isSelected ? 'selectedBedPlant' : 'bedPlantContainer'}`}
+            style={{ width: '18rem', padding: '5%' }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <h6 style={{ flex: '9' }}>
+                {plantObj.name}
+                <span onClick={() => setIsEditing(true)} onKeyDown={() => setIsEditing(true)}>
+                  {isEditing ? <form onSubmit={handleSymbolSubmit}><input type="text" value={editText} onChange={handleSymbolChange} /></form> : ` (${plantObj.symbol})`}
+                </span>
+              </h6>
+              <Button className="float-right" variant="light" onClick={deleteThisBedPlant} style={{ flex: '1' }}>
+                <Card.Img src="/delete.png" alt="delete" />
+              </Button>
+            </div>
+          </Card>
+        )
+        : (
+          <Card
+            className={`${isSelected ? 'selectedBedPlant' : 'bedPlantContainer'}`}
+            style={{ width: '18rem' }}
+          >
+            <Card.Body>
+              <Card.Title>{plantObj.name}
+                <span onClick={() => setIsEditing(true)} onKeyDown={() => setIsEditing(true)}>
+                  {isEditing ? <form onSubmit={handleSymbolSubmit}><input type="text" value={editText} onChange={handleSymbolChange} /></form> : ` (${plantObj.symbol})`}
+                </span>
+              </Card.Title>
+              <Card.Subtitle>{plantObj.type}</Card.Subtitle>
+              {bedPlantId
+                ? (
+                  <>
+                    <Button className="mt-3" variant="danger" onClick={deleteThisBedPlant}>Remove from Bed</Button>
+                  </>
+                )
+                : <Button className="mt-3" variant="success" onClick={addBedPlant}>Add Plant to Bed</Button>}
+            </Card.Body>
+          </Card>
+        )}
+    </>
   );
 }
 
@@ -78,9 +102,11 @@ BedPlantCard.propTypes = {
   bedId: PropTypes.number.isRequired,
   onUpdate: PropTypes.func.isRequired,
   isSelected: PropTypes.bool,
+  isOnBedPage: PropTypes.bool,
 };
 
 BedPlantCard.defaultProps = {
   bedPlantId: 0,
   isSelected: false,
+  isOnBedPage: false,
 };
