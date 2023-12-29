@@ -245,11 +245,16 @@ body {
   height: 9%;
 }
 
-.task-alert-title {
+.task-alert-button {
   position: absolute;
   border-radius: 3px;
-  width: 1%;
-  top: 7%
+  width: 20%;
+}
+
+.task-alert-container {
+  position: relative;
+  top: -35px;
+  left: 55%;
 }
 
 .task-alert-plant:hover, .task-alert-bed:hover, .task-alert-title:hover {
@@ -259,8 +264,8 @@ body {
 
 .task-alert-hidden-container-plant {
   position: absolute;
-  top: -21vh;
-  right: 20%;
+  top: -200px;
+  right: 30px;
   background-color: white;
   border: solid black 1px;
   padding: 1px 5px;
@@ -270,8 +275,8 @@ body {
 
 .task-alert-hidden-container-bed {
   position: absolute;
-  top: -3vh;
-  right: 9%;
+  top: -40px;
+  right: 30px;
   background-color: white;
   border: solid black 1px;
   padding: 1px 5px;
@@ -279,15 +284,8 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.task-alert-hidden-container-title {
-  position: absolute;
-  top: -3vh;
-  right: 9%;
-  background-color: white;
-  border: solid black 1px;
-  padding: 1px 5px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+.task-alert-hidden-container-button {
+  display: none;
 }
 
 .note-form-container {
@@ -300,16 +298,14 @@ body {
 
 .bed-bedplant-container {
   display: flex;
-  flex: 1;
+  flex: 2;
   flex-wrap: wrap;
   flex-direction: column;
   height: 100%;
-  border: solid black 2px;
   padding: 1%;
 }
 
 .bed-squares-container {
-  flex: 9;
+  flex: 8;
   height: 100%;
-  border: solid black 2px;
 }

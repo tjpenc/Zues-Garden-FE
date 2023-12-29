@@ -7,6 +7,7 @@ import BigPlantCard from '../../components/cards/PlantCardBig';
 import SmallTaskCard from '../../components/cards/TaskCardSmall';
 import NoteForm from '../../components/forms/NoteForm';
 import SmallNoteCard from '../../components/cards/NoteCardSmall';
+import TaskAlert from '../../components/TaskAlert';
 
 export default function ViewPlant() {
   const [plant, setPlant] = useState({});
@@ -15,6 +16,7 @@ export default function ViewPlant() {
   const [isViewingTasks, setIsViewingTasks] = useState(false);
   const [isViewingNotes, setIsViewingNotes] = useState(false);
   const [isViewingNoteForm, setIsViewingNoteForm] = useState(false);
+  const [hasOpenTasks, setHasOpenTasks] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
@@ -57,6 +59,9 @@ export default function ViewPlant() {
       toggleNoteFormView();
       toggleNotesView();
     }
+    if (plantObj.tasks.some((task) => !task.isComplete)) {
+      setHasOpenTasks(true);
+    }
   });
 
   useEffect(() => {
@@ -90,7 +95,9 @@ export default function ViewPlant() {
             <Button variant="success" onClick={toggleInfoView}>{isViewingInfo ? 'Close' : 'View'} Description</Button>
           </div>
           <div className="mt-3">
-            <Button variant="success" onClick={toggleTaskView}>{isViewingTasks ? 'Close' : 'View'} Tasks</Button>
+            <Button variant="success" onClick={toggleTaskView}>{isViewingTasks ? 'Close' : 'View'} Tasks
+              {hasOpenTasks ? <TaskAlert isOnButton /> : ''}
+            </Button>
           </div>
           <div className="mt-3">
             <Button variant="success" onClick={toggleNotesView}>{isViewingNotes ? 'Close' : 'View'} Notes</Button>

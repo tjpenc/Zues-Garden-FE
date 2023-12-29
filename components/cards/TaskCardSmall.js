@@ -46,7 +46,7 @@ export default function SmallTaskCard({ taskObj, onUpdate }) {
   const daysUntilDue = calculateDaysUntilDue();
 
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card style={{ width: '18rem', marginBottom: '5px' }}>
       <Card.Body className="d-flex flex-column">
         {!isComplete && daysUntilDue <= 3 && daysUntilDue >= 0 ? <p>Due Soon!</p> : ''}
         <Card.Title>{taskObj.title}</Card.Title>

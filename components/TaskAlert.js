@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 export default function TaskAlert({
-  isOnPlant, isOnBed, isOnTitle, numOfTasks,
+  isOnPlant, isOnBed, isOnButton, numOfTasks,
 }) {
   const [alertClass, setAlertClass] = useState();
   const [hiddenClass, setHiddenClass] = useState();
@@ -17,9 +17,9 @@ export default function TaskAlert({
     } else if (isOnBed) {
       setAlertClass('task-alert-bed');
       setHiddenClass('bed');
-    } else if (isOnTitle) {
-      setAlertClass('task-alert-title');
-      setHiddenClass('title');
+    } else if (isOnButton) {
+      setAlertClass('task-alert-button');
+      setHiddenClass('button');
     }
   };
 
@@ -46,9 +46,11 @@ export default function TaskAlert({
 
   return (
     <>
-      <Card.Img className={alertClass} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} variant="top" src="/exclamation.png" alt="taskAlert" />
-      <div style={{ position: 'relative' }}>
-        {isHidden ? '' : <div className={`task-alert-hidden-container-${hiddenClass}`}>{hiddenText}</div>}
+      <div className={isOnButton ? 'task-alert-container' : ''}>
+        <Card.Img className={alertClass} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} variant="top" src="/exclamation.png" alt="taskAlert" />
+        <div style={{ position: 'relative' }}>
+          {isHidden ? '' : <div className={`task-alert-hidden-container-${hiddenClass}`}>{hiddenText}</div>}
+        </div>
       </div>
     </>
   );
@@ -57,13 +59,13 @@ export default function TaskAlert({
 TaskAlert.propTypes = {
   isOnBed: PropTypes.bool,
   isOnPlant: PropTypes.bool,
-  isOnTitle: PropTypes.bool,
+  isOnButton: PropTypes.bool,
   numOfTasks: PropTypes.number,
 };
 
 TaskAlert.defaultProps = {
   isOnBed: false,
   isOnPlant: false,
-  isOnTitle: false,
+  isOnButton: false,
   numOfTasks: 1,
 };
