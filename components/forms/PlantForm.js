@@ -61,8 +61,8 @@ export default function PlantForm({ plantObj }) {
     <>
       <Form className="form-container" onSubmit={handleSubmit}>
         <div className="form-column-container">
-          <div className="form-column">
-            <h1 className="center">Required</h1>
+          <div className="form-column" style={{ flex: '2', marginRight: '10px' }}>
+            <h1 className="center mb-3">Required</h1>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Plant Name</Form.Label>
               <Form.Control
@@ -101,10 +101,10 @@ export default function PlantForm({ plantObj }) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Plant Symbol</Form.Label>
+              <Form.Label>Riased Bed Symbol</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Put a symbol for your plant to appear as in your raised beds"
+                placeholder="Raised Bed Symbol"
                 name="symbol"
                 value={formInput.symbol}
                 onChange={handleChange}
@@ -123,8 +123,8 @@ export default function PlantForm({ plantObj }) {
               id="inline-checkbox-1"
             />
           </div>
-          <div className="form-column">
-            <h1 className="center">Optional</h1>
+          <div className="form-column" style={{ flex: '1' }}>
+            <h1 className="center mb-3">Optional</h1>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Image</Form.Label>
               <Form.Control

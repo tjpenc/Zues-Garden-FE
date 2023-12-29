@@ -12,7 +12,7 @@ const initialState = {
   season: '',
   year: parseInt(new Date().toJSON().slice(0, 4), 10),
   description: '',
-  isCurrent: false,
+  isCurrent: true,
   soilType: '',
   width: 1,
   length: 1,
@@ -68,7 +68,7 @@ export default function BedForm({ bedObj }) {
     <>
       <Form className="form-container" onSubmit={handleSubmit}>
         <div className="form-column-container">
-          <div className="form-column">
+          <div className="form-column" style={{ flex: '2', marginRight: '10px' }}>
             <h1 className="center">Required</h1>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Bed Name</Form.Label>
@@ -180,7 +180,7 @@ export default function BedForm({ bedObj }) {
               id="inline-checkbox-1"
             />
           </div>
-          <div className="form-column">
+          <div className="form-column" style={{ flex: '1' }}>
             <h1 className="center">Optional</h1>
 
           </div>
