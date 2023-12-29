@@ -6,7 +6,7 @@ export default function SmallNoteCard({ noteObj, onUpdate }) {
   const deleteThisNote = () => deleteNote(noteObj.id).then(onUpdate);
 
   return (
-    <Card style={{ width: '12rem' }}>
+    <Card style={{ width: '12rem', marginBottom: '10px' }}>
       <Card.Body className="d-flex flex-column">
         <Card.Title>{noteObj.title}</Card.Title>
         <Card.Text>{noteObj.details}</Card.Text>

@@ -4,16 +4,18 @@ import TaskForm from '../../components/forms/TaskForm';
 
 export default function CreateTask() {
   return (
-    <>
-      <div className="mt-2">
-        <Link passHref href="/tasks/tasks">
-          <Button>Back to Tasks</Button>
-        </Link>
+    <div className="plants-page">
+      <div className="sidebar">
+        <div className="mt-2">
+          <Link passHref href="/tasks/tasks">
+            <Button>Back to Tasks</Button>
+          </Link>
+        </div>
       </div>
-      <h1 className="center">Create a Task</h1>
-      <div className="center">
+      <div className="content-container">
+        <h1 className="center">Create a Task</h1>
         <TaskForm />
       </div>
-    </>
+    </div>
   );
 }

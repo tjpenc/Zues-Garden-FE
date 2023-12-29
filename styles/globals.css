@@ -18,13 +18,21 @@ a {
 }
 
 body {
-  background-color: grey;
+  background-color: #FFF5EA;
+  overflow-y: hidden;
 }
 
 .center {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.center-flex-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .wrap {
@@ -63,13 +71,92 @@ body {
   object-fit: cover;
 }
 
+.b-border {
+  border: solid black 2px;
+}
+
+.plants-page {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: 100vh;
+  overflow-y: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar {
+  flex: 1;
+  background-color: #292b2c;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+}
+
+.content-container {
+  flex: 8;
+  height: 90vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+  padding: 0 5% 5% 5%;
+}
+
+.card-container {
+  overflow-y: scroll;
+  height: 70vh;
+  border: solid white 2px;
+  margin: 0 2% 5% 2%;
+  padding: 2% 10%;
+  border-radius: 5px;
+  background-color: antiquewhite;
+}
+
+.single-plant-content-container {
+  flex: 8;
+  height: 90vh;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.single-task-content-container {
+  flex: 8;
+  height: 90vh;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  padding: 0 5%;
+}
+
+.information-cards {
+  flex: 1;
+  height: 100%;
+}
+
+.information-cards-container {
+  flex: 1;
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .square-container {
   display: flex;
   flex-wrap: wrap;
   height: auto;
   background-color: white;
   margin: 5%;
-  border: solid black 5px;
   align-items: stretch;
   justify-content: center;
 }
@@ -128,12 +215,13 @@ body {
 
 .form-column-container {
   display: flex;
-  flex: 1;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 10px;
 }
 
 .form-column {
-  flex: 1;
-  margin: 0 5%;
+  margin: 0 0;
 }
 
 .form-submit-button {
@@ -158,11 +246,16 @@ body {
   height: 9%;
 }
 
-.task-alert-title {
+.task-alert-button {
   position: absolute;
   border-radius: 3px;
-  width: 1%;
-  top: 7%
+  width: 20%;
+}
+
+.task-alert-container {
+  position: relative;
+  top: -35px;
+  left: 55%;
 }
 
 .task-alert-plant:hover, .task-alert-bed:hover, .task-alert-title:hover {
@@ -172,8 +265,8 @@ body {
 
 .task-alert-hidden-container-plant {
   position: absolute;
-  top: -21vh;
-  right: 20%;
+  top: -200px;
+  right: 30px;
   background-color: white;
   border: solid black 1px;
   padding: 1px 5px;
@@ -183,8 +276,8 @@ body {
 
 .task-alert-hidden-container-bed {
   position: absolute;
-  top: -3vh;
-  right: 9%;
+  top: -40px;
+  right: 30px;
   background-color: white;
   border: solid black 1px;
   padding: 1px 5px;
@@ -192,13 +285,28 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.task-alert-hidden-container-title {
-  position: absolute;
-  top: -3vh;
-  right: 9%;
-  background-color: white;
-  border: solid black 1px;
-  padding: 1px 5px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+.task-alert-hidden-container-button {
+  display: none;
+}
+
+.note-form-container {
+  width: 80%;
+}
+
+.note-form-details-box {
+  height: 20vh;
+}
+
+.bed-bedplant-container {
+  display: flex;
+  flex: 2;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100%;
+  padding: 1%;
+}
+
+.bed-squares-container {
+  flex: 8;
+  height: 100%;
 }

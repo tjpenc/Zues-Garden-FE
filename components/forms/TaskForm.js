@@ -61,7 +61,7 @@ export default function TaskForm({ taskObj }) {
     <>
       <Form className="form-container" onSubmit={handleSubmit}>
         <div className="form-column-container">
-          <div className="form-column">
+          <div className="form-column" style={{ flex: '2', marginRight: '10px' }}>
             <h1 className="center">Required</h1>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Title</Form.Label>
@@ -116,10 +116,10 @@ export default function TaskForm({ taskObj }) {
             </Form.Group>
 
           </div>
-          <div className="form-column">
+          <div className="form-column" style={{ flex: '1' }}>
             <h1 className="center">Optional</h1>
             <Form.Group>
-              <Form.Label>Associated Raised Bed</Form.Label>
+              <Form.Label>Select the Raised Bed this Task is for</Form.Label>
               <Form.Select
                 aria-label="Default select example"
                 name="bedId"
@@ -127,7 +127,7 @@ export default function TaskForm({ taskObj }) {
                 value={formInput.bedId}
                 required
               >
-                <option value={undefined}>Select the Raised Bed this Task is for</option>
+                <option value={undefined}>Raised Bed</option>
                 {beds?.map((bed) => (
                   <option key={bed.name} value={bed.id}>{bed.name}</option>
                 ))}
@@ -135,7 +135,7 @@ export default function TaskForm({ taskObj }) {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Associated Plant</Form.Label>
+              <Form.Label>Select the Plant this Task is for</Form.Label>
               <Form.Select
                 aria-label="Default select example"
                 name="plantId"
@@ -143,7 +143,7 @@ export default function TaskForm({ taskObj }) {
                 value={formInput.plantId}
                 required
               >
-                <option value={undefined}>Select the Plant this Task is for</option>
+                <option value={undefined}>Plant</option>
                 {plants?.map((plant) => (
                   <option key={plant.name} value={plant.id}>{plant.name}</option>
                 ))}

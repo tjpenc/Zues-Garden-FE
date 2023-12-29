@@ -34,32 +34,38 @@ export default function ViewBeds() {
   };
 
   return (
-    <>
+    <div className="plants-page">
       {isLoading
         ? <Loading />
         : (
           <>
-            <div className="mt-3">
-              <Link passHref href="/beds/createBed">
-                <Button>Create Bed</Button>
-              </Link>
-              {showCurrentBeds ? <Button onClick={toggleBeds}>Old Beds</Button> : <Button onClick={toggleBeds}>Current Beds</Button>}
+            <div className="sidebar">
+              <div className="mt-3">
+                <Link passHref href="/beds/createBed">
+                  <Button>Create Bed</Button>
+                </Link>
+              </div>
+              <div className="mt-3">
+                {showCurrentBeds ? <Button onClick={toggleBeds}>Old Beds</Button> : <Button onClick={toggleBeds}>Current Beds</Button>}
+              </div>
             </div>
-            <h1 className="center mb-5">My Beds</h1>
-            <div className="space-around wrap">
-              {beds?.length === 0
-                ? (
-                  <>
-                    <div>
-                      <h2>You have no beds! Use the top left button to create a new bed</h2>
-                    </div>
-                  </>
-                )
-                : beds?.map((bed) => <SmallBedCard key={bed.id} bedObj={bed} onUpdate={getAllBeds} />)}
+            <div className="content-container">
+              <h1 className="center mb-5">My Beds</h1>
+              <div className="space-around wrap">
+                {beds?.length === 0
+                  ? (
+                    <>
+                      <div>
+                        <h2>You have no beds! Use the top left button to create a new bed</h2>
+                      </div>
+                    </>
+                  )
+                  : beds?.map((bed) => <SmallBedCard key={bed.id} bedObj={bed} onUpdate={getAllBeds} />)}
+              </div>
             </div>
           </>
         )}
 
-    </>
+    </div>
   );
 }
