@@ -24,11 +24,32 @@ export default function BedForm({ bedObj }) {
   const { user } = useAuth();
   const seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
   const soilTypes = ['Loam', 'Sand', 'Clay'];
-  // when a field is filled, need to update state
+
+  const updateEmptyInputFields = () => {
+    if (bedObj.description === 'N/A') {
+      setFormInput((prevState) => ({
+        ...prevState,
+        description: '',
+      }));
+    }
+    if (bedObj.season === 'N/A') {
+      setFormInput((prevState) => ({
+        ...prevState,
+        season: '',
+      }));
+    }
+    if (bedObj.soilType === 'N/A') {
+      setFormInput((prevState) => ({
+        ...prevState,
+        soilType: '',
+      }));
+    }
+  };
 
   useEffect(() => {
     if (bedObj.id) {
       setFormInput(bedObj);
+      updateEmptyInputFields();
     }
   }, [bedObj.id]);
 
@@ -50,6 +71,15 @@ export default function BedForm({ bedObj }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formInput.description) {
+      formInput.description = 'N/A';
+    }
+    if (!formInput.season) {
+      formInput.season = 'N/A';
+    }
+    if (!formInput.soilType) {
+      formInput.soilType = 'N/A';
+    }
     if (bedObj.id) {
       const stringYear = formInput.year.toString();
       formInput.year = stringYear;
@@ -95,53 +125,10 @@ export default function BedForm({ bedObj }) {
               />
             </Form.Group>
 
-            <Form.Group>
-              <Form.Label>Season</Form.Label>
-              <Form.Select
-                aria-label="Default select example"
-                name="season"
-                onChange={handleChange}
-                value={formInput.season}
-                required
-              >
-                <option value="">Season</option>
-                {seasons?.map((season) => (
-                  <option key={season} value={season}>{season}</option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Description"
-                name="description"
-                value={formInput.description}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-
             {bedObj.id
               ? ''
               : (
                 <>
-                  <Form.Group>
-                    <Form.Label>Soil Type</Form.Label>
-                    <Form.Select
-                      aria-label="Default select example"
-                      name="soilType"
-                      onChange={handleChange}
-                      value={formInput.soilType}
-                      required
-                    >
-                      <option value="">Select a Soil Type</option>
-                      {soilTypes?.map((soilType) => (
-                        <option key={soilType} value={soilType}>{soilType}</option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Bed Width</Form.Label>
                     <Form.Control
@@ -182,6 +169,54 @@ export default function BedForm({ bedObj }) {
           </div>
           <div className="form-column" style={{ flex: '1' }}>
             <h1 className="center">Optional</h1>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Description"
+                name="description"
+                value={formInput.description}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Season</Form.Label>
+              <Form.Select
+                className="mb-3"
+                aria-label="Default select example"
+                name="season"
+                onChange={handleChange}
+                value={formInput.season}
+              >
+                <option value="">Season</option>
+                {seasons?.map((season) => (
+                  <option key={season} value={season}>{season}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+
+            {bedObj.id
+              ? ''
+              : (
+                <>
+                  <Form.Group>
+                    <Form.Label>Soil Type</Form.Label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      name="soilType"
+                      onChange={handleChange}
+                      value={formInput.soilType}
+                    >
+                      <option value="">Select a Soil Type</option>
+                      {soilTypes?.map((soilType) => (
+                        <option key={soilType} value={soilType}>{soilType}</option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                </>
+              )}
 
           </div>
         </div>

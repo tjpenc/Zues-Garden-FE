@@ -4,7 +4,7 @@ export default function BigPlantCard({ plantObj }) {
   return (
     <div>
       <div className="d-flex flex-column mt-5">
-        <h3>{plantObj.description}</h3>
+        <h3>{plantObj.description === 'N/A' ? 'No description provided' : plantObj.description}</h3>
       </div>
     </div>
   );

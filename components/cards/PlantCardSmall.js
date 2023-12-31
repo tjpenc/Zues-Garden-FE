@@ -13,7 +13,7 @@ export default function SmallPlantCard({ plantObj, onUpdate }) {
       {plantObj.hasOpenTasks ? <TaskAlert isOnPlant /> : ''}
       <Card.Body className="d-flex flex-column">
         <Card.Title>{plantObj.name}</Card.Title>
-        <Card.Subtitle className="mb-3">{plantObj.type}</Card.Subtitle>
+        <Card.Subtitle className="mb-3">{plantObj.type === 'N/A' ? '' : plantObj.type}</Card.Subtitle>
         {plantObj.isOwned === true ? 'Owned' : 'Not owned' }
         <div className="mt-auto border-top">
           {!plantObj.beds.length
