@@ -16,13 +16,9 @@ export default function SmallPlantCard({ plantObj, onUpdate }) {
         <Card.Subtitle className="mb-3">{plantObj.type === 'N/A' ? '' : plantObj.type}</Card.Subtitle>
         {plantObj.isOwned === true ? 'Owned' : 'Not owned' }
         <div className="mt-auto border-top">
-          {!plantObj.beds.length
-            ? (
-              <Button className="float-left" variant="light" onClick={deleteThisPlant}>
-                <Card.Img variant="top" src="/delete.png" alt="delete" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
-              </Button>
-            )
-            : ''}
+          <Button className="float-left" variant="light" onClick={deleteThisPlant}>
+            <Card.Img variant="top" src="/delete.png" alt="delete" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
+          </Button>
           <Link passHref href={`/plants/${plantObj.id}`}>
             <Button className="float-right" variant="light">
               <Card.Img variant="top" src="/fast-forward.png" alt="view" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
