@@ -9,15 +9,46 @@ import Loading from '../../components/Loading';
 export default function ViewPlants() {
   const [plants, setPlants] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSortedAZ, setisSortedAZ] = useState(false);
   const { user } = useAuth();
+
+  const sortPlantsAlphabetical = (array) => {
+    const sortedArray = array;
+    if (!isSortedAZ) {
+      setisSortedAZ(true);
+      sortedArray.sort((a, b) => {
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        }
+        return 0;
+      });
+    } else {
+      setisSortedAZ(false);
+      sortedArray.sort((a, b) => {
+        if (a.name < b.name) {
+          return 1;
+        }
+        if (a.name > b.name) {
+          return -1;
+        }
+        return 0;
+      });
+    }
+    setPlants(sortedArray);
+  };
+
   const getAllPlants = () => getPlants(user.uid).then((plantsArray) => {
+    sortPlantsAlphabetical(plantsArray);
     setPlants(plantsArray);
     setIsLoading(false);
   });
 
   useEffect(() => {
     setTimeout(() => {
-      getAllPlants();
+      getAllPlants(true);
     }, 300);
   }, []);
 
@@ -32,6 +63,9 @@ export default function ViewPlants() {
                 <Link passHref href="/plants/createPlant">
                   <Button>Create Plant</Button>
                 </Link>
+              </div>
+              <div className="mt-3">
+                <Button onClick={getAllPlants}>Sort {isSortedAZ ? 'Z-A' : 'A-Z'}</Button>
               </div>
             </div>
             <div className="content-container">
