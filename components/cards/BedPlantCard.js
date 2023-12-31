@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Card, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createBedPlant, deleteBedPlant } from '../../api/bedPlantData';
 import { updatePlantSymbol } from '../../api/plantData';
 
@@ -15,6 +15,20 @@ export default function BedPlantCard({
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState();
+  const newRef = useRef(null);
+
+  const handleOutsideClick = (e) => {
+    if (!newRef.current.contains(e.target)) {
+      setIsEditing(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  });
 
   const addBedPlant = () => {
     const payload = {
@@ -51,7 +65,7 @@ export default function BedPlantCard({
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <h6 style={{ flex: '9' }}>
                 {plantObj.name}
-                <span onClick={() => setIsEditing(true)} onKeyDown={() => setIsEditing(true)}>
+                <span onClick={() => setIsEditing(true)} onKeyDown={() => setIsEditing(true)} ref={newRef}>
                   {isEditing ? <form onSubmit={handleSymbolSubmit}><input type="text" value={editText} onChange={handleSymbolChange} /></form> : ` (${plantObj.symbol})`}
                 </span>
               </h6>
@@ -68,9 +82,7 @@ export default function BedPlantCard({
           >
             <Card.Body>
               <Card.Title>{plantObj.name}
-                <span onClick={() => setIsEditing(true)} onKeyDown={() => setIsEditing(true)}>
-                  {isEditing ? <form onSubmit={handleSymbolSubmit}><input type="text" value={editText} onChange={handleSymbolChange} /></form> : ` (${plantObj.symbol})`}
-                </span>
+                <span>{plantObj.symbol}</span>
               </Card.Title>
               <Card.Subtitle>{plantObj.type}</Card.Subtitle>
               {bedPlantId
