@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { getSingleTask } from '../../../api/taskData';
@@ -16,14 +15,16 @@ export default function EditTask() {
 
   return (
     <>
-      <div className="mt-3">
-        <Link passHref href="/tasks/tasks">
-          <Button>Back to Tasks</Button>
-        </Link>
-      </div>
-      <h1 className="center mb-5">Edit Task: {task.title}</h1>
-      <div className="center">
-        <TaskForm taskObj={task} />
+      <div className="plants-page">
+        <div className="sidebar">
+          <div className="mt-3">
+            <Button onClick={() => router.back()}>Back to {task.title}</Button>
+          </div>
+        </div>
+        <div className="content-container">
+          <h1 className="center">Edit Task: {task.title}</h1>
+          <TaskForm />
+        </div>
       </div>
     </>
   );

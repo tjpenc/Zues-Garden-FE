@@ -18,7 +18,7 @@ export default function BedPlantCard({
   const newRef = useRef(null);
 
   const handleOutsideClick = (e) => {
-    if (!newRef.current.contains(e.target)) {
+    if (newRef && !newRef.current.contains(e.target)) {
       setIsEditing(false);
     }
   };
@@ -81,9 +81,7 @@ export default function BedPlantCard({
             style={{ width: '18rem' }}
           >
             <Card.Body>
-              <Card.Title>{plantObj.name}
-                <span>{plantObj.symbol}</span>
-              </Card.Title>
+              <Card.Title ref={newRef}>{`${plantObj.name} (${plantObj.symbol})`}</Card.Title>
               <Card.Subtitle>{plantObj.type}</Card.Subtitle>
               {bedPlantId
                 ? (

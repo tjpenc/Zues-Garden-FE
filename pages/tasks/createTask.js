@@ -6,7 +6,7 @@ export default function CreateTask() {
   return (
     <div className="plants-page">
       <div className="sidebar">
-        <div className="mt-2">
+        <div className="mt-3">
           <Link passHref href="/tasks/tasks">
             <Button>Back to Tasks</Button>
           </Link>
