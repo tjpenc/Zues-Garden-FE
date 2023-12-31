@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import { Form } from 'react-bootstrap';
 
-export default function SearchBar({ searchInput, setSearchInput }) {
+export default function SearchBar({
+  searchInput, setSearchInput, isOnPlant, isOnBed,
+}) {
   const handleChange = (e) => {
     setSearchInput(e.target.value.toLowerCase());
   };
@@ -12,7 +14,8 @@ export default function SearchBar({ searchInput, setSearchInput }) {
         <Form.Label controlId="floatingInput1" label="Search" className="mb-3">
           <Form.Control
             type="text"
-            placeholder="Search"
+            // eslint-disable-next-line no-nested-ternary
+            placeholder={`Search ${isOnPlant ? 'Plants' : (isOnBed ? 'Beds' : 'Tasks')}`}
             name="value"
             value={searchInput.value}
             onChange={handleChange}
@@ -27,8 +30,12 @@ export default function SearchBar({ searchInput, setSearchInput }) {
 SearchBar.propTypes = {
   searchInput: PropTypes.string,
   setSearchInput: PropTypes.func.isRequired,
+  isOnPlant: PropTypes.bool,
+  isOnBed: PropTypes.bool,
 };
 
 SearchBar.defaultProps = {
   searchInput: '',
+  isOnPlant: false,
+  isOnBed: false,
 };

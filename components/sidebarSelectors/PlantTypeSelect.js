@@ -31,8 +31,8 @@ export default function PlantTypeSelect({ selectTypeInput, setSelectTypeInput, p
           value={selectTypeInput.value}
           required
         >
-          <option value="">-</option>
-          {plantTypeArray.map((type) => (
+          <option value="">All Plants</option>
+          {plantTypeArray?.map((type) => (
             <option key={type} value={type}>{type}</option>
           ))}
         </Form.Select>

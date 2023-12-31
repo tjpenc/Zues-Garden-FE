@@ -6,7 +6,7 @@ import { getBeds } from '../../api/bedData';
 import SmallBedCard from '../../components/cards/BedCardSmall';
 import Loading from '../../components/Loading';
 import SearchBar from '../../components/SearchBar';
-import BedYearSelect from '../../components/BedYearSelect';
+import BedYearSelect from '../../components/sidebarSelectors/BedYearSelect';
 
 export default function ViewBeds() {
   const [beds, setBeds] = useState([]);
@@ -58,10 +58,10 @@ export default function ViewBeds() {
                 </Link>
               </div>
               <div className="mt-3">
-                {showCurrentBeds ? <Button onClick={toggleBeds}>Old Beds</Button> : <Button onClick={toggleBeds}>Current Beds</Button>}
+                {showCurrentBeds ? <Button onClick={toggleBeds}>View Old Beds</Button> : <Button onClick={toggleBeds}>View Current Beds</Button>}
               </div>
               <div className="mt-3">
-                <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
+                <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} isOnBed />
               </div>
               <div className="mt-3">
                 <BedYearSelect selectBedYear={selectBedYear} setSelectBedYear={setSelectBedYear} beds={beds} />

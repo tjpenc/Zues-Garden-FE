@@ -82,7 +82,7 @@ export default function BedPlantCard({
           >
             <Card.Body>
               <Card.Title ref={newRef}>{`${plantObj.name} (${plantObj.symbol})`}</Card.Title>
-              <Card.Subtitle>{plantObj.type}</Card.Subtitle>
+              {plantObj.type !== 'N/A' ? <Card.Subtitle>{plantObj.type}</Card.Subtitle> : ''}
               {bedPlantId
                 ? (
                   <>

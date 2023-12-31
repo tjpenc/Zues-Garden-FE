@@ -6,7 +6,7 @@ import { useAuth } from '../../utils/context/authContext';
 import SmallPlantCard from '../../components/cards/PlantCardSmall';
 import Loading from '../../components/Loading';
 import SearchBar from '../../components/SearchBar';
-import PlantTypeSelect from '../../components/PlantTypeSelect';
+import PlantTypeSelect from '../../components/sidebarSelectors/PlantTypeSelect';
 
 export default function ViewPlants() {
   const [plants, setPlants] = useState([]);
@@ -56,13 +56,12 @@ export default function ViewPlants() {
     }, 300);
   }, []);
 
-  const specifySearch = () => {
-    const searchedPlants = plants?.filter((plant) => plant.name.toLowerCase().includes(searchInput));
-    console.warn(selectTypeInput);
+  const searchedPlants = () => {
+    const filteredPlants = plants?.filter((plant) => plant.name.toLowerCase().includes(searchInput));
     if (selectTypeInput !== '') {
-      return searchedPlants?.filter((plant) => plant.type.toLowerCase().includes(selectTypeInput));
+      return filteredPlants?.filter((plant) => plant.type.toLowerCase().includes(selectTypeInput));
     }
-    return searchedPlants;
+    return filteredPlants;
   };
 
   return (
@@ -81,7 +80,7 @@ export default function ViewPlants() {
                 <Button onClick={getAllPlants}>Sort {isSortedAZ ? 'Z-A' : 'A-Z'}</Button>
               </div>
               <div className="mt-3">
-                <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
+                <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} isOnPlant />
               </div>
               <div className="mt-3">
                 <PlantTypeSelect selectTypeInput={selectTypeInput} setSelectTypeInput={setSelectTypeInput} plants={plants} />
@@ -99,7 +98,7 @@ export default function ViewPlants() {
                       </div>
                     </>
                   )
-                  : specifySearch()?.map((plant) => <SmallPlantCard key={plant.id} plantObj={plant} onUpdate={getAllPlants} />)}
+                  : searchedPlants()?.map((plant) => <SmallPlantCard key={plant.id} plantObj={plant} onUpdate={getAllPlants} />)}
               </div>
             </div>
           </>

@@ -31,7 +31,7 @@ export default function BedYearSelect({ selectBedYear, setSelectBedYear, beds })
           value={selectBedYear.value}
           required
         >
-          <option value="">-</option>
+          <option value="">All Years</option>
           {bedYearArray.map((year) => (
             <option key={year} value={year}>{year}</option>
           ))}
