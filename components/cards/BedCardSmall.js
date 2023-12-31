@@ -12,7 +12,7 @@ export default function SmallBedCard({ bedObj, onUpdate }) {
       <Card.Body className="d-flex flex-column" style={{ position: 'relative' }}>
         {bedObj.hasOpenTasks ? <TaskAlert isOnBed numOfTasks={bedObj.numOfTasks} /> : ''}
         <Card.Title>{bedObj.name}</Card.Title>
-        <Card.Subtitle>{bedObj.season} {bedObj.year}</Card.Subtitle>
+        <Card.Subtitle>{bedObj.season === 'N/A' ? '' : `${bedObj.season}`} {bedObj.year}</Card.Subtitle>
         <Card.Text>{`${bedObj.width} ft. x ${bedObj.length} ft.`}</Card.Text>
         <div className="mt-auto border-top">
           <Button className="float-left" variant="light" onClick={deleteThisBed}>

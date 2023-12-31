@@ -188,7 +188,7 @@ export default function ViewPlant() {
                                     <div className="flex-column">
                                       <div className="mb-3">
                                         <Link passHref href={`/beds/addPlants/${id}`}>
-                                          <Button variant="success">Add Plants to {bed.name}</Button>
+                                          <Button variant="success">Add Plants to Bed</Button>
                                         </Link>
                                       </div>
                                       <div className="mb-3">
