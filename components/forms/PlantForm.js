@@ -103,7 +103,7 @@ export default function PlantForm({ plantObj }) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Riased Bed Symbol</Form.Label>
+              <Form.Label>Raised Bed Symbol</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="i.e Bc for Broccoli"

@@ -6,12 +6,14 @@ import { useAuth } from '../../utils/context/authContext';
 import SmallPlantCard from '../../components/cards/PlantCardSmall';
 import Loading from '../../components/Loading';
 import SearchBar from '../../components/SearchBar';
+import PlantTypeSelect from '../../components/PlantTypeSelect';
 
 export default function ViewPlants() {
   const [plants, setPlants] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSortedAZ, setisSortedAZ] = useState(false);
   const [searchInput, setSearchInput] = useState('');
+  const [selectTypeInput, setSelectTypeInput] = useState('');
   const { user } = useAuth();
 
   const sortPlantsAlphabetical = (array) => {
@@ -54,7 +56,14 @@ export default function ViewPlants() {
     }, 300);
   }, []);
 
-  const searchedPlants = plants.filter((plant) => plant.name.toLowerCase().includes(searchInput));
+  const specifySearch = () => {
+    const searchedPlants = plants?.filter((plant) => plant.name.toLowerCase().includes(searchInput));
+    console.warn(selectTypeInput);
+    if (selectTypeInput !== '') {
+      return searchedPlants?.filter((plant) => plant.type.toLowerCase().includes(selectTypeInput));
+    }
+    return searchedPlants;
+  };
 
   return (
     <div className="plants-page">
@@ -74,9 +83,13 @@ export default function ViewPlants() {
               <div className="mt-3">
                 <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
               </div>
+              <div className="mt-3">
+                <PlantTypeSelect selectTypeInput={selectTypeInput} setSelectTypeInput={setSelectTypeInput} plants={plants} />
+              </div>
             </div>
             <div className="content-container">
               <h1 className="center mb-5">My Plants</h1>
+              {console.warn(selectTypeInput)}
               <div className="space-around wrap">
                 {plants?.length === 0
                   ? (
@@ -86,7 +99,7 @@ export default function ViewPlants() {
                       </div>
                     </>
                   )
-                  : searchedPlants?.map((plant) => <SmallPlantCard key={plant.id} plantObj={plant} onUpdate={getAllPlants} />)}
+                  : specifySearch()?.map((plant) => <SmallPlantCard key={plant.id} plantObj={plant} onUpdate={getAllPlants} />)}
               </div>
             </div>
           </>

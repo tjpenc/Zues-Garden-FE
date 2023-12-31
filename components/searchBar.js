@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Form, FloatingLabel } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 export default function SearchBar({ searchInput, setSearchInput }) {
   const handleChange = (e) => {
@@ -8,16 +8,18 @@ export default function SearchBar({ searchInput, setSearchInput }) {
 
   return (
     <Form>
-      <FloatingLabel controlId="floatingInput1" label="Search" className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Search"
-          name="value"
-          value={searchInput.value}
-          onChange={handleChange}
-          required
-        />
-      </FloatingLabel>
+      <Form.Group className="m-3" controlId="exampleForm.ControlInput1">
+        <Form.Label controlId="floatingInput1" label="Search" className="mb-3">
+          <Form.Control
+            type="text"
+            placeholder="Search"
+            name="value"
+            value={searchInput.value}
+            onChange={handleChange}
+            required
+          />
+        </Form.Label>
+      </Form.Group>
     </Form>
   );
 }
