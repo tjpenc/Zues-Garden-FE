@@ -146,92 +146,98 @@ export default function ViewPlant() {
                 </div>
               </div>
               <div className="single-plant-content-container">
-                <div className="bed-bedplant-container">
-                  {isViewingBedPlants
-                    ? (
-                      <>
-                        {bed?.plants?.length
+                {isViewingBedPlants || isViewingNoteForm || isViewingNotes || isViewingTasks
+                  ? (
+                    <>
+                      <div className="bed-bedplant-container">
+                        {isViewingBedPlants
                           ? (
                             <>
-                              <div className="center mb-3"><h3>Available Plants</h3></div>
-                              <div className="space-around flex-column">
-                                {bed?.plants?.map((plant) => {
-                                  const bedPlant = bed.bedPlants.find((bp) => bp.plantId === plant.id);
-                                  return (
-                                    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-                                    <div className="mb-3" key={plant.id} onClick={() => handleBedPlantCardClick(plant)} onKeyDown={() => handleBedPlantCardClick(plant)}>
-                                      <BedPlantCard plantObj={plant} bedPlantId={bedPlant.id} bedId={id} onUpdate={getThisBed} isOnBedPage isSelected={plant.id === selectedPlant.id} />
+                              {bed?.plants?.length
+                                ? (
+                                  <>
+                                    <div className="center mb-3"><h3>Available Plants</h3></div>
+                                    <div className="space-around flex-column">
+                                      {bed?.plants?.map((plant) => {
+                                        const bedPlant = bed.bedPlants.find((bp) => bp.plantId === plant.id);
+                                        return (
+                                          // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+                                          <div className="mb-3" key={plant.id} onClick={() => handleBedPlantCardClick(plant)} onKeyDown={() => handleBedPlantCardClick(plant)}>
+                                            <BedPlantCard plantObj={plant} bedPlantId={bedPlant.id} bedId={id} onUpdate={getThisBed} isOnBedPage isSelected={plant.id === selectedPlant.id} />
+                                          </div>
+                                        );
+                                      })}
+                                      <Card
+                                        onClick={handleRemovePlantClick}
+                                        className={`${isRemovingPlants ? 'selectedBedPlant' : 'bedPlantContainer'}`}
+                                        style={{ width: '18rem' }}
+                                      >
+                                        <Card.Body>
+                                          <Card.Title>Empty Square</Card.Title>
+                                          <Card.Subtitle>Click on a square to remove a plant</Card.Subtitle>
+                                        </Card.Body>
+                                      </Card>
                                     </div>
-                                  );
-                                })}
-                                <Card
-                                  onClick={handleRemovePlantClick}
-                                  className={`${isRemovingPlants ? 'selectedBedPlant' : 'bedPlantContainer'}`}
-                                  style={{ width: '18rem' }}
-                                >
-                                  <Card.Body>
-                                    <Card.Title>Empty Square</Card.Title>
-                                    <Card.Subtitle>Click on a square to remove a plant</Card.Subtitle>
-                                  </Card.Body>
-                                </Card>
-                              </div>
+                                  </>
+                                )
+                                : (
+                                  <>
+                                    <div className="center">
+                                      <h5>You dont have any plants for this bed!</h5>
+                                    </div>
+                                    <div className="flex-column">
+                                      <div className="mb-3">
+                                        <Link passHref href={`/beds/addPlants/${id}`}>
+                                          <Button variant="success">Add Plants to {bed.name}</Button>
+                                        </Link>
+                                      </div>
+                                      <div className="mb-3">
+                                        <Link passHref href="/plants/createPlant">
+                                          <Button variant="success">Create a New Plant</Button>
+                                        </Link>
+                                      </div>
+                                    </div>
+                                  </>
+                                )}
                             </>
                           )
-                          : (
+                          : ''}
+                        {isViewingTasks
+                          ? (
                             <>
-                              <div className="center">
-                                <h5>You dont have any plants for this bed!</h5>
-                              </div>
-                              <div className="flex-column">
-                                <div className="mb-3">
-                                  <Link passHref href={`/beds/addPlants/${id}`}>
-                                    <Button variant="success">Add Plants to {bed.name}</Button>
-                                  </Link>
-                                </div>
-                                <div className="mb-3">
-                                  <Link passHref href="/plants/createPlant">
-                                    <Button variant="success">Create a New Plant</Button>
-                                  </Link>
-                                </div>
-                              </div>
+                              {bed?.tasks?.some((task) => task.isComplete === false)
+                                ? (
+                                  <div className="information-cards-container">
+                                    <h1 className="center mb-5">Tasks</h1>
+                                    {bed?.tasks?.map((task) => <SmallTaskCard key={task.id} taskObj={task} onUpdate={getThisBed} />)}
+                                  </div>
+                                ) : (
+                                  <>
+                                    <h1 className="center mb-5">Tasks</h1>
+                                    <div className="center">There are no open tasks</div>
+                                  </>
+                                )}
                             </>
-                          )}
-                      </>
-                    )
-                    : ''}
-                  {isViewingTasks
-                    ? (
-                      <>
-                        {bed?.tasks?.some((task) => task.isComplete === false)
+                          )
+                          : ''}
+                        {isViewingNotes
                           ? (
                             <div className="information-cards-container">
-                              <h1 className="center mb-5">Tasks</h1>
-                              {bed?.tasks?.map((task) => <SmallTaskCard key={task.id} taskObj={task} onUpdate={getThisBed} />)}
+                              <h1 className="center mb-5">Notes</h1>
+                              {bed?.notes?.map((note) => <SmallNoteCard key={note.id} noteObj={note} onUpdate={getThisBed} />)}
                             </div>
-                          ) : (
-                            <>
-                              <h1 className="center mb-5">Tasks</h1>
-                              <div className="center">There are no open tasks</div>
-                            </>
-                          )}
-                      </>
-                    )
-                    : ''}
-                  {isViewingNotes
-                    ? (
-                      <div className="information-cards-container">
-                        <h1 className="center mb-5">Notes</h1>
-                        {bed?.notes?.map((note) => <SmallNoteCard key={note.id} noteObj={note} onUpdate={getThisBed} />)}
+                          ) : ''}
+                        {isViewingNoteForm
+                          ? (
+                            <div className="information-cards-container" style={{ overflowY: 'hidden' }}>
+                              <h1 className="center mb-5">Create a Note</h1>
+                              <NoteForm bedId={id} onUpdate={getThisBed} />
+                            </div>
+                          ) : ''}
                       </div>
-                    ) : ''}
-                  {isViewingNoteForm
-                    ? (
-                      <div className="information-cards-container" style={{ overflowY: 'hidden' }}>
-                        <h1 className="center mb-5">Create a Note</h1>
-                        <NoteForm bedId={id} onUpdate={getThisBed} />
-                      </div>
-                    ) : ''}
-                </div>
+                    </>
+                  )
+                  : ''}
                 <div className="bed-squares-container">
                   <h1 className="center" style={{ position: 'relative' }}>{bed.name}</h1>
                   <div className="center">

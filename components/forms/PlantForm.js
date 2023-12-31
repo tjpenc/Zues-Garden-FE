@@ -10,7 +10,7 @@ const initialState = {
   name: '',
   description: '',
   type: '',
-  numberPerSquare: 1,
+  numberPerSquare: 0,
   isOwned: true,
   image: '',
   symbol: '',
@@ -20,11 +20,32 @@ export default function PlantForm({ plantObj }) {
   const [formInput, setFormInput] = useState(initialState);
   const router = useRouter();
   const { user } = useAuth();
-  // when a field is filled, need to update state
+
+  const updateEmptyInputFields = () => {
+    if (plantObj.description === 'N/A') {
+      setFormInput((prevState) => ({
+        ...prevState,
+        description: '',
+      }));
+    }
+    if (plantObj.type === 'N/A') {
+      setFormInput((prevState) => ({
+        ...prevState,
+        type: '',
+      }));
+    }
+    if (plantObj.numberPerSquare < 0) {
+      setFormInput((prevState) => ({
+        ...prevState,
+        numberPerSquare: 0,
+      }));
+    }
+  };
 
   useEffect(() => {
     if (plantObj.id) {
       setFormInput(plantObj);
+      updateEmptyInputFields();
     }
   }, [plantObj.id]);
 
@@ -46,13 +67,19 @@ export default function PlantForm({ plantObj }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    formInput.uid = user.uid;
+    if (!formInput.description) {
+      formInput.description = 'N/A';
+    }
+    if (!formInput.type) {
+      formInput.type = 'N/A';
+    }
+    if (!formInput.numberPerSquare) {
+      formInput.numberPerSquare = -1;
+    }
     if (plantObj.id) {
       updatePlant(formInput).then(router.push(`/plants/${plantObj.id}`));
     } else {
-      formInput.uid = user.uid;
-      if (formInput.description === '') {
-        formInput.description = 'No description';
-      }
       createPlant(formInput).then(router.push('/plants/plants'));
     }
   };
@@ -76,35 +103,10 @@ export default function PlantForm({ plantObj }) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Type</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Type"
-                name="type"
-                value={formInput.type}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Number Per Square Foot</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="# / sq.ft"
-                min="1"
-                name="numberPerSquare"
-                value={formInput.numberPerSquare}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Riased Bed Symbol</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Raised Bed Symbol"
+                placeholder="i.e Bc for Broccoli"
                 name="symbol"
                 value={formInput.symbol}
                 onChange={handleChange}
@@ -144,7 +146,31 @@ export default function PlantForm({ plantObj }) {
                 name="description"
                 value={formInput.description}
                 onChange={handleChange}
-                required
+              />
+            </Form.Group>
+
+            {/* need to fix this one */}
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Type</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="i.e. Brassica"
+                name="type"
+                value={formInput.type}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            {/* need to fix this one */}
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Number Per Square Foot</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="# / sq.ft"
+                min="0"
+                name="numberPerSquare"
+                value={formInput.numberPerSquare}
+                onChange={handleChange}
               />
             </Form.Group>
           </div>
