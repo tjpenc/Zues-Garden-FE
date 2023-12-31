@@ -9,7 +9,9 @@ export default function SmallPlantCard({ plantObj, onUpdate }) {
 
   return (
     <Card style={{ width: '12rem', position: 'relative' }}>
-      <Card.Img className="image" variant="top" src={plantObj.image} />
+      {plantObj.image
+        ? <Card.Img className="image" variant="top" src={plantObj.image} />
+        : <Card.Img className="image" variant="top" src="/plant.png" />}
       {plantObj.hasOpenTasks ? <TaskAlert isOnPlant /> : ''}
       <Card.Body className="d-flex flex-column">
         <Card.Title>{plantObj.name}</Card.Title>

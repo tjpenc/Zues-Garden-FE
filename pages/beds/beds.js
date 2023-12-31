@@ -5,11 +5,15 @@ import { useAuth } from '../../utils/context/authContext';
 import { getBeds } from '../../api/bedData';
 import SmallBedCard from '../../components/cards/BedCardSmall';
 import Loading from '../../components/Loading';
+import SearchBar from '../../components/SearchBar';
+import BedYearSelect from '../../components/sidebarSelectors/BedYearSelect';
 
 export default function ViewBeds() {
   const [beds, setBeds] = useState([]);
   const [showCurrentBeds, setShowCurrentBeds] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchInput, setSearchInput] = useState('');
+  const [selectBedYear, setSelectBedYear] = useState(0);
   const { user } = useAuth();
 
   const getAllBeds = () => getBeds(user.uid).then((bedsArray) => {
@@ -33,6 +37,14 @@ export default function ViewBeds() {
     setShowCurrentBeds((prevState) => !prevState);
   };
 
+  const searchedBeds = () => {
+    const filteredBeds = beds?.filter((bed) => bed.name.toLowerCase().includes(searchInput));
+    if (selectBedYear) {
+      return filteredBeds?.filter((bed) => bed.year.toLowerCase().includes(selectBedYear));
+    }
+    return filteredBeds;
+  };
+
   return (
     <div className="plants-page">
       {isLoading
@@ -46,7 +58,13 @@ export default function ViewBeds() {
                 </Link>
               </div>
               <div className="mt-3">
-                {showCurrentBeds ? <Button onClick={toggleBeds}>Old Beds</Button> : <Button onClick={toggleBeds}>Current Beds</Button>}
+                {showCurrentBeds ? <Button onClick={toggleBeds}>View Old Beds</Button> : <Button onClick={toggleBeds}>View Current Beds</Button>}
+              </div>
+              <div className="mt-3">
+                <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} isOnBed />
+              </div>
+              <div className="mt-3">
+                <BedYearSelect selectBedYear={selectBedYear} setSelectBedYear={setSelectBedYear} beds={beds} />
               </div>
             </div>
             <div className="content-container">
@@ -60,7 +78,7 @@ export default function ViewBeds() {
                       </div>
                     </>
                   )
-                  : beds?.map((bed) => <SmallBedCard key={bed.id} bedObj={bed} onUpdate={getAllBeds} />)}
+                  : searchedBeds()?.map((bed) => <SmallBedCard key={bed.id} bedObj={bed} onUpdate={getAllBeds} />)}
               </div>
             </div>
           </>

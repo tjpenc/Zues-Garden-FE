@@ -116,10 +116,12 @@ export default function ViewPlant() {
         <div className="single-plant-content-container">
           <div className="information-cards">
             <h1 className="center mb-3">{plant.name}</h1>
-            <h2 className="center mb-5">{plant.type === 'none' ? '' : plant.type}</h2>
+            <h2 className="center mb-5">{plant.type === 'N/A' ? '' : plant.type}</h2>
             <div className="center-flex-column">
               <Card className="mb-5" style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={plant.image} />
+                {plant.image
+                  ? <Card.Img variant="top" src={plant.image} style={{ backgroundColor: '#FFF5EA' }} />
+                  : <Card.Img className="image" variant="top" src="/plant.png" />}
               </Card>
               <h3>{plant.numberPerSquare < 0 ? '' : `Number per Square Foot: ${plant.numberPerSquare}`}</h3>
               <h3 className="mt-3 mb-3">{plant.isOwned === true ? 'Owned' : 'Not owned' }</h3>
