@@ -13,7 +13,7 @@ export default function CreateBed() {
         </div>
       </div>
       <div className="content-container">
-        <h1 className="center mb-5">Create a Bed</h1>
+        <h1 className="center mb-5">Create a Raised Bed</h1>
         <BedForm />
       </div>
     </div>

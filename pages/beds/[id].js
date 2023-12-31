@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Card, Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { getSingleBed } from '../../api/bedData';
+import { deleteBed, getSingleBed } from '../../api/bedData';
 import SquareCard from '../../components/cards/SquareCard';
 import BedPlantCard from '../../components/cards/BedPlantCard';
 import Loading from '../../components/Loading';
@@ -70,6 +70,8 @@ export default function ViewPlant() {
       getThisBed();
     }, 300);
   }, []);
+
+  const deleteThisBed = () => deleteBed(id).then(router.push('beds/beds'));
 
   const handleSquareClick = (squareObj) => {
     if (selectedPlant) {
@@ -143,6 +145,19 @@ export default function ViewPlant() {
                 </div>
                 <div className="mt-3">
                   <Button variant="success" onClick={toggleNoteFormView}>{isViewingNoteForm ? 'Close Form' : 'Add Note'}</Button>
+                </div>
+                <div className="mt-3">
+                  <Link passHref href="/tasks/createTask">
+                    <Button>Create A Task</Button>
+                  </Link>
+                </div>
+                <div className="mt-3">
+                  <Link passHref href={`/beds/edit/${id}`}>
+                    <Button className="float-right">Edit Bed</Button>
+                  </Link>
+                </div>
+                <div className="mt-3">
+                  <Button onClick={deleteThisBed}>Delete Bed</Button>
                 </div>
               </div>
               <div className="single-plant-content-container">

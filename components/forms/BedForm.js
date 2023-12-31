@@ -83,7 +83,7 @@ export default function BedForm({ bedObj }) {
     if (bedObj.id) {
       const stringYear = formInput.year.toString();
       formInput.year = stringYear;
-      updateBed(formInput).then(router.push('/beds/beds'));
+      updateBed(formInput).then(router.back());
     } else {
       formInput.uid = user.uid;
       const stringYear = formInput.year.toString();

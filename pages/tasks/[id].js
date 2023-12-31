@@ -20,6 +20,7 @@ export default function ViewSingleTask() {
 
   return (
     <>
+      {console.warn(task)}
       <div className="plants-page">
         <div className="sidebar">
           <div className="mt-3">
@@ -37,6 +38,28 @@ export default function ViewSingleTask() {
               <Card.Img variant="top" src="/delete.png" alt="delete" style={{ height: '20px', objectFit: 'cover', borderRadius: '3px' }} />
             </Button>
           </div>
+          {task.plantId
+            ? (
+              <div className="mt-3">
+                <Link passHref href={`/plants/${task.plantId}`}>
+                  <Button>
+                    View Plant
+                  </Button>
+                </Link>
+              </div>
+            )
+            : ''}
+          {task.bedId
+            ? (
+              <div className="mt-3">
+                <Link passHref href={`/beds/${task.bedId}`}>
+                  <Button>
+                    View Bed
+                  </Button>
+                </Link>
+              </div>
+            )
+            : ''}
         </div>
         <div className="single-task-content-container">
           <BigTaskCard key={task.id} taskObj={task} onUpdate={returnToPrevPage} />

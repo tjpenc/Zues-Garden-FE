@@ -52,20 +52,22 @@ export default function ViewPlant() {
 
   const getThisPlant = () => getSinglePlant(id).then((plantObj) => {
     setPlant(plantObj);
-    if (plantObj.beds.length) {
+    if (plantObj?.beds?.length) {
       setHasBedPlants(true);
     }
     if (isViewingNoteForm === true) {
       toggleNoteFormView();
       toggleNotesView();
     }
-    if (plantObj.tasks.some((task) => !task.isComplete)) {
+    if (plantObj?.tasks?.some((task) => !task.isComplete)) {
       setHasOpenTasks(true);
     }
   });
 
   useEffect(() => {
-    getThisPlant();
+    setTimeout(() => {
+      getThisPlant();
+    }, 300);
   }, [id]);
 
   const returnToPrevPage = () => router.back();
@@ -104,6 +106,11 @@ export default function ViewPlant() {
           </div>
           <div className="mt-3">
             <Button variant="success" onClick={toggleNoteFormView}>{isViewingNoteForm ? 'Close Form' : 'Add Note'}</Button>
+          </div>
+          <div className="mt-3">
+            <Link passHref href="/tasks/createTask">
+              <Button>Create A Task</Button>
+            </Link>
           </div>
         </div>
         <div className="single-plant-content-container">
