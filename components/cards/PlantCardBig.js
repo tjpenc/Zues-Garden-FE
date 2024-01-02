@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 export default function BigPlantCard({ plantObj }) {
   return (
     <div>
-      <div className="d-flex flex-column mt-5">
+      <div className="d-flex flex-column mt-5" style={{ paddingRight: '20px' }}>
         <h3>{plantObj.description === 'N/A' ? 'No description provided' : plantObj.description}</h3>
       </div>
     </div>

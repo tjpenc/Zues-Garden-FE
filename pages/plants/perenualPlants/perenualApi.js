@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
-import Loading from '../../components/Loading';
-import PerenualPlantCard from '../../components/cards/PerenualPlantCard';
-import PerenualSearchBar from '../../components/cards/searchBars/PerenualSearchBar';
+import Loading from '../../../components/Loading';
+import PerenualPlantCard from '../../../components/cards/PerenualPlantCard';
+import PerenualSearchBar from '../../../components/cards/searchBars/PerenualSearchBar';
+import { clientCredentials } from '../../../utils/client';
+
+const perenualApiKey = clientCredentials.perenualKey;
 
 export default function Perenual() {
   const [data, setData] = useState(null);
@@ -16,7 +19,7 @@ export default function Perenual() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(`https://perenual.com/api/species-list?key=sk-Oc3T6591f04e9a7ff3617
+        const response = await axios.get(`https://perenual.com/api/species-list?key=${perenualApiKey}
         &page=${pageNumber}
         ${isEdible ? '&edible=1' : ''}
         ${searchInput ? `&q=${searchInput}` : ''}`);

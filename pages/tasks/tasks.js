@@ -19,7 +19,6 @@ export default function ViewTasks() {
   const getAllTasks = () => getTasks(user.uid).then((tasksArray) => {
     const completedTasks = tasksArray?.filter((task) => task.isComplete === true);
     const incompletedTasks = tasksArray?.filter((task) => task.isComplete === false);
-    console.warn(incompletedTasks);
     if (!showCompleteTasks) {
       setTasks(incompletedTasks);
     } else if (showCompleteTasks) {
