@@ -85,6 +85,96 @@ body {
   align-items: center;
 }
 
+.home-page {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: 100vh;
+  overflow-y: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-page-intro-container {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.home-page-welcome-header-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space; 
+  align-items: center;
+  height: 100%;
+}
+
+.home-page-button-container {
+  flex: 3;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.home-page-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5% 0 5%;
+}
+
+.home-page-cards-container {
+  flex: 1;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5% 5% 5%;
+  width: 100%;
+  overflow-y: hidden;
+}
+
+.home-page-tasks-container {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  margin-bottom: 3%;
+  overflow-y: scroll;
+  flex-direction: column;
+  border-radius: 5px;
+  padding: 0 5% 5% 5%;
+}
+
+.home-page-beds-container {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 0 5% 5% 5%;
+  overflow-y: scroll;
+  border-radius: 5px;
+  padding: 0 5% 5% 5%;
+}
+
+.home-page-card-container-headers {
+  flex: 1;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #FFF5EA;
+  padding-bottom: 5px;
+}
+
 .sidebar {
   flex: 1;
   background-color: #292b2c;

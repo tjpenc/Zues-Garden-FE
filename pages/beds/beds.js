@@ -5,7 +5,7 @@ import { useAuth } from '../../utils/context/authContext';
 import { getBeds } from '../../api/bedData';
 import SmallBedCard from '../../components/cards/BedCardSmall';
 import Loading from '../../components/Loading';
-import SearchBar from '../../components/SearchBar';
+import SearchBar from '../../components/cards/searchBars/SearchBar';
 import BedYearSelect from '../../components/sidebarSelectors/BedYearSelect';
 
 export default function ViewBeds() {

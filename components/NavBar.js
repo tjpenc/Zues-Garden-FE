@@ -34,6 +34,9 @@ export default function NavBar() {
             <Link passHref href="/tasks/tasks">
               <Nav.Link>Tasks</Nav.Link>
             </Link>
+            <Link passHref href="/plants/perenualApi">
+              <Nav.Link>Perenual</Nav.Link>
+            </Link>
             <Button variant="danger" onClick={() => { signOut(router); }}>
               Sign Out
             </Button>

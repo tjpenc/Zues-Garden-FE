@@ -6,7 +6,7 @@ import { getPlants } from '../../../api/plantData';
 import { getBedPlants } from '../../../api/bedPlantData';
 import { useAuth } from '../../../utils/context/authContext';
 import BedPlantCard from '../../../components/cards/BedPlantCard';
-import SearchBar from '../../../components/SearchBar';
+import SearchBar from '../../../components/cards/searchBars/SearchBar';
 import PlantTypeSelect from '../../../components/sidebarSelectors/PlantTypeSelect';
 
 export default function AddBedPlants() {
