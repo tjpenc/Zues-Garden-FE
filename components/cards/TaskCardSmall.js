@@ -48,14 +48,15 @@ export default function SmallTaskCard({ taskObj, onUpdate }) {
   return (
     <Card style={{ width: '18rem', marginBottom: '5px' }}>
       <Card.Body className="d-flex flex-column">
-        {!isComplete && daysUntilDue <= 3 && daysUntilDue >= 0 ? <p>Due Soon!</p> : ''}
         <Card.Title>{taskObj.title}</Card.Title>
         {isComplete
           ? <Card.Subtitle className="mb-2 text-muted mt-3">Completed: {taskCompletionDate?.slice(0, 10)}</Card.Subtitle>
           : (
             <>
               <Card.Subtitle className="mb-2 text-muted"><div style={{ color: `${taskColor}` }}>Priority: {priorityString}</div></Card.Subtitle>
-              <Card.Subtitle className="mb-2 text-muted">Days Until Due: {daysUntilDue}</Card.Subtitle>
+              {daysUntilDue >= 0 ? <Card.Subtitle className="mb-2 text-muted">Days Until Due: {daysUntilDue}</Card.Subtitle> : ''}
+              {!isComplete && daysUntilDue <= 3 && daysUntilDue >= 0 ? <span style={{ fontWeight: 'bold' }}>Due Soon!</span> : ''}
+              {!isComplete && daysUntilDue < 0 ? <p style={{ color: 'red', fontWeight: 'bold' }}>{daysUntilDue * -1} {daysUntilDue === -1 ? 'Day' : 'Days'} Overdue</p> : ''}
             </>
           )}
         <div className="mt-4 mb-3">
