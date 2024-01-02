@@ -5,7 +5,7 @@ import SmallTaskCard from '../../components/cards/TaskCardSmall';
 import { useAuth } from '../../utils/context/authContext';
 import { getTasks } from '../../api/taskData';
 import Loading from '../../components/Loading';
-import SearchBar from '../../components/SearchBar';
+import SearchBar from '../../components/cards/searchBars/SearchBar';
 import TaskPrioritySelect from '../../components/sidebarSelectors/TaskPrioritySelect';
 
 export default function ViewTasks() {

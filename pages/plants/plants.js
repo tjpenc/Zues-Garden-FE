@@ -5,7 +5,7 @@ import { getPlants } from '../../api/plantData';
 import { useAuth } from '../../utils/context/authContext';
 import SmallPlantCard from '../../components/cards/PlantCardSmall';
 import Loading from '../../components/Loading';
-import SearchBar from '../../components/SearchBar';
+import SearchBar from '../../components/cards/searchBars/SearchBar';
 import PlantTypeSelect from '../../components/sidebarSelectors/PlantTypeSelect';
 
 export default function ViewPlants() {
@@ -103,7 +103,6 @@ export default function ViewPlants() {
             </div>
           </>
         )}
-
     </div>
   );
 }
