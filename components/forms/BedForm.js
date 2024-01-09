@@ -117,7 +117,6 @@ export default function BedForm({ bedObj }) {
               <Form.Control
                 type="number"
                 placeholder="Year"
-                min={parseInt(new Date().toJSON().slice(0, 4), 10)}
                 name="year"
                 value={formInput.year}
                 onChange={handleChange}
@@ -135,6 +134,7 @@ export default function BedForm({ bedObj }) {
                       type="number"
                       placeholder="Width"
                       min="1"
+                      max="6"
                       name="width"
                       value={formInput.width}
                       onChange={handleChange}
@@ -147,6 +147,7 @@ export default function BedForm({ bedObj }) {
                       type="number"
                       placeholder="Length"
                       min="1"
+                      max="12"
                       name="length"
                       value={formInput.length}
                       onChange={handleChange}

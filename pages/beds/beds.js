@@ -10,6 +10,7 @@ import BedYearSelect from '../../components/sidebarSelectors/BedYearSelect';
 
 export default function ViewBeds() {
   const [beds, setBeds] = useState([]);
+  const [allBeds, setAllBeds] = useState([]);
   const [showCurrentBeds, setShowCurrentBeds] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [searchInput, setSearchInput] = useState('');
@@ -17,6 +18,7 @@ export default function ViewBeds() {
   const { user } = useAuth();
 
   const getAllBeds = () => getBeds(user.uid).then((bedsArray) => {
+    setAllBeds(bedsArray);
     if (showCurrentBeds) {
       const currentBeds = bedsArray.filter((bed) => bed.isCurrent === true);
       setBeds(currentBeds);
@@ -32,6 +34,13 @@ export default function ViewBeds() {
       setIsLoading(false);
     }, 300);
   }, [showCurrentBeds]);
+
+  useEffect(() => {
+    getAllBeds();
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
+  }, []);
 
   const toggleBeds = () => {
     setShowCurrentBeds((prevState) => !prevState);
@@ -53,18 +62,18 @@ export default function ViewBeds() {
           <>
             <div className="sidebar">
               <div className="mt-3">
-                <Link passHref href="/beds/createBed">
-                  <Button>Create Bed</Button>
-                </Link>
+                <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} isOnBed />
+              </div>
+              <div>
+                <BedYearSelect selectBedYear={selectBedYear} setSelectBedYear={setSelectBedYear} beds={allBeds} />
               </div>
               <div className="mt-3">
                 {showCurrentBeds ? <Button onClick={toggleBeds}>View Old Beds</Button> : <Button onClick={toggleBeds}>View Current Beds</Button>}
               </div>
-              <div className="mt-3">
-                <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} isOnBed />
-              </div>
-              <div className="mt-3">
-                <BedYearSelect selectBedYear={selectBedYear} setSelectBedYear={setSelectBedYear} beds={beds} />
+              <div className="mt-5">
+                <Link passHref href="/beds/createBed">
+                  <Button>Create Bed</Button>
+                </Link>
               </div>
             </div>
             <div className="content-container">

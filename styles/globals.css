@@ -75,6 +75,18 @@ body {
   border: solid black 2px;
 }
 
+.sign-in-div {
+  border: solid black 5px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  height: 50%;
+  background-color: white;
+}
+
 .plants-page {
   display: flex;
   flex-direction: row;
@@ -119,8 +131,7 @@ body {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
+  justify-content: space-around;
 }
 
 .home-page-buttons {
@@ -235,6 +246,7 @@ body {
 .information-cards-container {
   flex: 1;
   height: 100%;
+  width: 100%;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -390,14 +402,25 @@ body {
 
 .bed-bedplant-container {
   display: flex;
-  flex: 2;
-  flex-wrap: wrap;
+  flex: 3;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   height: 100%;
+  width: 100%;
   padding: 1%;
 }
 
+.testing {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  width: 100%;
+  align-items: center;
+  padding: 2px 0 20px 0;
+}
+
 .bed-squares-container {
-  flex: 8;
+  flex: 6;
   height: 100%;
 }

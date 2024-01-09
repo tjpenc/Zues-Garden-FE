@@ -19,8 +19,8 @@ export default function EditPlant() {
       <div className="plants-page">
         <div className="sidebar">
           <div className="mt-3">
-            <Link passHref href="/beds/beds">
-              <Button>Back to Beds</Button>
+            <Link passHref href={`/beds/${id}`}>
+              <Button>Back to Bed</Button>
             </Link>
           </div>
         </div>

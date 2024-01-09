@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import Loading from '../../../components/Loading';
 import PerenualPlantCard from '../../../components/cards/PerenualPlantCard';
@@ -9,12 +8,13 @@ import { clientCredentials } from '../../../utils/client';
 
 const perenualApiKey = clientCredentials.perenualKey;
 
-export default function Perenual() {
+export default function PerenualAPI() {
   const [data, setData] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [isEdible, setIsEdible] = useState(true);
   const [searchInput, setSearchInput] = useState('');
+  const [isOutOfCalls, setIsOutOfCalls] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -25,8 +25,12 @@ export default function Perenual() {
         ${searchInput ? `&q=${searchInput}` : ''}`);
         setData(response.data);
         setIsLoading(false);
+        setIsOutOfCalls(false);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        const serializedError = JSON.stringify(error, Object.getOwnPropertyNames(error));
+        if (serializedError.includes('429')) {
+          setIsOutOfCalls(true);
+        }
       }
     }
     fetchData();
@@ -56,15 +60,14 @@ export default function Perenual() {
 
   return (
     <div className="plants-page">
+      {isOutOfCalls ? <h2>You have no API Calls left for today</h2> : ''}
       {isLoading
         ? <Loading />
         : (
           <>
             <div className="sidebar">
               <div className="mt-3">
-                <Link passHref href="/plants/createPlant">
-                  <Button>Create Plant</Button>
-                </Link>
+                <span>Page {pageNumber}</span>
               </div>
               <div className="mt-3">
                 {data.data.length < 30 ? <Button disabled>Next Page</Button> : <Button onClick={() => changePage('next')}>Next Page</Button> }
@@ -76,17 +79,21 @@ export default function Perenual() {
                 <Button onClick={toggleEdibleFilter}>{isEdible ? 'View All Plants' : 'View Edible Plants'}</Button>
               </div>
               <div className="mt-3">
-                <PerenualSearchBar searchInput={searchInput} setSearchInput={setSearchInput} isOnPlant />
+                <PerenualSearchBar searchInput={searchInput} setSearchInput={setSearchInput} setPageNumber={setPageNumber} isOnPlant />
               </div>
               <div className="mt-3">
                 <Button onClick={resetSearch}>Reset Search</Button>
               </div>
             </div>
             <div className="content-container">
-              <h1 className="center mb-5">Perenual Plants {isEdible ? '(Edible)' : '(All)'}</h1>
-              <div className="space-around wrap">
-                {data?.data?.map((plant) => <PerenualPlantCard key={plant.id} plantObj={plant} />)}
-              </div>
+              <h1 className="center mb-5">Browse Plants {isEdible ? '(Edible)' : '(All)'}</h1>
+              {data?.data?.length ? (
+                <>
+                  <div className="space-around wrap">
+                    {data?.data?.map((plant) => <PerenualPlantCard key={plant.id} plantObj={plant} />)}
+                  </div>
+                </>
+              ) : <h3>No plants match your search</h3>}
             </div>
           </>
         )}

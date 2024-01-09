@@ -8,6 +8,7 @@ import {
   Button,
 } from 'react-bootstrap';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import { signOut } from '../utils/auth';
 
 export default function NavBar() {
@@ -15,8 +16,11 @@ export default function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
+        <div className="mr-5" style={{ position: 'absolute', left: '2%' }}>
+          <Image src="/apple-tree.png" width="30px" height="30px" />
+        </div>
         <Link passHref href="/">
-          <Navbar.Brand>Plants</Navbar.Brand>
+          <Navbar.Brand className="mr-5" style={{ position: 'absolute', left: '4.5%' }}>Zues&apos; Garden</Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -26,7 +30,7 @@ export default function NavBar() {
               <Nav.Link>Home</Nav.Link>
             </Link>
             <Link passHref href="/plants/plants">
-              <Nav.Link>Plants</Nav.Link>
+              <Nav.Link>My Plants</Nav.Link>
             </Link>
             <Link passHref href="/beds/beds">
               <Nav.Link>Beds</Nav.Link>
@@ -35,9 +39,9 @@ export default function NavBar() {
               <Nav.Link>Tasks</Nav.Link>
             </Link>
             <Link passHref href="/plants/perenualPlants/perenualApi">
-              <Nav.Link>Perenual</Nav.Link>
+              <Nav.Link>Browse More Plants</Nav.Link>
             </Link>
-            <Button variant="danger" onClick={() => { signOut(router); }}>
+            <Button variant="danger" onClick={() => { signOut(router); }} style={{ position: 'absolute', right: '3%' }}>
               Sign Out
             </Button>
           </Nav>

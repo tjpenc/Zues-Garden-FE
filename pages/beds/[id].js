@@ -71,7 +71,7 @@ export default function ViewPlant() {
     }, 300);
   }, []);
 
-  const deleteThisBed = () => deleteBed(id).then(router.push('beds/beds'));
+  const deleteThisBed = () => deleteBed(id).then(router.push('/beds/beds'));
 
   const handleSquareClick = (squareObj) => {
     if (selectedPlant) {
@@ -120,44 +120,39 @@ export default function ViewPlant() {
             <div className="plants-page">
               <div className="sidebar">
                 <div className="mt-3">
-                  <Link passHref href="/beds/beds">
-                    <Button>Back to Beds</Button>
-                  </Link>
+                  <Button onClick={clearBed} variant="light">Clear Bed</Button>
                 </div>
-                <div className="mt-3">
-                  <Button onClick={clearBed}>Clear Bed</Button>
-                </div>
-                <div className="mt-3">
+                <div className="mt-5">
                   <Link passHref href={`/beds/addPlants/${id}`}>
                     <Button variant="success">Add Plants to Bed</Button>
                   </Link>
                 </div>
                 <div className="mt-3">
-                  <Button variant="success" onClick={toggleBedPlantView}>{isViewingBedPlants ? 'Close' : 'View'} Beds Plants</Button>
+                  <Button variant="success" onClick={toggleBedPlantView}>{isViewingBedPlants ? 'Close' : 'View'} Plants in Bed</Button>
                 </div>
-                <div className="mt-3 center">
-                  <Button variant="success" onClick={toggleTaskView}>{isViewingTasks ? 'Close' : 'View'} Tasks
+                <div className="mt-5 center">
+                  <Button variant="info" onClick={toggleTaskView}>{isViewingTasks ? 'Close' : 'View'} Tasks
                     {hasOpenTasks ? <TaskAlert isOnButton /> : ''}
                   </Button>
                 </div>
                 <div className="mt-3">
-                  <Button variant="success" onClick={toggleNotesView}>{isViewingNotes ? 'Close' : 'View'} Notes</Button>
-                </div>
-                <div className="mt-3">
-                  <Button variant="success" onClick={toggleNoteFormView}>{isViewingNoteForm ? 'Close Form' : 'Add Note'}</Button>
-                </div>
-                <div className="mt-3">
                   <Link passHref href="/tasks/createTask">
-                    <Button>Create A Task</Button>
+                    <Button variant="info">Create A Task</Button>
                   </Link>
                 </div>
                 <div className="mt-3">
+                  <Button variant="info" onClick={toggleNotesView}>{isViewingNotes ? 'Close' : 'View'} Notes</Button>
+                </div>
+                <div className="mt-3">
+                  <Button variant="info" onClick={toggleNoteFormView}>{isViewingNoteForm ? 'Close Form' : 'Add Note'}</Button>
+                </div>
+                <div className="mt-5">
                   <Link passHref href={`/beds/edit/${id}`}>
                     <Button className="float-right">Edit Bed</Button>
                   </Link>
                 </div>
                 <div className="mt-3">
-                  <Button onClick={deleteThisBed}>Delete Bed</Button>
+                  <Button variant="danger" onClick={deleteThisBed}>Delete Bed</Button>
                 </div>
               </div>
               <div className="single-plant-content-container">
@@ -172,7 +167,7 @@ export default function ViewPlant() {
                                 ? (
                                   <>
                                     <div className="center mb-3"><h3>Available Plants</h3></div>
-                                    <div className="space-around flex-column">
+                                    <div className="testing">
                                       {bed?.plants?.map((plant) => {
                                         const bedPlant = bed.bedPlants.find((bp) => bp.plantId === plant.id);
                                         return (
@@ -189,7 +184,7 @@ export default function ViewPlant() {
                                       >
                                         <Card.Body>
                                           <Card.Title>Empty Square</Card.Title>
-                                          <Card.Subtitle>Click on a square to remove a plant</Card.Subtitle>
+                                          <Card.Subtitle>Select this box, then click on a square to remove a plant</Card.Subtitle>
                                         </Card.Body>
                                       </Card>
                                     </div>
@@ -197,7 +192,7 @@ export default function ViewPlant() {
                                 )
                                 : (
                                   <>
-                                    <div className="center">
+                                    <div className="center mb-3">
                                       <h5>You dont have any plants for this bed!</h5>
                                     </div>
                                     <div className="flex-column">
@@ -229,7 +224,7 @@ export default function ViewPlant() {
                                 ) : (
                                   <>
                                     <h1 className="center mb-5">Tasks</h1>
-                                    <div className="center">There are no open tasks</div>
+                                    <div className="center">This bed has no open tasks</div>
                                   </>
                                 )}
                             </>

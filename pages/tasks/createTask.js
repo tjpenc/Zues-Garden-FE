@@ -13,7 +13,7 @@ export default function CreateTask() {
         </div>
       </div>
       <div className="content-container">
-        <h1 className="center">Create a Task</h1>
+        <h1 className="center mb-3">Create a Task</h1>
         <TaskForm />
       </div>
     </div>

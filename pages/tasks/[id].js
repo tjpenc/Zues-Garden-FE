@@ -20,11 +20,12 @@ export default function ViewSingleTask() {
 
   return (
     <>
-      {console.warn(task)}
       <div className="plants-page">
         <div className="sidebar">
           <div className="mt-3">
-            <Button onClick={returnToPrevPage}>Back To Tasks</Button>
+            <Link passHref href="/tasks/tasks">
+              <Button>Back To Tasks</Button>
+            </Link>
           </div>
           <div className="mt-3">
             <Link passHref href={`/tasks/edit/${id}`}>
