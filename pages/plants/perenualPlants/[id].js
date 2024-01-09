@@ -9,7 +9,7 @@ import { useAuth } from '../../../utils/context/authContext';
 
 const perenualApiKey = clientCredentials.perenualKey;
 
-export default function Perenual() {
+export default function SinglePerenualPlant() {
   const [plant, setPlant] = useState(null);
   const router = useRouter();
   const { user } = useAuth();

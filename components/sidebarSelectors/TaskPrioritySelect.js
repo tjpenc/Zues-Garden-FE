@@ -9,7 +9,7 @@ export default function TaskPrioritySelect({ selectPriority, setSelectPriority }
   return (
     <Form>
       <Form.Group>
-        <Form.Label>Choose Priority</Form.Label>
+        <Form.Label>Filter By Priority</Form.Label>
         <Form.Select
           aria-label="Default select example"
           name="priority"

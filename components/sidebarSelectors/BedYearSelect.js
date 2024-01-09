@@ -13,6 +13,7 @@ export default function BedYearSelect({ selectBedYear, setSelectBedYear, beds })
     const removeDuplicates = (array) => array.filter((value, index) => array.indexOf(value) === index);
     const allBedYears = [];
     beds.forEach((bed) => allBedYears.push(bed.year));
+    console.warn(allBedYears);
     setBedYearArray(removeDuplicates(allBedYears));
   };
 

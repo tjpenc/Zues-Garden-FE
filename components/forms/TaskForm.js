@@ -94,7 +94,7 @@ export default function TaskForm({ taskObj }) {
                 id="start"
                 name="deadline"
                 value={formInput.deadline}
-                min={new Date().toJSON().slice(0, 10)}
+                min={taskObj.id ? '' : new Date().toJSON().slice(0, 10)}
                 onChange={handleChange}
               />
             </Form.Group>
@@ -118,7 +118,7 @@ export default function TaskForm({ taskObj }) {
           </div>
           <div className="form-column" style={{ flex: '1' }}>
             <h1 className="center">Optional</h1>
-            <Form.Group>
+            <Form.Group className="mb-3">
               <Form.Label>Select the Raised Bed this Task is for</Form.Label>
               <Form.Select
                 aria-label="Default select example"

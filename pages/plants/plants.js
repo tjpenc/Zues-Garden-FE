@@ -11,15 +11,15 @@ import PlantTypeSelect from '../../components/sidebarSelectors/PlantTypeSelect';
 export default function ViewPlants() {
   const [plants, setPlants] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isSortedAZ, setisSortedAZ] = useState(false);
+  const [isSortedAZ, setIsSortedAZ] = useState(true);
+  const [isShowingOwned, setIsShowingOwned] = useState(false);
   const [searchInput, setSearchInput] = useState('');
   const [selectTypeInput, setSelectTypeInput] = useState('');
   const { user } = useAuth();
 
   const sortPlantsAlphabetical = (array) => {
     const sortedArray = array;
-    if (!isSortedAZ) {
-      setisSortedAZ(true);
+    if (isSortedAZ) {
       sortedArray.sort((a, b) => {
         if (a.name < b.name) {
           return -1;
@@ -30,7 +30,6 @@ export default function ViewPlants() {
         return 0;
       });
     } else {
-      setisSortedAZ(false);
       sortedArray.sort((a, b) => {
         if (a.name < b.name) {
           return 1;
@@ -46,15 +45,28 @@ export default function ViewPlants() {
 
   const getAllPlants = () => getPlants(user.uid).then((plantsArray) => {
     sortPlantsAlphabetical(plantsArray);
-    setPlants(plantsArray);
+    if (isShowingOwned) {
+      const filteredPlants = plantsArray.filter((plant) => plant.isOwned);
+      setPlants(filteredPlants);
+    } else {
+      setPlants(plantsArray);
+    }
     setIsLoading(false);
   });
 
+  const toggleOwnedPlantsView = () => {
+    setIsShowingOwned((prevState) => !prevState);
+  };
+
+  const toggleAlphabeticalView = () => {
+    setIsSortedAZ((prevState) => !prevState);
+  };
+
   useEffect(() => {
     setTimeout(() => {
-      getAllPlants(true);
+      getAllPlants();
     }, 300);
-  }, []);
+  }, [isShowingOwned, isSortedAZ]);
 
   const searchedPlants = () => {
     const filteredPlants = plants?.filter((plant) => plant.name.toLowerCase().includes(searchInput));
@@ -62,6 +74,13 @@ export default function ViewPlants() {
       return filteredPlants?.filter((plant) => plant.type.toLowerCase().includes(selectTypeInput));
     }
     return filteredPlants;
+  };
+
+  const resetFilters = () => {
+    setIsSortedAZ(true);
+    setIsShowingOwned(false);
+    setSearchInput('');
+    setSelectTypeInput('');
   };
 
   return (
@@ -72,23 +91,28 @@ export default function ViewPlants() {
           <>
             <div className="sidebar">
               <div className="mt-3">
+                <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} isOnPlant />
+              </div>
+              <div>
+                <PlantTypeSelect selectTypeInput={selectTypeInput} setSelectTypeInput={setSelectTypeInput} plants={plants} />
+              </div>
+              <div className="mt-3">
+                <Button onClick={toggleAlphabeticalView}>Sort {isSortedAZ ? 'Z-A' : 'A-Z'}</Button>
+              </div>
+              <div className="mt-3">
+                <Button onClick={toggleOwnedPlantsView}>View {isShowingOwned ? 'All Plants' : 'Owned Plants'}</Button>
+              </div>
+              <div className="mt-3">
+                <Button onClick={resetFilters}>Reset Filters</Button>
+              </div>
+              <div className="mt-5">
                 <Link passHref href="/plants/createPlant">
                   <Button>Create Plant</Button>
                 </Link>
               </div>
-              <div className="mt-3">
-                <Button onClick={getAllPlants}>Sort {isSortedAZ ? 'Z-A' : 'A-Z'}</Button>
-              </div>
-              <div className="mt-3">
-                <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} isOnPlant />
-              </div>
-              <div className="mt-3">
-                <PlantTypeSelect selectTypeInput={selectTypeInput} setSelectTypeInput={setSelectTypeInput} plants={plants} />
-              </div>
             </div>
             <div className="content-container">
               <h1 className="center mb-5">My Plants</h1>
-              {console.warn(selectTypeInput)}
               <div className="space-around wrap">
                 {plants?.length === 0
                   ? (

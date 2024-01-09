@@ -12,7 +12,8 @@ import PlantTypeSelect from '../../../components/sidebarSelectors/PlantTypeSelec
 export default function AddBedPlants() {
   const [plants, setPlants] = useState([]);
   const [bedPlants, setBedPlants] = useState([]);
-  const [isSortedAZ, setisSortedAZ] = useState(false);
+  const [isSortedAZ, setIsSortedAZ] = useState(true);
+  const [isShowingOwned, setIsShowingOwned] = useState(false);
   const [searchInput, setSearchInput] = useState('');
   const [selectTypeInput, setSelectTypeInput] = useState('');
   const { user } = useAuth();
@@ -21,8 +22,7 @@ export default function AddBedPlants() {
 
   const sortPlantsAlphabetical = (array) => {
     const sortedArray = array;
-    if (!isSortedAZ) {
-      setisSortedAZ(true);
+    if (isSortedAZ) {
       sortedArray.sort((a, b) => {
         if (a.name < b.name) {
           return -1;
@@ -33,7 +33,6 @@ export default function AddBedPlants() {
         return 0;
       });
     } else {
-      setisSortedAZ(false);
       sortedArray.sort((a, b) => {
         if (a.name < b.name) {
           return 1;
@@ -49,13 +48,26 @@ export default function AddBedPlants() {
 
   const getAllPlantsAndBedPlants = () => getPlants(user.uid).then((plantsArray) => {
     sortPlantsAlphabetical(plantsArray);
-    setPlants(plantsArray);
+    if (isShowingOwned) {
+      const filteredPlants = plantsArray.filter((plant) => plant.isOwned);
+      setPlants(filteredPlants);
+    } else {
+      setPlants(plantsArray);
+    }
     getBedPlants(id).then(setBedPlants);
   });
 
+  const toggleOwnedPlantsView = () => {
+    setIsShowingOwned((prevState) => !prevState);
+  };
+
+  const toggleAlphabeticalView = () => {
+    setIsSortedAZ((prevState) => !prevState);
+  };
+
   useEffect(() => {
     getAllPlantsAndBedPlants();
-  }, []);
+  }, [id, isShowingOwned, isSortedAZ]);
 
   const searchedPlants = () => {
     const filteredPlants = plants?.filter((plant) => plant.name.toLowerCase().includes(searchInput));
@@ -69,19 +81,31 @@ export default function AddBedPlants() {
     <div className="plants-page">
       <div className="sidebar">
         <div className="mt-3">
-          <Button onClick={() => { router.back(); }}>Back to Beds</Button>
-        </div>
-        <div className="mt-3">
-          <Button onClick={getAllPlantsAndBedPlants}>Sort {isSortedAZ ? 'Z-A' : 'A-Z'}</Button>
-        </div>
-        <div className="mt-3">
           <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} isOnPlant />
         </div>
+        {plants?.length > 0
+          ? (
+            <div>
+              <PlantTypeSelect selectTypeInput={selectTypeInput} setSelectTypeInput={setSelectTypeInput} plants={plants} />
+            </div>
+          ) : ''}
+
         <div className="mt-3">
-          <PlantTypeSelect selectTypeInput={selectTypeInput} setSelectTypeInput={setSelectTypeInput} plants={plants} />
+          <Button onClick={toggleAlphabeticalView}>Sort {isSortedAZ ? 'Z-A' : 'A-Z'}</Button>
+        </div>
+        <div className="mt-3">
+          <Button onClick={toggleOwnedPlantsView}>View {isShowingOwned ? 'All Plants' : 'Owned Plants'}</Button>
+        </div>
+        <div className="mt-5">
+          {!bedPlants.length
+            ? ''
+            : (
+              <Link passHref href={`/beds/${id}`}>
+                <Button>Continue to Bed</Button>
+              </Link>
+            )}
         </div>
       </div>
-      {console.warn(plants)}
       <div className="content-container">
         <h1 className="center mb-5">Select plants for this bed</h1>
         {!plants.length
@@ -102,15 +126,6 @@ export default function AddBedPlants() {
                   const bedPlant = bedPlants.find((bp) => bp.plantId === plant.id);
                   return <BedPlantCard key={plant.id} plantObj={plant} bedPlantId={bedPlant ? bedPlant.id : 0} bedId={id} onUpdate={getAllPlantsAndBedPlants} />;
                 })}
-              </div>
-              <div className="center mt-3">
-                {!bedPlants.length
-                  ? ''
-                  : (
-                    <Link passHref href={`/beds/${id}`}>
-                      <Button>Continue to Bed</Button>
-                    </Link>
-                  )}
               </div>
             </>
           )}
