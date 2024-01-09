@@ -105,9 +105,6 @@ function Home() {
             <Link passHref href="/plants/plants">
               <Button variant="primary" className="m-3">View My Plants</Button>
             </Link>
-            <Link passHref href="/plants/perenualPlants/perenualApi">
-              <Button variant="primary" className="m-3">Browse More Plants</Button>
-            </Link>
           </div>
           <div className="home-page-buttons">
             <h1>Raised Beds</h1>

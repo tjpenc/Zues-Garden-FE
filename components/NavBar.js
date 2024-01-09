@@ -20,7 +20,7 @@ export default function NavBar() {
           <Image src="/apple-tree.png" width="30px" height="30px" />
         </div>
         <Link passHref href="/">
-          <Navbar.Brand className="mr-5" style={{ position: 'absolute', left: '4.5%' }}>Zues&apos; Garden</Navbar.Brand>
+          <Navbar.Brand>Zues&apos; Garden</Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
