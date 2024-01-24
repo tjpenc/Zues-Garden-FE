@@ -1,6 +1,6 @@
 # Plants
 ## Overview
-  This full stack app is for the hobby gardener who needs to keep track of the many tasks, plants, and beds that they have. A user is able to create tasks and set deadlines for themselves, and mark when the tasks have been completed. A user can also create plants to keep track of what plants they have in their inventory or even any plants they may want to own in the future. Further, this app acts as a raised bed planner. A user can use the plants they have created, and plan out a raised bed with those plants. All data is user specific, so you will never encounter another users data. 
+  This full stack app is for the hobby gardener who needs to keep track of the many moving parts that it takes to maintain a garden. A user is able to create plants, raised beds, and tasks. A user can also add notes to document extra information needed for a plant or raised bed, such as special care requirements or watering conditions. Plants added to a users profile can be used to create and plan raised beds for the next season. Users can also keep old beds documented to see what worked and what didn't. Next, a user can create tasks with a deadline and associate them with a plant or raised bed, so they can see what needs to get done in their garden and when. The app is also connected to Perenual which gives access to a huge database of unique plants that a user can explore and if they find anything interesting, they can add it to their own list.
 
 ## Deploy
 [Plants App](raised-beds.netlify.app)
@@ -10,16 +10,25 @@
 
 ## Features
 - Sign in/out via Google Authentication
-- Create a plant and give it a name, description, and symbol to appear as in your raised beds
-- Delete and edit plants that you do not have anymore
-- Create tasks and reminders for your garden so you can see what you need to do, and the upcoming deadlines of when they are due
-- Mark tasks as complete, and see a log of all you have accomplished in your garden
-- Create and keep track of multiple raised beds
+- User specific data management
+- Full CRUD on plants
+- Full CRUD tasks to keep track of deadlines
+- Set the priority level of a task to keep you focused on what matters most
+- Associate tasks with a plant or raised bed (or both), and be alerted when that particular item has a task that needs to be done
+- Special alerts for tasks that are overdue or coming due soon
+- Full CRUD on raised beds
 - Raised beds are based on square foot gardening, with each square representing one foot
-- Add and remove plants from your raised beds to help you plot your next season
+- Add and remove plants from your raised beds to help you plan your next season
+- Create notes for raised beds and plants to keep track of any extra information of special instructions for that item such as watering conditions or how much you harvested from a bed
+- Using the Perenual API, users can interact with a massive database of plants to search for new plants or find extra information for their current ones
+- Users can add plants from the Perenual database to their personal collection
 
 ## Screenshots
 ![Plants](utils/images/plantspage.png)
+![Single Plant](utils/images/broccolinotes.png)
+![Perenual Plants](utils/images/perenualplants.png)
+![Single Perenual Plant](utils/images/perenualsingleplant.png)
+![Raised Beds](utils/images/allbeds.png)
 ![Raised Beds](utils/images/raisedbed.png)
 ![Tasks](utils/images/taskspage.png)
 

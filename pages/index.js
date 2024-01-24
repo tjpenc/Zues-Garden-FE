@@ -114,13 +114,6 @@ function Home() {
             <Link passHref href="/beds/beds">
               <Button variant="primary" className="m-3">View My Raised Beds</Button>
             </Link>
-            <Button
-              className="m-3"
-              style={{
-                color: '#FFF5EA', backgroundColor: '#FFF5EA', border: 'none', cursor: 'default',
-              }}
-            >Hidden
-            </Button>
           </div>
           <div className="home-page-buttons">
             <h1>Tasks</h1>
@@ -130,13 +123,6 @@ function Home() {
             <Link passHref href="/tasks/tasks">
               <Button variant="primary" className="m-3">View My Tasks</Button>
             </Link>
-            <Button
-              className="m-3"
-              style={{
-                color: '#FFF5EA', backgroundColor: '#FFF5EA', border: 'none', cursor: 'default',
-              }}
-            >Hidden
-            </Button>
           </div>
         </div>
       </div>
