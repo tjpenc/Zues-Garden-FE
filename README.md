@@ -24,7 +24,7 @@
 - Users can add plants from the Perenual database to their personal collection
 
 ## Screenshots
-![Plants](utils/images/plantspagenew.png)
+![Plants](utils/images/plantspag.png)
 ![Single Plant](utils/images/broccolinotes.png)
 ![Perenual Plants](utils/images/perenualplants.png)
 ![Single Perenual Plant](utils/images/perenualsingleplant.png)
